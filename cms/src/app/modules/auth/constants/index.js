@@ -1,0 +1,2 @@
+export const AUTHENTICATE = 'AUTH/AUTHENTICATE';
+export const CHECK_AUTH = 'AUTH/CHECK_AUTH';
