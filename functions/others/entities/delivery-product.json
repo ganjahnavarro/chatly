@@ -1,0 +1,33 @@
+{
+  "id": "9b1b897c-2d8a-45a5-85d3-0784fcca6681",
+  "name": "delivery-product",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "@food-product",
+      "synonyms": [
+        "@food-product"
+      ]
+    },
+    {
+      "value": "@dish",
+      "synonyms": [
+        "@dish"
+      ]
+    },
+    {
+      "value": "@beverage-hard-drinks",
+      "synonyms": [
+        "@beverage-hard-drinks"
+      ]
+    },
+    {
+      "value": "@beverage-soft-drinks",
+      "synonyms": [
+        "@beverage-soft-drinks"
+      ]
+    }
+  ],
+  "isEnum": true,
+  "automatedExpansion": false
+}

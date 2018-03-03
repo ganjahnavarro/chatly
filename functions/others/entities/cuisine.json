@@ -1,0 +1,726 @@
+{
+  "id": "c1a2abd2-7c85-4a11-b9b7-0165a79d8065",
+  "name": "cuisine",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "dominican",
+      "synonyms": [
+        "dominican"
+      ]
+    },
+    {
+      "value": "bangladeshi",
+      "synonyms": [
+        "bangladeshi"
+      ]
+    },
+    {
+      "value": "cuban",
+      "synonyms": [
+        "cuban"
+      ]
+    },
+    {
+      "value": "malaysian",
+      "synonyms": [
+        "malaysian"
+      ]
+    },
+    {
+      "value": "belgian",
+      "synonyms": [
+        "belgian"
+      ]
+    },
+    {
+      "value": "Persian Iranian",
+      "synonyms": [
+        "Persian Iranian"
+      ]
+    },
+    {
+      "value": "trinidadian",
+      "synonyms": [
+        "trinidadian"
+      ]
+    },
+    {
+      "value": "german",
+      "synonyms": [
+        "german"
+      ]
+    },
+    {
+      "value": "african",
+      "synonyms": [
+        "african"
+      ]
+    },
+    {
+      "value": "american",
+      "synonyms": [
+        "american"
+      ]
+    },
+    {
+      "value": "argentine",
+      "synonyms": [
+        "argentine"
+      ]
+    },
+    {
+      "value": "asian fusion",
+      "synonyms": [
+        "asian fusion"
+      ]
+    },
+    {
+      "value": "iberian",
+      "synonyms": [
+        "iberian"
+      ]
+    },
+    {
+      "value": "indonesian",
+      "synonyms": [
+        "indonesian"
+      ]
+    },
+    {
+      "value": "jamaican",
+      "synonyms": [
+        "jamaican"
+      ]
+    },
+    {
+      "value": "afghan",
+      "synonyms": [
+        "afghan"
+      ]
+    },
+    {
+      "value": "catalan",
+      "synonyms": [
+        "catalan"
+      ]
+    },
+    {
+      "value": "cantonese",
+      "synonyms": [
+        "cantonese"
+      ]
+    },
+    {
+      "value": "mexican",
+      "synonyms": [
+        "mexican"
+      ]
+    },
+    {
+      "value": "arabic",
+      "synonyms": [
+        "arabic"
+      ]
+    },
+    {
+      "value": "british",
+      "synonyms": [
+        "british"
+      ]
+    },
+    {
+      "value": "cambodian",
+      "synonyms": [
+        "cambodian"
+      ]
+    },
+    {
+      "value": "filipino",
+      "synonyms": [
+        "filipino"
+      ]
+    },
+    {
+      "value": "himalayan",
+      "synonyms": [
+        "himalayan"
+      ]
+    },
+    {
+      "value": "indpak",
+      "synonyms": [
+        "indpak"
+      ]
+    },
+    {
+      "value": "korean",
+      "synonyms": [
+        "korean"
+      ]
+    },
+    {
+      "value": "lebanese",
+      "synonyms": [
+        "lebanese"
+      ]
+    },
+    {
+      "value": "puertorican",
+      "synonyms": [
+        "puertorican"
+      ]
+    },
+    {
+      "value": "shanghainese",
+      "synonyms": [
+        "shanghainese"
+      ]
+    },
+    {
+      "value": "szechuan",
+      "synonyms": [
+        "szechuan"
+      ]
+    },
+    {
+      "value": "czech",
+      "synonyms": [
+        "czech"
+      ]
+    },
+    {
+      "value": "american traditional",
+      "synonyms": [
+        "american traditional"
+      ]
+    },
+    {
+      "value": "australian",
+      "synonyms": [
+        "australian"
+      ]
+    },
+    {
+      "value": "brasseries",
+      "synonyms": [
+        "brasseries"
+      ]
+    },
+    {
+      "value": "italian",
+      "synonyms": [
+        "italian"
+      ]
+    },
+    {
+      "value": "basque",
+      "synonyms": [
+        "basque"
+      ]
+    },
+    {
+      "value": "Czech Slovakian",
+      "synonyms": [
+        "Czech Slovakian"
+      ]
+    },
+    {
+      "value": "haitian",
+      "synonyms": [
+        "haitian"
+      ]
+    },
+    {
+      "value": "french",
+      "synonyms": [
+        "french"
+      ]
+    },
+    {
+      "value": "hawaiian",
+      "synonyms": [
+        "hawaiian"
+      ]
+    },
+    {
+      "value": "japanese",
+      "synonyms": [
+        "japanese"
+      ]
+    },
+    {
+      "value": "laotian",
+      "synonyms": [
+        "laotian"
+      ]
+    },
+    {
+      "value": "mediterranean",
+      "synonyms": [
+        "mediterranean"
+      ]
+    },
+    {
+      "value": "american new",
+      "synonyms": [
+        "american new"
+      ]
+    },
+    {
+      "value": "Himalayan Nepalese",
+      "synonyms": [
+        "Himalayan Nepalese"
+      ]
+    },
+    {
+      "value": "Diners",
+      "synonyms": [
+        "Diners"
+      ]
+    },
+    {
+      "value": "delis",
+      "synonyms": [
+        "delis",
+        "dehlis"
+      ]
+    },
+    {
+      "value": "asian",
+      "synonyms": [
+        "asian"
+      ]
+    },
+    {
+      "value": "cajun",
+      "synonyms": [
+        "cajun"
+      ]
+    },
+    {
+      "value": "canadian",
+      "synonyms": [
+        "canadian"
+      ]
+    },
+    {
+      "value": "brazilian",
+      "synonyms": [
+        "brazilian"
+      ]
+    },
+    {
+      "value": "slovakian",
+      "synonyms": [
+        "slovakian"
+      ]
+    },
+    {
+      "value": "irish",
+      "synonyms": [
+        "irish"
+      ]
+    },
+    {
+      "value": "salvadoran",
+      "synonyms": [
+        "salvadoran"
+      ]
+    },
+    {
+      "value": "mongolian",
+      "synonyms": [
+        "mongolian"
+      ]
+    },
+    {
+      "value": "armenian",
+      "synonyms": [
+        "armenian"
+      ]
+    },
+    {
+      "value": "Latin American",
+      "synonyms": [
+        "Latin American"
+      ]
+    },
+    {
+      "value": "chinese",
+      "synonyms": [
+        "chinese"
+      ]
+    },
+    {
+      "value": "indian",
+      "synonyms": [
+        "indian"
+      ]
+    },
+    {
+      "value": "greek",
+      "synonyms": [
+        "greek"
+      ]
+    },
+    {
+      "value": "hungarian",
+      "synonyms": [
+        "hungarian"
+      ]
+    },
+    {
+      "value": "moroccan",
+      "synonyms": [
+        "moroccan"
+      ]
+    },
+    {
+      "value": "austrian",
+      "synonyms": [
+        "austrian"
+      ]
+    },
+    {
+      "value": "cajun",
+      "synonyms": [
+        "cajun"
+      ]
+    },
+    {
+      "value": "caribbean",
+      "synonyms": [
+        "caribbean"
+      ]
+    },
+    {
+      "value": "senegalese",
+      "synonyms": [
+        "senegalese"
+      ]
+    },
+    {
+      "value": "colombian",
+      "synonyms": [
+        "colombian"
+      ]
+    },
+    {
+      "value": "burmese",
+      "synonyms": [
+        "burmese"
+      ]
+    },
+    {
+      "value": "creole",
+      "synonyms": [
+        "creole"
+      ]
+    },
+    {
+      "value": "Cajun Creole",
+      "synonyms": [
+        "Cajun Creole"
+      ]
+    },
+    {
+      "value": "Soul food",
+      "synonyms": [
+        "Soul food"
+      ]
+    },
+    {
+      "value": "ethiopian",
+      "synonyms": [
+        "ethiopian"
+      ]
+    },
+    {
+      "value": "venezuelan",
+      "synonyms": [
+        "venezuelan"
+      ]
+    },
+    {
+      "value": "egyptian",
+      "synonyms": [
+        "egyptian"
+      ]
+    },
+    {
+      "value": "bulgar",
+      "synonyms": [
+        "bulgar"
+      ]
+    },
+    {
+      "value": "arabian",
+      "synonyms": [
+        "arabian"
+      ]
+    },
+    {
+      "value": "iranian",
+      "synonyms": [
+        "iranian"
+      ]
+    },
+    {
+      "value": "latin",
+      "synonyms": [
+        "latin"
+      ]
+    },
+    {
+      "value": "mideastern",
+      "synonyms": [
+        "mideastern"
+      ]
+    },
+    {
+      "value": "modern european, european",
+      "synonyms": [
+        "modern european, european"
+      ]
+    },
+    {
+      "value": "turkish",
+      "synonyms": [
+        "turkish"
+      ]
+    },
+    {
+      "value": "spanish",
+      "synonyms": [
+        "spanish"
+      ]
+    },
+    {
+      "value": "Rooftop",
+      "synonyms": [
+        "Rooftop"
+      ]
+    },
+    {
+      "value": "modern european",
+      "synonyms": [
+        "modern european"
+      ]
+    },
+    {
+      "value": "Dairy",
+      "synonyms": [
+        "Dairy"
+      ]
+    },
+    {
+      "value": "vietnam",
+      "synonyms": [
+        "vietnam",
+        "vietnamese"
+      ]
+    },
+    {
+      "value": "Cethelsea",
+      "synonyms": [
+        "Cethelsea"
+      ]
+    },
+    {
+      "value": "persian",
+      "synonyms": [
+        "persian"
+      ]
+    },
+    {
+      "value": "polish",
+      "synonyms": [
+        "polish"
+      ]
+    },
+    {
+      "value": "vegetarian",
+      "synonyms": [
+        "vegetarian",
+        "veg"
+      ]
+    },
+    {
+      "value": "tex mex, tex-mex, texmex",
+      "synonyms": [
+        "tex mex, tex-mex, texmex"
+      ]
+    },
+    {
+      "value": "swedish",
+      "synonyms": [
+        "swedish"
+      ]
+    },
+    {
+      "value": "halal, hallal",
+      "synonyms": [
+        "halal, hallal"
+      ]
+    },
+    {
+      "value": "kosher, koshar",
+      "synonyms": [
+        "kosher, koshar"
+      ]
+    },
+    {
+      "value": "peruvian",
+      "synonyms": [
+        "peruvian"
+      ]
+    },
+    {
+      "value": "scandinavian",
+      "synonyms": [
+        "scandinavian"
+      ]
+    },
+    {
+      "value": "singaporean",
+      "synonyms": [
+        "singaporean"
+      ]
+    },
+    {
+      "value": "tex mex",
+      "synonyms": [
+        "tex mex"
+      ]
+    },
+    {
+      "value": "puerto rican",
+      "synonyms": [
+        "puerto rican"
+      ]
+    },
+    {
+      "value": "middle eastern",
+      "synonyms": [
+        "middle eastern"
+      ]
+    },
+    {
+      "value": "southern",
+      "synonyms": [
+        "southern"
+      ]
+    },
+    {
+      "value": "gluten free, gluten-free",
+      "synonyms": [
+        "gluten free, gluten-free"
+      ]
+    },
+    {
+      "value": "russian",
+      "synonyms": [
+        "russian"
+      ]
+    },
+    {
+      "value": "scottish",
+      "synonyms": [
+        "scottish"
+      ]
+    },
+    {
+      "value": "taiwanese",
+      "synonyms": [
+        "taiwanese"
+      ]
+    },
+    {
+      "value": "kosher",
+      "synonyms": [
+        "kosher"
+      ]
+    },
+    {
+      "value": "pakistani",
+      "synonyms": [
+        "pakistani"
+      ]
+    },
+    {
+      "value": "nepalese",
+      "synonyms": [
+        "nepalese"
+      ]
+    },
+    {
+      "value": "ukrainian",
+      "synonyms": [
+        "ukrainian"
+      ]
+    },
+    {
+      "value": "ethnic",
+      "synonyms": [
+        "ethnic"
+      ]
+    },
+    {
+      "value": "middle eastern, eastern",
+      "synonyms": [
+        "middle eastern, eastern"
+      ]
+    },
+    {
+      "value": "vegan",
+      "synonyms": [
+        "vegan"
+      ]
+    },
+    {
+      "value": "kosher",
+      "synonyms": [
+        "kosher"
+      ]
+    },
+    {
+      "value": "european",
+      "synonyms": [
+        "european"
+      ]
+    },
+    {
+      "value": "portuguese",
+      "synonyms": [
+        "portuguese"
+      ]
+    },
+    {
+      "value": "south african",
+      "synonyms": [
+        "south african"
+      ]
+    },
+    {
+      "value": "Tibetan",
+      "synonyms": [
+        "Tibetan"
+      ]
+    },
+    {
+      "value": "thai",
+      "synonyms": [
+        "thai"
+      ]
+    },
+    {
+      "value": "caribbean",
+      "synonyms": [
+        "caribbean"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}

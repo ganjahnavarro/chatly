@@ -1,0 +1,557 @@
+{
+  "id": "15850417-a43b-4da4-a819-c7ae16606753",
+  "name": "beverage-soft-drinks",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "americano",
+      "synonyms": [
+        "americano"
+      ]
+    },
+    {
+      "value": "café mocha",
+      "synonyms": [
+        "café mocha"
+      ]
+    },
+    {
+      "value": "camomile tea",
+      "synonyms": [
+        "camomile tea"
+      ]
+    },
+    {
+      "value": "cappuccino",
+      "synonyms": [
+        "cappuccino"
+      ]
+    },
+    {
+      "value": "matcha",
+      "synonyms": [
+        "matcha"
+      ]
+    },
+    {
+      "value": "orange juice",
+      "synonyms": [
+        "orange juice"
+      ]
+    },
+    {
+      "value": "rice milk",
+      "synonyms": [
+        "rice milk"
+      ]
+    },
+    {
+      "value": "apple cider",
+      "synonyms": [
+        "apple cider"
+      ]
+    },
+    {
+      "value": "caffè americano",
+      "synonyms": [
+        "caffè americano"
+      ]
+    },
+    {
+      "value": "irish coffee",
+      "synonyms": [
+        "irish coffee"
+      ]
+    },
+    {
+      "value": "milk",
+      "synonyms": [
+        "milk",
+        "buy milk",
+        "drinking milk"
+      ]
+    },
+    {
+      "value": "mocha latte",
+      "synonyms": [
+        "mocha latte"
+      ]
+    },
+    {
+      "value": "strawberry milk",
+      "synonyms": [
+        "strawberry milk"
+      ]
+    },
+    {
+      "value": "latte",
+      "synonyms": [
+        "latte"
+      ]
+    },
+    {
+      "value": "moccaccino",
+      "synonyms": [
+        "moccaccino"
+      ]
+    },
+    {
+      "value": "rooibos tea",
+      "synonyms": [
+        "rooibos tea"
+      ]
+    },
+    {
+      "value": "vienna coffee",
+      "synonyms": [
+        "vienna coffee"
+      ]
+    },
+    {
+      "value": "white tea",
+      "synonyms": [
+        "white tea"
+      ]
+    },
+    {
+      "value": "sparkling water",
+      "synonyms": [
+        "sparkling water"
+      ]
+    },
+    {
+      "value": "chai latte",
+      "synonyms": [
+        "chai latte"
+      ]
+    },
+    {
+      "value": "turkish coffee",
+      "synonyms": [
+        "turkish coffee"
+      ]
+    },
+    {
+      "value": "latte macchiato",
+      "synonyms": [
+        "latte macchiato"
+      ]
+    },
+    {
+      "value": "macchiato",
+      "synonyms": [
+        "macchiato"
+      ]
+    },
+    {
+      "value": "non alcoholic cocktail",
+      "synonyms": [
+        "non alcoholic cocktail",
+        " non alcoholic cocktails"
+      ]
+    },
+    {
+      "value": "tomato juice",
+      "synonyms": [
+        "tomato juice"
+      ]
+    },
+    {
+      "value": "drink",
+      "synonyms": [
+        "drink"
+      ]
+    },
+    {
+      "value": "fanta",
+      "synonyms": [
+        "fanta"
+      ]
+    },
+    {
+      "value": "banana milk",
+      "synonyms": [
+        "banana milk"
+      ]
+    },
+    {
+      "value": "coffee",
+      "synonyms": [
+        "coffee",
+        "to coffee"
+      ]
+    },
+    {
+      "value": "hot chocolate",
+      "synonyms": [
+        "hot chocolate"
+      ]
+    },
+    {
+      "value": "juice",
+      "synonyms": [
+        "juice"
+      ]
+    },
+    {
+      "value": "lemonade",
+      "synonyms": [
+        "lemonade"
+      ]
+    },
+    {
+      "value": "yellow tea",
+      "synonyms": [
+        "yellow tea"
+      ]
+    },
+    {
+      "value": "earl grey tea",
+      "synonyms": [
+        "earl grey tea"
+      ]
+    },
+    {
+      "value": "iced coffee",
+      "synonyms": [
+        "iced coffee"
+      ]
+    },
+    {
+      "value": "iced matcha green tea latte",
+      "synonyms": [
+        "iced matcha green tea latte"
+      ]
+    },
+    {
+      "value": "soda pop",
+      "synonyms": [
+        "soda pop"
+      ]
+    },
+    {
+      "value": "sprite",
+      "synonyms": [
+        "sprite"
+      ]
+    },
+    {
+      "value": "almond milk",
+      "synonyms": [
+        "almond milk"
+      ]
+    },
+    {
+      "value": "chai masala",
+      "synonyms": [
+        "chai masala"
+      ]
+    },
+    {
+      "value": "coolatta",
+      "synonyms": [
+        "coolatta"
+      ]
+    },
+    {
+      "value": "icetea",
+      "synonyms": [
+        "icetea"
+      ]
+    },
+    {
+      "value": "mocha",
+      "synonyms": [
+        "mocha"
+      ]
+    },
+    {
+      "value": "schweppes",
+      "synonyms": [
+        "schweppes",
+        " schweppes soda"
+      ]
+    },
+    {
+      "value": "smoothie",
+      "synonyms": [
+        "smoothie"
+      ]
+    },
+    {
+      "value": "soda",
+      "synonyms": [
+        "soda"
+      ]
+    },
+    {
+      "value": "soft drink",
+      "synonyms": [
+        "soft drink",
+        " soft drinks"
+      ]
+    },
+    {
+      "value": "tea",
+      "synonyms": [
+        "tea"
+      ]
+    },
+    {
+      "value": "water",
+      "synonyms": [
+        "water",
+        "mineral water"
+      ]
+    },
+    {
+      "value": "carrot juice",
+      "synonyms": [
+        "carrot juice",
+        "pure carrot juice"
+      ]
+    },
+    {
+      "value": "coffee milk",
+      "synonyms": [
+        "coffee milk"
+      ]
+    },
+    {
+      "value": "coffee with milk",
+      "synonyms": [
+        "coffee with milk"
+      ]
+    },
+    {
+      "value": "espresso",
+      "synonyms": [
+        "espresso"
+      ]
+    },
+    {
+      "value": "iced tea",
+      "synonyms": [
+        "iced tea"
+      ]
+    },
+    {
+      "value": "rooibos",
+      "synonyms": [
+        "rooibos"
+      ]
+    },
+    {
+      "value": "vietnamese coffee",
+      "synonyms": [
+        "vietnamese coffee"
+      ]
+    },
+    {
+      "value": "apple juice",
+      "synonyms": [
+        "apple juice"
+      ]
+    },
+    {
+      "value": "coke",
+      "synonyms": [
+        "coke",
+        "coksy"
+      ]
+    },
+    {
+      "value": "frappe",
+      "synonyms": [
+        "frappe",
+        "frappé"
+      ]
+    },
+    {
+      "value": "fruit juice",
+      "synonyms": [
+        "fruit juice",
+        " fruit juices"
+      ]
+    },
+    {
+      "value": "iced cappuccino",
+      "synonyms": [
+        "iced cappuccino"
+      ]
+    },
+    {
+      "value": "mocktail",
+      "synonyms": [
+        "mocktail",
+        " mocktails"
+      ]
+    },
+    {
+      "value": "shirley temple cocktail",
+      "synonyms": [
+        "shirley temple cocktail"
+      ]
+    },
+    {
+      "value": "diet coke",
+      "synonyms": [
+        "diet coke"
+      ]
+    },
+    {
+      "value": "regular diet pepsi",
+      "synonyms": [
+        "regular diet pepsi"
+      ]
+    },
+    {
+      "value": "black tea",
+      "synonyms": [
+        "black tea"
+      ]
+    },
+    {
+      "value": "brandy coffee",
+      "synonyms": [
+        "brandy coffee"
+      ]
+    },
+    {
+      "value": "caffè latte",
+      "synonyms": [
+        "caffè latte"
+      ]
+    },
+    {
+      "value": "milkshake",
+      "synonyms": [
+        "milkshake"
+      ]
+    },
+    {
+      "value": "pu erh tea",
+      "synonyms": [
+        "pu erh tea",
+        "pu-erh tea",
+        "pu erh"
+      ]
+    },
+    {
+      "value": "low alcohol beer",
+      "synonyms": [
+        "low alcohol beer"
+      ]
+    },
+    {
+      "value": "soy milk",
+      "synonyms": [
+        "soy milk"
+      ]
+    },
+    {
+      "value": "coconut milk",
+      "synonyms": [
+        "coconut milk"
+      ]
+    },
+    {
+      "value": "green tea",
+      "synonyms": [
+        "green tea"
+      ]
+    },
+    {
+      "value": "mango smoothie",
+      "synonyms": [
+        "mango smoothie"
+      ]
+    },
+    {
+      "value": "peppermint tea",
+      "synonyms": [
+        "peppermint tea"
+      ]
+    },
+    {
+      "value": "café au lait",
+      "synonyms": [
+        "café au lait"
+      ]
+    },
+    {
+      "value": "coca cola",
+      "synonyms": [
+        "coca cola"
+      ]
+    },
+    {
+      "value": "frappuccino",
+      "synonyms": [
+        "frappuccino"
+      ]
+    },
+    {
+      "value": "green iced tea",
+      "synonyms": [
+        "green iced tea"
+      ]
+    },
+    {
+      "value": "masala chai latte",
+      "synonyms": [
+        "masala chai latte"
+      ]
+    },
+    {
+      "value": "oolong tea",
+      "synonyms": [
+        "oolong tea"
+      ]
+    },
+    {
+      "value": "chocolate milk",
+      "synonyms": [
+        "chocolate milk"
+      ]
+    },
+    {
+      "value": "citrus soda",
+      "synonyms": [
+        "citrus soda"
+      ]
+    },
+    {
+      "value": "coffee & tea",
+      "synonyms": [
+        "coffee & tea",
+        "coffee tea",
+        "coffee and tea",
+        "coffee n tea",
+        "tea coffee",
+        "tea and coffee",
+        "tea n coffee"
+      ]
+    },
+    {
+      "value": "cola",
+      "synonyms": [
+        "cola"
+      ]
+    },
+    {
+      "value": "jasmine tea",
+      "synonyms": [
+        "jasmine tea"
+      ]
+    },
+    {
+      "value": "non alcoholic beer",
+      "synonyms": [
+        "non alcoholic beer"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}

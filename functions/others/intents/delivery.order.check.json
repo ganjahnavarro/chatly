@@ -1,0 +1,163 @@
+{
+  "id": "5014cfac-10f3-46e5-823c-e24d20a90c45",
+  "name": "delivery.order.check",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "delivery.order.check",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": false,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1496995070316,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "31c68dfc-119c-474b-95b7-6038db06deaa",
+      "data": [
+        {
+          "text": "what's ",
+          "userDefined": false
+        },
+        {
+          "text": "in",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " my basket",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "48ec18c6-f9b6-4f81-9873-aa03da7b0a50",
+      "data": [
+        {
+          "text": "check my order",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "265ffd4f-f6c1-4bef-b85d-4bc623e48baa",
+      "data": [
+        {
+          "text": "check my cart",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "bbdbb70d-937d-4d7d-b156-eac5bc0d2b93",
+      "data": [
+        {
+          "text": "what do I have ",
+          "userDefined": false
+        },
+        {
+          "text": "in",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " my basket",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "b1d5d578-defc-4363-bb3d-e83dc7ad7696",
+      "data": [
+        {
+          "text": "check what I have ordered",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "3bc5da14-829b-4f17-b586-805518795545",
+      "data": [
+        {
+          "text": "show my order",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "58006537-e7d3-4160-80ee-8c7877632ab5",
+      "data": [
+        {
+          "text": "check my basket",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    },
+    {
+      "id": "d336445e-ac3f-4ebd-b7a1-2177a4a14d3b",
+      "data": [
+        {
+          "text": "show ",
+          "userDefined": false
+        },
+        {
+          "text": "me",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " what I've ordered",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 0,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

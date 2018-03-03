@@ -1,0 +1,20 @@
+{
+  "id": "e24647da-f82c-4d33-89ee-1bcbb4ad9df2",
+  "name": "all",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "true",
+      "synonyms": [
+        "every",
+        "each",
+        "all",
+        "all of",
+        "everywhere",
+        "everything"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}
