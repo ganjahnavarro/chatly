@@ -5,14 +5,14 @@ function* checkAuthentication() {
     const token = sessionStorage.getItem('token');
     if(token) {
         yield put({
-                type: "AUTHENTICATE",
-                isSuccess: true
-            })
+            type: c.AUTHENTICATE,
+            isSuccess: true
+        })
         return;
     }
 
     yield put({
-        type: "AUTHENTICATE",
+        type: c.AUTHENTICATE,
         isSuccess: false
     })
 }

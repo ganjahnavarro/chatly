@@ -8,7 +8,7 @@ class App extends Component {
 	componentWillMount(){
 		const { dispatch } = this.props;
 		dispatch({
-            type: "CHECK_AUTH"
+            type: "AUTH/CHECK_AUTH"
         });
 	}
 
