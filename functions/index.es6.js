@@ -2,9 +2,11 @@
 
 const functions = require('firebase-functions')
 
+const tempCart = []
+
 const messages = {
-    welcome: 'Welcome to chatly!',
-    default: 'Sorry I don\'t understand'
+    'welcome': 'Welcome to chatly!',
+    'default': 'Sorry I don\'t understand'
 }
 
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
@@ -44,24 +46,42 @@ const onWelcome = (args) => {
     sendResponse({ responseToUser: messages.welcome, ...args })
 }
 
+const onOrderStart = (args) => {
+    const { parameters } = args
+    const { quantity, product } = parameters
+
+    tempCart.push({ quantity, product })
+
+    const message = `OK, ${quantity} ${product} added to your cart. Anything else?`
+    sendResponse({ responseToUser: message, ...args })
+}
+
+const onShowCart = (args) => {
+    sendResponse({ responseToUser: JSON.stringify(tempCart), ...args })
+}
+
 const onDefault = (args) => {
     let responseToUser = { fulfillmentText: messages.default }
     sendResponse({ responseToUser, ...args })
 }
 
 const actionHandlers = {
-    'input.welcome': onWelcome,
-    'default': onDefault
+    'order.product': onOrderStart,
+    'order.show.cart': onShowCart,
+    'default.welcome': onWelcome,
+    'default.fallback': onDefault
 }
 
 function processRequest (request, response) {
-    let action = (request.body.queryResult.action) ? request.body.queryResult.action : 'default'
+    const defaultAction = 'default.fallback'
+
+    let action = (request.body.queryResult.action) ? request.body.queryResult.action : defaultAction
     let parameters = request.body.queryResult.parameters || {}
     let inputContexts = request.body.queryResult.contexts
     let requestSource = (request.body.originalDetectIntentRequest) ? request.body.originalDetectIntentRequest.source : undefined
     let session = (request.body.session) ? request.body.session : undefined
 
-    const handler = actionHandlers[action] || actionHandlers['default']
+    const handler = actionHandlers[action] || actionHandlers[defaultAction]
     const args = { action, parameters, inputContexts, requestSource, session, response }
     handler(args)
 }

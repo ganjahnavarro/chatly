@@ -1,0 +1,60 @@
+{
+  "id": "a63a17d6-a844-493e-af3a-77f365e0d672",
+  "name": "order.show.cart",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.show.cart",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520362431,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "5673def6-606b-4963-bb6f-f8ae8e9d3fce",
+      "data": [
+        {
+          "text": "Can you show me my orders"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520362431,
+      "isAuto": false
+    },
+    {
+      "id": "dc762914-773e-4d72-8b5a-1d42a5d90ac0",
+      "data": [
+        {
+          "text": "Show cart"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520362431,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

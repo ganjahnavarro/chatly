@@ -9,9 +9,10 @@
         "node": "~6.0"
     },
     "scripts": {
-        "start": "firebase serve --only functions:dialogflowFulfillment",
-        "deploy": "npm run package-es6 && firebase deploy --only functions:dialogflowFulfillment",
-        "package-es6": "babel index.es6.js -o index.js --presets=env --plugins=transform-object-rest-spread"
+        "start": "npm run lint && npm run package-functions && firebase serve --only functions:dialogflowFulfillment",
+        "deploy": "npm run lint && npm run package-functions && firebase deploy --only functions:dialogflowFulfillment",
+        "package-functions": "babel index.es6.js -o index.js --presets=env --plugins=transform-object-rest-spread",
+        "lint": "eslint . --fix"
     },
     "dependencies": {
         "apiai": "^4.0.3",

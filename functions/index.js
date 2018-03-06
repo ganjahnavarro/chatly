@@ -4,9 +4,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 var functions = require('firebase-functions');
 
+var tempCart = [];
+
 var messages = {
-    welcome: 'Welcome to chatly!',
-    default: 'Sorry I don\'t understand'
+    'welcome': 'Welcome to chatly!',
+    'default': 'Sorry I don\'t understand'
 };
 
 exports.dialogflowFulfillment = functions.https.onRequest(function (request, response) {
@@ -49,24 +51,44 @@ var onWelcome = function onWelcome(args) {
     sendResponse(_extends({ responseToUser: messages.welcome }, args));
 };
 
+var onOrderStart = function onOrderStart(args) {
+    var parameters = args.parameters;
+    var quantity = parameters.quantity,
+        product = parameters.product;
+
+
+    tempCart.push({ quantity: quantity, product: product });
+
+    var message = 'OK, ' + quantity + ' ' + product + ' added to your cart. Anything else?';
+    sendResponse(_extends({ responseToUser: message }, args));
+};
+
+var onShowCart = function onShowCart(args) {
+    sendResponse(_extends({ responseToUser: JSON.stringify(tempCart) }, args));
+};
+
 var onDefault = function onDefault(args) {
     var responseToUser = { fulfillmentText: messages.default };
     sendResponse(_extends({ responseToUser: responseToUser }, args));
 };
 
 var actionHandlers = {
-    'input.welcome': onWelcome,
-    'default': onDefault
+    'order.product': onOrderStart,
+    'order.show.cart': onShowCart,
+    'default.welcome': onWelcome,
+    'default.fallback': onDefault
 };
 
 function processRequest(request, response) {
-    var action = request.body.queryResult.action ? request.body.queryResult.action : 'default';
+    var defaultAction = 'default.fallback';
+
+    var action = request.body.queryResult.action ? request.body.queryResult.action : defaultAction;
     var parameters = request.body.queryResult.parameters || {};
     var inputContexts = request.body.queryResult.contexts;
     var requestSource = request.body.originalDetectIntentRequest ? request.body.originalDetectIntentRequest.source : undefined;
     var session = request.body.session ? request.body.session : undefined;
 
-    var handler = actionHandlers[action] || actionHandlers['default'];
+    var handler = actionHandlers[action] || actionHandlers[defaultAction];
     var args = { action: action, parameters: parameters, inputContexts: inputContexts, requestSource: requestSource, session: session, response: response };
     handler(args);
 }
