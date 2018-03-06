@@ -1,14 +1,15 @@
 'use strict';
 
-const functions = require('firebase-functions');
-const DialogflowApp = require('actions-on-google').DialogflowApp;
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-const messages = {
-    welcome: 'Welcome to chatly.',
+var functions = require('firebase-functions');
+
+var messages = {
+    welcome: 'Welcome to chatly!',
     default: 'Sorry I don\'t understand'
 };
 
-exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
+exports.dialogflowFulfillment = functions.https.onRequest(function (request, response) {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
     console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
@@ -20,50 +21,52 @@ exports.dialogflowFulfillment = functions.https.onRequest((request, response) =>
     }
 });
 
-function processRequest (request, response) {
-    let action = (request.body.queryResult.action) ? request.body.queryResult.action : 'default';
-    let parameters = request.body.queryResult.parameters || {};
-    let inputContexts = request.body.queryResult.contexts;
-    let requestSource = (request.body.originalDetectIntentRequest) ? request.body.originalDetectIntentRequest.source : undefined;
-    let session = (request.body.session) ? request.body.session : undefined;
+function sendResponse(_ref) {
+    var responseToUser = _ref.responseToUser,
+        response = _ref.response;
 
-    const actionHandlers = {
-        'input.welcome': () => {
-            sendResponse(messages.welcome);
-        },
-        'default': () => {
-            let responseToUser = {
-                /* outputContexts: [{ 'name': `${session}/contexts/weather`, 'lifespanCount': 2, 'parameters': {'city': 'Rome'} }], */
-                fulfillmentText: messages.default
-            };
-            sendResponse(responseToUser);
+    if (typeof responseToUser === 'string') {
+        var responseJson = { fulfillmentText: responseToUser };
+        response.json(responseJson);
+    } else {
+        var _responseJson = {};
+        _responseJson.fulfillmentText = responseToUser.fulfillmentText;
+
+        if (responseToUser.fulfillmentMessages) {
+            _responseJson.fulfillmentMessages = responseToUser.fulfillmentMessages;
         }
-    };
 
-    if (!actionHandlers[action]) {
-        action = 'default';
-    }
-    actionHandlers[action]();
-
-    function sendResponse (responseToUser) {
-        // if the response is a string send it as a response to the user
-        if (typeof responseToUser === 'string') {
-            let responseJson = {fulfillmentText: responseToUser};
-            response.json(responseJson);
-        } else {
-            let responseJson = {};
-            responseJson.fulfillmentText = responseToUser.fulfillmentText;
-
-            if (responseToUser.fulfillmentMessages) {
-                responseJson.fulfillmentMessages = responseToUser.fulfillmentMessages;
-            }
-
-            if (responseToUser.outputContexts) {
-                responseJson.outputContexts = responseToUser.outputContexts;
-            }
-
-            console.log('Response to Dialogflow: ' + JSON.stringify(responseJson));
-            response.json(responseJson);
+        if (responseToUser.outputContexts) {
+            _responseJson.outputContexts = responseToUser.outputContexts;
         }
+
+        console.log('Response to Dialogflow: ' + JSON.stringify(_responseJson));
+        response.json(_responseJson);
     }
+}
+
+var onWelcome = function onWelcome(args) {
+    sendResponse(_extends({ responseToUser: messages.welcome }, args));
+};
+
+var onDefault = function onDefault(args) {
+    var responseToUser = { fulfillmentText: messages.default };
+    sendResponse(_extends({ responseToUser: responseToUser }, args));
+};
+
+var actionHandlers = {
+    'input.welcome': onWelcome,
+    'default': onDefault
+};
+
+function processRequest(request, response) {
+    var action = request.body.queryResult.action ? request.body.queryResult.action : 'default';
+    var parameters = request.body.queryResult.parameters || {};
+    var inputContexts = request.body.queryResult.contexts;
+    var requestSource = request.body.originalDetectIntentRequest ? request.body.originalDetectIntentRequest.source : undefined;
+    var session = request.body.session ? request.body.session : undefined;
+
+    var handler = actionHandlers[action] || actionHandlers['default'];
+    var args = { action: action, parameters: parameters, inputContexts: inputContexts, requestSource: requestSource, session: session, response: response };
+    handler(args);
 }

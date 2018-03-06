@@ -14,4 +14,8 @@ Firebase.getCategoryItems = (categoryId) => {
     return items.filter(item => item.categoryId === categoryId);
 };
 
+Firebase.getItem = (itemId) => {
+    return items.find(item => item.id === itemId);
+};
+
 export default Firebase;
