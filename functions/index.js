@@ -1,94 +1,114 @@
-'use strict';
+'use strict'
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+const functions = require('firebase-functions')
 
-var functions = require('firebase-functions');
+let tempCart = []
 
-var tempCart = [];
-
-var messages = {
+const messages = {
     'welcome': 'Welcome to chatly!',
     'default': 'Sorry I don\'t understand'
-};
+}
 
-exports.dialogflowFulfillment = functions.https.onRequest(function (request, response) {
-    console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
-    console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
+exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
+    console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
+    console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
 
     if (request.body.queryResult) {
-        processRequest(request, response);
+        processRequest(request, response)
     } else {
-        console.log('Invalid Request');
-        return response.status(400).end('Invalid Webhook Request (expecting v2 webhook request)');
+        console.log('Invalid Request')
+        return response.status(400).end('Invalid Webhook Request (expecting v2 webhook request)')
     }
-});
+})
 
-function sendResponse(_ref) {
-    var responseToUser = _ref.responseToUser,
-        response = _ref.response;
-
+function sendResponse ({ responseToUser, response }) {
     if (typeof responseToUser === 'string') {
-        var responseJson = { fulfillmentText: responseToUser };
-        response.json(responseJson);
+        let responseJson = { fulfillmentText: responseToUser }
+        response.json(responseJson)
     } else {
-        var _responseJson = {};
-        _responseJson.fulfillmentText = responseToUser.fulfillmentText;
-
-        if (responseToUser.fulfillmentMessages) {
-            _responseJson.fulfillmentMessages = responseToUser.fulfillmentMessages;
-        }
-
-        if (responseToUser.outputContexts) {
-            _responseJson.outputContexts = responseToUser.outputContexts;
-        }
-
-        console.log('Response to Dialogflow: ' + JSON.stringify(_responseJson));
-        response.json(_responseJson);
+        console.log('Response to Dialogflow: ' + JSON.stringify(responseToUser))
+        response.json(responseToUser)
     }
 }
 
-var onWelcome = function onWelcome(args) {
-    sendResponse(_extends({ responseToUser: messages.welcome }, args));
-};
+const onWelcome = (args) => {
+    sendResponse({ responseToUser: messages.welcome, ...args })
+}
 
-var onOrderStart = function onOrderStart(args) {
-    var parameters = args.parameters;
-    var quantity = parameters.quantity,
-        product = parameters.product;
+const onOrderStart = (args) => {
+    const { parameters } = args
+    const { quantity, product } = parameters
 
+    tempCart.push({ quantity, product })
 
-    tempCart.push({ quantity: quantity, product: product });
+    const message = `OK, ${quantity} ${product} added to your cart. Anything else?`
+    sendResponse({ responseToUser: message, ...args })
+}
 
-    var message = 'OK, ' + quantity + ' ' + product + ' added to your cart. Anything else?';
-    sendResponse(_extends({ responseToUser: message }, args));
-};
+const onShowCart = (args) => {
+    sendResponse({ responseToUser: JSON.stringify(tempCart), ...args })
+}
 
-var onShowCart = function onShowCart(args) {
-    sendResponse(_extends({ responseToUser: JSON.stringify(tempCart) }, args));
-};
+const onClearCart = (args) => {
+    tempCart = []
+    sendResponse({ responseToUser: 'Cart cleared.', ...args })
+}
 
-var onDefault = function onDefault(args) {
-    var responseToUser = { fulfillmentText: messages.default };
-    sendResponse(_extends({ responseToUser: responseToUser }, args));
-};
+const onAskLocation = (args) => {
+    const fulfillmentText = 'In what address you want this order to be delivered?'
+    const payload = {
+        facebook: {
+            text: fulfillmentText,
+            quick_replies: [
+                {
+                    content_type: 'location'
+                }
+            ]
+        }
+    }
+    let responseToUser = { fulfillmentText, payload }
+    sendResponse({ responseToUser, ...args })
+}
 
-var actionHandlers = {
+const onReceiveLocation = (args) => {
+    const { originalRequestData } = args
+    if (originalRequestData && originalRequestData.postback && originalRequestData.postback.data) {
+        const { lat, long } = originalRequestData.postback.data
+        sendResponse({ responseToUser: `Location received. Lat: ${lat}, Long: ${long}.`, ...args })
+    } else {
+        console.error('Invalid state: ' + JSON.stringify(args))
+    }
+}
+
+const onDefault = (args) => {
+    let responseToUser = { fulfillmentText: messages.default }
+    sendResponse({ responseToUser, ...args })
+}
+
+const actionHandlers = {
     'order.product': onOrderStart,
     'order.show.cart': onShowCart,
+    'order.clear.cart': onClearCart,
+
+    'order.additional.no': onAskLocation,
+    'order.receive.location': onReceiveLocation,
+
     'default.welcome': onWelcome,
     'default.fallback': onDefault
-};
+}
 
-function processRequest(request, response) {
-    var defaultAction = 'default.fallback';
+function processRequest (request, response) {
+    const defaultAction = 'default.fallback'
 
-    var action = request.body.queryResult.action ? request.body.queryResult.action : defaultAction;
-    var parameters = request.body.queryResult.parameters || {};
-    var inputContexts = request.body.queryResult.contexts;
-    var requestSource = request.body.originalDetectIntentRequest ? request.body.originalDetectIntentRequest.source : undefined;
-    var session = request.body.session ? request.body.session : undefined;
+    let action = (request.body.queryResult.action) ? request.body.queryResult.action : defaultAction
+    let parameters = request.body.queryResult.parameters || {}
+    let inputContexts = request.body.queryResult.contexts
+    let session = (request.body.session) ? request.body.session : undefined
 
-    var handler = actionHandlers[action] || actionHandlers[defaultAction];
-    var args = { action: action, parameters: parameters, inputContexts: inputContexts, requestSource: requestSource, session: session, response: response };
-    handler(args);
+    const originalRequest = request.body.queryResult.originalDetectIntentRequest
+    let originalRequestData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
+
+    const handler = actionHandlers[action] || actionHandlers[defaultAction]
+    const args = { action, parameters, inputContexts, session, originalRequestData, response }
+    handler(args)
 }
