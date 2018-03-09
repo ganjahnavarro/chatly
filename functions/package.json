@@ -1,7 +1,7 @@
 {
     "name": "chatly-functions",
     "description": "Chatly Cloud Functions",
-    "main": "index.es6.js",
+    "main": "lib/index.js",
     "version": "0.0.1",
     "private": true,
     "license": "Apache Version 2.0",
@@ -12,11 +12,12 @@
     "scripts": {
         "start": "npm run lint && npm run package-functions && firebase serve --only functions:dialogflowFulfillment",
         "deploy": "npm run lint && npm run package-functions && firebase deploy --only functions:dialogflowFulfillment",
-        "package-functions": "babel index.js -o index.es6.js --presets=env --plugins=transform-object-rest-spread",
+        "package-functions": "babel src -d lib --presets=env --plugins=transform-object-rest-spread",
         "lint": "eslint . --fix"
     },
     "dependencies": {
         "apiai": "^4.0.3",
+        "axios": "^0.18.0",
         "firebase-admin": "^4.2.1",
         "firebase-functions": "^0.5.7"
     },

@@ -1,6 +1,7 @@
 'use strict'
 
 const functions = require('firebase-functions')
+const { getUserDetails } = require('./api/messenger')
 
 let tempCart = []
 
@@ -32,6 +33,14 @@ function sendResponse ({ responseToUser, response }) {
 }
 
 const onWelcome = (args) => {
+    const { payloadData } = args
+
+    console.log(args)
+
+    if (payloadData.sender && payloadData.sender.id) {
+        getUserDetails(payloadData.sender.id)
+    }
+
     sendResponse({ responseToUser: messages.welcome, ...args })
 }
 
@@ -71,12 +80,12 @@ const onAskLocation = (args) => {
 }
 
 const onReceiveLocation = (args) => {
-    const { originalRequestData } = args
-    if (originalRequestData && originalRequestData.postback && originalRequestData.postback.data) {
-        const { lat, long } = originalRequestData.postback.data
+    const { payloadData } = args
+    if (payloadData && payloadData.postback && payloadData.postback.data) {
+        const { lat, long } = payloadData.postback.data
         sendResponse({ responseToUser: `Location received. Lat: ${lat}, Long: ${long}.`, ...args })
     } else {
-        console.error('Invalid state: ' + JSON.stringify(args))
+        console.error('Invalid state. Payload Data: ' + JSON.stringify(payloadData))
     }
 }
 
@@ -105,10 +114,11 @@ function processRequest (request, response) {
     let inputContexts = request.body.queryResult.contexts
     let session = (request.body.session) ? request.body.session : undefined
 
-    const originalRequest = request.body.queryResult.originalDetectIntentRequest
-    let originalRequestData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
+    const originalRequest = request.body.originalDetectIntentRequest
+    let payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
-    const args = { action, parameters, inputContexts, session, originalRequestData, response }
+    const args = { action, parameters, inputContexts, session, payloadData, response }
+
     handler(args)
 }
