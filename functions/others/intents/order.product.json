@@ -1,0 +1,116 @@
+{
+  "id": "42eb51b6-4087-487b-a6f7-5d5cb8f5a53a",
+  "name": "order.product",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.product",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "8b0c912a-dbd6-4a33-8230-665a8d1cd9be",
+          "required": false,
+          "dataType": "@product",
+          "name": "product",
+          "value": "$product",
+          "isList": true
+        },
+        {
+          "id": "6a9a0d21-b868-4cb8-8f33-a727b0ff2c8c",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "quantity",
+          "value": "$quantity",
+          "isList": true
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520361810,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "1947bce0-fa00-431a-9c71-7f66406634db",
+      "data": [
+        {
+          "text": "i want "
+        },
+        {
+          "text": "2",
+          "alias": "quantity",
+          "meta": "@sys.number",
+          "userDefined": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "kalamata tomato",
+          "alias": "product",
+          "meta": "@product",
+          "userDefined": false
+        },
+        {
+          "text": " and "
+        },
+        {
+          "text": "3",
+          "alias": "quantity",
+          "meta": "@sys.number",
+          "userDefined": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "extravaganzza",
+          "alias": "product",
+          "meta": "@product",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520361810,
+      "isAuto": false
+    },
+    {
+      "id": "736a5104-bf6b-4b9f-b646-b1935f5626ad",
+      "data": [
+        {
+          "text": "i want to order a "
+        },
+        {
+          "text": "extravaganzza",
+          "alias": "product",
+          "meta": "@product",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520361810,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

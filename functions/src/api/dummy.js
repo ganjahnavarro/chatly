@@ -3,7 +3,7 @@ export const categories = [
     { id: 2, name: 'Chicken & Pasta' },
     { id: 3, name: 'Appetizers & Desserts' },
     { id: 4, name: 'Beverages' }
-];
+]
 
 export const items = [
     {
@@ -84,7 +84,7 @@ export const items = [
         name: 'COKE 1.5L',
         description: 'Coke 1.5L',
         imageURL: 'https://www.dominospizza.ph/uploads/files/products/beverages/Coca-Cola-Bottle_15.jpg',
-        price:
+        price: 95
     },
     {
         id: 11,
@@ -102,4 +102,4 @@ export const items = [
         imageURL: 'https://www.dominospizza.ph/uploads/files/products/beverages/dominos-water.jpg',
         price: 29
     }
-];
+]
