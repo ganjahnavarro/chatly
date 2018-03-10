@@ -2,14 +2,14 @@ export default {
   items: [
     {
       name: 'Dashboard',
-      url: '/dashboard',
+      url: '/',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info',
         text: 'NEW'
       }
     },
-    {
+    /*{
       title: true,
       name: 'Theme',
       wrapper: {            // optional wrapper object
@@ -222,7 +222,7 @@ export default {
     {
       title: true,
       name: 'Extras'
-    },
+    },*/
     {
       name: 'Pages',
       url: '/pages',

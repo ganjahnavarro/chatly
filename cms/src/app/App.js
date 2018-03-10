@@ -5,15 +5,15 @@ import Routes from "./Routes";
 
 class App extends Component {
 
-	componentWillMount(){
-		const { dispatch } = this.props;
-		dispatch({
+    componentWillMount(){
+        const { dispatch } = this.props;
+        dispatch({
             type: "AUTH/CHECK_AUTH"
         });
-	}
+    }
 
     render() {
-    	const { isAuthenticated } = this.props;
+        const { isAuthenticated } = this.props;
         return (
             <div>
                 <Routes isAuthenticated={ isAuthenticated } />

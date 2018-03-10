@@ -50,6 +50,6 @@ const Breadcrumbs = ({...rest, location : {pathname}, match}) => {
 
 export default props => (
   <div>
-    <Route path="/:path" component={Breadcrumbs} {...props} />
+    <Route path="/:path?" component={Breadcrumbs} {...props} />
   </div>
 );

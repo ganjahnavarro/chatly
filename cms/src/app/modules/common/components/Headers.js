@@ -73,11 +73,11 @@ class Headers extends PureComponent {
 					</NavItem>
 					<HeaderDropdown />
 				</Nav>
-				<NavbarToggler
+				{/*<NavbarToggler
 					className="d-md-down-none"
 					onClick={this.asideToggle}>
 					<span className="navbar-toggler-icon" />
-				</NavbarToggler>
+				</NavbarToggler>*/}
 			</header>
 		);
 	}
