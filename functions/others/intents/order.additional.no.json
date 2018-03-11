@@ -1,0 +1,133 @@
+{
+  "id": "03af9062-0af4-4bdc-a269-d2effd61c1f0",
+  "name": "order.additional.no",
+  "auto": true,
+  "contexts": [
+    "product-added"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.additional.no",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "google": false,
+        "facebook": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520528165,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "afc7e20c-6b8d-4ce4-baa3-35a93f5312b7",
+      "data": [
+        {
+          "text": "none"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "30ffbc39-59a3-4ba0-b9f3-2bc48cf5686a",
+      "data": [
+        {
+          "text": "nope"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "32f4fb4a-d3b4-427b-a0c2-e114253dd243",
+      "data": [
+        {
+          "text": "I'm done"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "c20880ac-bd94-484f-9dc4-e14ada36b2fe",
+      "data": [
+        {
+          "text": "not really"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "76cde866-9d38-4920-85ed-ef556aeaf79b",
+      "data": [
+        {
+          "text": "I don't think so"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "7d4ee02e-21c4-4d34-8453-c8a7984b28a1",
+      "data": [
+        {
+          "text": "not interested"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "3cd8d6fd-d858-4eef-8695-74fc1781a5d5",
+      "data": [
+        {
+          "text": "definitely not"
+        }
+      ],
+      "isTemplate": false,
+      "count": 1,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "bd165fc8-38f8-41c9-aa4c-117e10d4149b",
+      "data": [
+        {
+          "text": "no"
+        }
+      ],
+      "isTemplate": false,
+      "count": 1,
+      "updated": 1520528165,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

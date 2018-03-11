@@ -1,33 +1,34 @@
 {
-  "id": "e733be5f-fe0f-435d-b338-5353dabc7e95",
-  "name": "default.welcome",
+  "id": "ba2d72c2-494e-4cd1-8aaf-ee1a1b252c5e",
+  "name": "order.receive.location",
   "auto": true,
   "contexts": [],
   "responses": [
     {
       "resetContexts": false,
-      "action": "default.welcome",
+      "action": "order.receive.location",
       "affectedContexts": [],
       "parameters": [],
       "messages": [],
       "defaultResponsePlatforms": {
-        "facebook": false,
-        "google": false
+        "google": false,
+        "facebook": false
       },
       "speech": []
     }
   ],
   "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520758877,
+  "lastUpdate": 1520532106,
   "fallbackIntent": false,
   "events": [
     {
-      "name": "WELCOME"
-    },
-    {
-      "name": "FACEBOOK_WELCOME"
+      "name": "FACEBOOK_LOCATION"
     }
   ],
   "userSays": [],
