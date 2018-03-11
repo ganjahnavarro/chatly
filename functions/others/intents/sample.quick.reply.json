@@ -20,13 +20,6 @@
     }
   ],
   "priority": 500000,
-<<<<<<< HEAD
-=======
-  "cortanaCommand": {
-    "navigateOrService": "NAVIGATE",
-    "target": ""
-  },
->>>>>>> 90274cc184245a856f7037ea96107870e808ccb4
   "webhookUsed": true,
   "webhookForSlotFilling": false,
   "lastUpdate": 1520707171,
@@ -34,18 +27,11 @@
   "events": [],
   "userSays": [
     {
-<<<<<<< HEAD
       "id": "067c40f3-4120-4a63-ae0e-e8a4bc0e008c",
       "data": [
         {
           "text": "sample quick reply",
           "userDefined": false
-=======
-      "id": "22ef7f64-6ad4-4b79-861b-3272b8126841",
-      "data": [
-        {
-          "text": "sample quick reply"
->>>>>>> 90274cc184245a856f7037ea96107870e808ccb4
         }
       ],
       "isTemplate": false,
