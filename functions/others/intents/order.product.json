@@ -7,11 +7,17 @@
     {
       "resetContexts": false,
       "action": "order.product",
-      "affectedContexts": [],
+      "affectedContexts": [
+        {
+          "name": "product-added",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
       "parameters": [
         {
           "id": "8b0c912a-dbd6-4a33-8230-665a8d1cd9be",
-          "required": false,
+          "required": true,
           "dataType": "@product",
           "name": "product",
           "value": "$product",
@@ -19,10 +25,13 @@
         },
         {
           "id": "6a9a0d21-b868-4cb8-8f33-a727b0ff2c8c",
-          "required": false,
+          "required": true,
           "dataType": "@sys.number",
           "name": "quantity",
           "value": "$quantity",
+          "prompts": [
+            "how many"
+          ],
           "isList": true
         }
       ],
@@ -43,12 +52,12 @@
   },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520361810,
+  "lastUpdate": 1520693217,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "1947bce0-fa00-431a-9c71-7f66406634db",
+      "id": "9f887423-1da0-46eb-ad57-ca88ecf90493",
       "data": [
         {
           "text": "i want "
@@ -89,11 +98,11 @@
       ],
       "isTemplate": false,
       "count": 0,
-      "updated": 1520361810,
+      "updated": 1520520724,
       "isAuto": false
     },
     {
-      "id": "736a5104-bf6b-4b9f-b646-b1935f5626ad",
+      "id": "c560a176-7483-4f9f-9a4d-4ae21a7690b8",
       "data": [
         {
           "text": "i want to order a "
@@ -107,7 +116,7 @@
       ],
       "isTemplate": false,
       "count": 0,
-      "updated": 1520361810,
+      "updated": 1520520724,
       "isAuto": false
     }
   ],

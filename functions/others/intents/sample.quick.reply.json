@@ -1,0 +1,48 @@
+{
+  "id": "681d4c9a-82fe-475d-b603-d30e70aca6aa",
+  "name": "sample.quick.reply",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "sample.quick.reply",
+      "affectedContexts": [],
+      "parameters": [],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520707171,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "22ef7f64-6ad4-4b79-861b-3272b8126841",
+      "data": [
+        {
+          "text": "sample quick reply"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520707080,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}
