@@ -1,35 +1,31 @@
 export default (args, sendResponse) => {
-    console.log(args, 'test argel')
-    /* const responseToUser = {
-        messages: {
-            platform: 'facebook',
-            replies: ['Quick reply 1', 'Quick reply 2', 'Quick reply 3'],
-            title: 'Quick Reply Title',
-            type: 1
-        }
-    } */
-
-    /* const payload = {
+    const fulfillmentText = 'Sample Quick Reply'
+    const payload = {
         facebook: {
-            text: 'Pick a color:',
+            text: 'Pick a pizza:',
             quick_replies: [
                 {
                     content_type: 'text',
-                    title: 'Red',
-                    payload: 'red'
+                    title: 'EXTRAVAGANZZA',
+                    payload: 'EXTRAVAGANZZA'
                 },
                 {
                     content_type: 'text',
-                    title: 'Green',
-                    payload: 'green'
+                    title: 'KALAMATA TOMATO',
+                    payload: 'KALAMATA TOMATO'
+                },
+                {
+                    content_type: 'text',
+                    title: 'CHICKEN BBQ SAUSAGE',
+                    payload: 'sample quick reply'
                 }
             ]
         }
-    } */
-    // const responseToUser = { fulfillmentText, payload }
+    }
+    const responseToUser = { fulfillmentText, payload }
 
     sendResponse({
-        responseToUser: 'Test argel',
+        responseToUser,
         ...args
     })
 }

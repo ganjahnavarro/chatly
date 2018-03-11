@@ -1,7 +1,6 @@
 'use strict'
 
-import functions from 'firebase-functions'
-// import { getUserDetails } from './api/messenger'
+import * as functions from 'firebase-functions'
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
 import onAskLocation from './modules/location/onAskLocation'
@@ -10,6 +9,8 @@ import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
 import onOrderStart from './modules/order/onOrderStart'
 import quickReply from './modules/quick-reply/quickReply'
+
+// const functions = require('firebase-functions')
 
 // let tempCart = []
 
