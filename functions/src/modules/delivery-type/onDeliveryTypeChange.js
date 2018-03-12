@@ -1,16 +1,14 @@
 import { database } from '../../api/firebase'
+import onAskLocation from '../location/onAskLocation'
 
 export default (args, sendResponse) => {
-    const { payloadData } = args
+    const { parameters, payloadData } = args
+    const deliveryType = parameters['delivery-type']
 
-    if (payloadData.sender && payloadData.sender.id) {
+    if (payloadData.sender && payloadData.sender.id && deliveryType) {
         const senderId = payloadData.sender.id
-
-        console.log('Sender ID: ', senderId)
-
-        database.ref(`sessions/${senderId}`).set({ deliveryType: 'delivery' })
+        database.ref(`sessions/${senderId}`).update({ deliveryType })
     }
 
-    const responseToUser = 'Delivery or pick-up?'
-    sendResponse({ responseToUser, ...args })
+    onAskLocation(args, sendResponse)
 }
