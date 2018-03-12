@@ -1,54 +1,90 @@
-// import admin from '../../api/cart'
+import { database } from '../../api/firebase'
+import _ from 'lodash'
+import Promise from 'promise'
 
-export default (args, sendResponse) => {
-    // const sessionRef = admin.database().ref(`session/123eafkqhew`)
+const getCategories = categoryKey => {
+    const categoryRef = database.ref(`categories/${categoryKey}`)
+    return new Promise((resolve, reject) => {
+        categoryRef.once('value', snapshot => {
+            resolve(snapshot.val())
+        })
+    })
+}
 
-    // let value = {}
+const getProduct = productKey => {
+    const productsRef = database.ref(`products/${productKey}`)
+    return new Promise((resolve, reject) => {
+        productsRef.once('value', snapshot => {
+            const { categoryId } = snapshot.val()
+            getCategories(categoryId).then(res => {
+                resolve({
+                    ...snapshot.val(),
+                    category: res
+                })
+            })
+        })
+    })
+}
 
-    // sessionRef.once("value", snapshot => {
-    // console.log(snapshot.val());
-    // });
+const getItems = itemId => {
+    const sessionRef = database.ref(
+        `sessions/${1615712965183322}/cart/${itemId}`
+    )
+    return new Promise((resolve, reject) => {
+        sessionRef.once('value', snapshot => {
+            const { product } = snapshot.val()
+            getProduct(product).then(res => {
+                resolve({
+                    ...snapshot.val(),
+                    product: res
+                })
+            })
+        })
+    })
+}
 
-    const fulfillmentText = 'Sample Quick Reply'
+const onShowCart = (args, sendResponse) => {
+    const sessionRef = database.ref(`sessions/${1615712965183322}/cart`)
+    sessionRef.once('value', snapshot => {
+        let promises = []
 
-    const payload = {
-        facebook: {
-            attachment: {
-                type: 'template',
-                payload: {
-                    template_type: 'generic',
-                    elements: [
+        const keys = _.keys(snapshot.val())
+
+        keys.forEach(item => promises.push(getItems(item)))
+
+        Promise.all(promises).then(res => {
+            let elements = []
+            res.forEach(item => {
+                elements.push({
+                    title: item.product.name,
+                    image_url: item.product.image,
+                    subtitle: item.product.description,
+                    buttons: [
                         {
-                            title: 'Extravaganzza',
-                            image_url: 'http://www.paparonspizza.com/gfx/products/1257157444.jpg',
-                            subtitle: 'Think and Crispy',
-                            buttons: [
-                                {
-                                    type: 'postback',
-                                    payload: 'Extravaganzza',
-                                    title: 'Buy'
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Kalamata',
-                            image_url: 'http://www.paparonspizza.com/gfx/products/1257157444.jpg',
-                            subtitle: 'Spicy',
-                            buttons: [
-                                {
-                                    type: 'postback',
-                                    payload: 'Extravaganzza',
-                                    title: 'Buy'
-                                }
-                            ]
+                            type: 'postback',
+                            payload: item.product.name,
+                            title: `Add More (qty: ${item.quantity})`
                         }
                     ]
+                })
+            })
+
+            const payload = {
+                facebook: {
+                    attachment: {
+                        type: 'template',
+                        payload: {
+                            template_type: 'generic',
+                            elements: elements
+                        }
+                    }
                 }
             }
-        }
-    }
 
-    const responseToUser = { fulfillmentText, payload }
-
-    sendResponse({ responseToUser, ...args })
+            const responseToUser = { payload }
+            sendResponse({ responseToUser, ...args })
+        })
+    })
 }
+
+export default onShowCart
