@@ -7,12 +7,12 @@ export default (args, sendResponse) => {
                 {
                     content_type: 'text',
                     title: 'Delivery',
-                    payload: 'p.delivery'
+                    payload: 'Delivery'
                 },
                 {
                     content_type: 'text',
                     title: 'Pick-up',
-                    payload: 'p.pickup'
+                    payload: 'Pick-up'
                 }
             ]
         }

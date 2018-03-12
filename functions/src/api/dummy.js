@@ -1,3 +1,30 @@
+export const branches = [
+    {
+        name: 'España',
+        location: {
+            address: 'España Boulevard, 873 M.F. Jhocson, Sampaloc, Manila',
+            lat: 14.607905,
+            long: 120.991088
+        }
+    },
+    {
+        name: 'Tutuban',
+        location: {
+            address: 'Unit M1-BB150, Tutuban Center Mall, Recto Ave, Tondo 48 Zone 4, Manila, 1012 Metro Manila',
+            lat: 14.607026,
+            long: 120.973130
+        }
+    },
+    {
+        name: 'Shaw Blvd.',
+        location: {
+            address: 'Shaw, Mandaluyong, Metro Manila',
+            lat: 14.584490,
+            long: 121.049764
+        }
+    }
+]
+
 export const categories = [
     { id: 1, name: 'Pizza' },
     { id: 2, name: 'Chicken & Pasta' },

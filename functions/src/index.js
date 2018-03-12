@@ -5,10 +5,10 @@ import * as functions from 'firebase-functions'
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
 
-// import onAskLocation from './modules/location/onAskLocation'
 import onReceiveLocation from './modules/location/onReceiveLocation'
 
 import onAskDeliveryType from './modules/delivery-type/onAskDeliveryType'
+import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
@@ -46,6 +46,8 @@ const actionHandlers = {
 
     'order.additional.no': onAskDeliveryType,
     'order.receive.location': onReceiveLocation,
+
+    'order.delivery.type.change': onDeliveryTypeChange,
 
     'default.welcome': onWelcome,
     'default.fallback': onDefault,

@@ -1,5 +1,11 @@
 export default (args, sendResponse) => {
-    const fulfillmentText = 'In what address you want this order to be delivered?'
+    const { parameters } = args
+    const deliveryType = parameters['delivery-type']
+
+    const deliveryMessage = 'In what address you want this order to be delivered?'
+    const pickupMessage = 'What is your address?'
+
+    const fulfillmentText = deliveryType === 'delivery' ? deliveryMessage : pickupMessage
     const payload = {
         facebook: {
             text: fulfillmentText,
