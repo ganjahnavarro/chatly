@@ -1,0 +1,23 @@
+{
+  "id": "b872fe66-b2cf-40d3-b68a-ffba6d4f5ed4",
+  "name": "delivery-type",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "delivery",
+      "synonyms": [
+        "delivery"
+      ]
+    },
+    {
+      "value": "pick-up",
+      "synonyms": [
+        "pick-up",
+        "pick up",
+        "pickup"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}

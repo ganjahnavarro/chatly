@@ -1,0 +1,92 @@
+{
+  "id": "f57e06d6-8033-491c-a41e-e955cfb254f0",
+  "name": "product",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "EXTRAVAGANZZA",
+      "synonyms": [
+        "EXTRAVAGANZZA"
+      ]
+    },
+    {
+      "value": "KALAMATA TOMATO",
+      "synonyms": [
+        "KALAMATA TOMATO",
+        "KALAMATA"
+      ]
+    },
+    {
+      "value": "CHICKEN BBQ SAUSAGE",
+      "synonyms": [
+        "CHICKEN BBQ SAUSAGE",
+        "CHICKEN BBQ",
+        "BBQ"
+      ]
+    },
+    {
+      "value": "CREAMY ALFREDO SPAGHETTI",
+      "synonyms": [
+        "CREAMY ALFREDO SPAGHETTI",
+        "ALFREDO SPAGHETTI"
+      ]
+    },
+    {
+      "value": "MEATY BOLOGNESE SPAGHETTI",
+      "synonyms": [
+        "MEATY BOLOGNESE SPAGHETTI",
+        "BOLOGNESE SPAGHETTI",
+        "MEATY SPAGHETTI"
+      ]
+    },
+    {
+      "value": "CHEESY BAKED MACARONI",
+      "synonyms": [
+        "CHEESY BAKED MACARONI",
+        "BAKED MACARONI",
+        "BAKED MAC",
+        "CHEESY BAKED MAC",
+        "CHEESY MAC"
+      ]
+    },
+    {
+      "value": "MARBLED COOKIE BROWNIE (2PCS)",
+      "synonyms": [
+        "MARBLED COOKIE BROWNIE",
+        "COOKIE BROWNIE"
+      ]
+    },
+    {
+      "value": "SPECIALTY CHICKEN - ALOHA BARBECUE",
+      "synonyms": [
+        "SPECIALTY CHICKEN - ALOHA BARBECUE"
+      ]
+    },
+    {
+      "value": "POTATO WEDGES WITH BBQ DIP",
+      "synonyms": [
+        "POTATO WEDGES WITH BBQ DIP"
+      ]
+    },
+    {
+      "value": "COKE 1.5L",
+      "synonyms": [
+        "COKE 1.5L"
+      ]
+    },
+    {
+      "value": "MINUTE MAID FRESH",
+      "synonyms": [
+        "MINUTE MAID FRESH"
+      ]
+    },
+    {
+      "value": "DOMINO'S BOTTLED WATER",
+      "synonyms": [
+        "DOMINO'S BOTTLED WATER"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}
