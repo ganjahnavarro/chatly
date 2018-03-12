@@ -1,18 +1,21 @@
 'use strict'
 
 import * as functions from 'firebase-functions'
+
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
-import onAskLocation from './modules/location/onAskLocation'
+
+// import onAskLocation from './modules/location/onAskLocation'
 import onReceiveLocation from './modules/location/onReceiveLocation'
+
+import onAskDeliveryType from './modules/delivery-type/onAskDeliveryType'
+
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
+
 import onOrderStart from './modules/order/onOrderStart'
-import quickReply from './modules/quick-reply/quickReply'
 
-// const functions = require('firebase-functions')
-
-// let tempCart = []
+import sampleQuickReply from './modules/sample/quickReply'
 
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
@@ -41,13 +44,13 @@ const actionHandlers = {
     'order.show.cart': onShowCart,
     'order.clear.cart': onClearCart,
 
-    'order.additional.no': onAskLocation,
+    'order.additional.no': onAskDeliveryType,
     'order.receive.location': onReceiveLocation,
 
-    'sample.quick.reply': quickReply,
-
     'default.welcome': onWelcome,
-    'default.fallback': onDefault
+    'default.fallback': onDefault,
+
+    'sample.quick.reply': sampleQuickReply
 }
 
 function processRequest (request, response) {

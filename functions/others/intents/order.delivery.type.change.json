@@ -1,0 +1,129 @@
+{
+  "id": "5b829c33-d4e8-4259-9d17-91228e6796a2",
+  "name": "order.delivery.type.change",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "3ad4ca08-1d52-4fa0-8bd9-b2bc57de651a",
+          "required": true,
+          "dataType": "@delivery-type",
+          "name": "delivery-type",
+          "value": "$delivery-type",
+          "prompts": [
+            "OK. Delivery or pick-up?"
+          ],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {},
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520849937,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "e929b4a0-b471-40e3-b3eb-6fdb2d247b3b",
+      "data": [
+        {
+          "text": "Change my "
+        },
+        {
+          "text": "delivery",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " method to "
+        },
+        {
+          "text": "pick-up",
+          "alias": "delivery-type",
+          "meta": "@delivery-type",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520849937,
+      "isAuto": false
+    },
+    {
+      "id": "6daaf6d0-17de-4eb4-8730-4458767eee9f",
+      "data": [
+        {
+          "text": "Change my "
+        },
+        {
+          "text": "delivery",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " type to "
+        },
+        {
+          "text": "delivery",
+          "alias": "delivery-type",
+          "meta": "@delivery-type",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520849937,
+      "isAuto": false
+    },
+    {
+      "id": "bf564d3a-2f5e-42d2-b30e-1fdb1e06077f",
+      "data": [
+        {
+          "text": "Pick-up",
+          "alias": "delivery-type",
+          "meta": "@delivery-type",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520849937,
+      "isAuto": false
+    },
+    {
+      "id": "400a8801-8f67-4635-80cc-da95b15cedd0",
+      "data": [
+        {
+          "text": "Delivery",
+          "alias": "delivery-type",
+          "meta": "@delivery-type",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520849937,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

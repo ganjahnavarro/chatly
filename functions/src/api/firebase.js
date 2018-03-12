@@ -1,21 +1,13 @@
-import { categories, items } from './dummy'
+import * as admin from 'firebase-admin'
+import * as firebase from 'firebase'
 
-const Firebase = {}
+const functions = require('firebase-functions')
 
-Firebase.getCategories = () => {
-    return categories
+admin.initializeApp(functions.config().firebase)
+firebase.initializeApp(functions.config().firebase)
+
+export const database = firebase.database()
+
+export const saveUserDetails = (senderId, data) => {
+    database.ref(`users/${senderId}`).set(data)
 }
-
-Firebase.getItems = () => {
-    return items
-}
-
-Firebase.getCategoryItems = (categoryId) => {
-    return items.filter(item => item.categoryId === categoryId)
-}
-
-Firebase.getItem = (itemId) => {
-    return items.find(item => item.id === itemId)
-}
-
-export default Firebase
