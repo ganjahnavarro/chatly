@@ -2,6 +2,8 @@
 
 import * as functions from 'firebase-functions'
 
+import populateDatabase from './api/populate'
+
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
 
@@ -12,8 +14,7 @@ import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
-
-import onOrderStart from './modules/order/onOrderStart'
+import onAddCartItem from './modules/cart/onAddCartItem'
 
 import sampleQuickReply from './modules/sample/quickReply'
 
@@ -40,7 +41,7 @@ function sendResponse ({ responseToUser, response }) {
 }
 
 const actionHandlers = {
-    'order.product': onOrderStart,
+    'order.product': onAddCartItem,
     'order.show.cart': onShowCart,
     'order.clear.cart': onClearCart,
 
@@ -71,3 +72,5 @@ function processRequest (request, response) {
 
     handler(args, sendResponse)
 }
+
+populateDatabase()
