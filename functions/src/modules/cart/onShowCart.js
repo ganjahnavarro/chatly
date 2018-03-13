@@ -38,12 +38,17 @@ const onShowCart = (args, sendResponse) => {
                     elements.push({
                         title: item.product.name,
                         image_url: item.product.imageURL,
-                        subtitle: item.product.description,
+                        subtitle: `${item.product.description} \n Quantity: ${item.quantity}`,
                         buttons: [
                             {
                                 type: 'postback',
                                 payload: item.product.name,
-                                title: `Add More (qty: ${item.quantity})`
+                                title: 'Change Quantity'
+                            },
+                            {
+                                type: 'postback',
+                                payload: item.product.name,
+                                title: 'Remove'
                             }
                         ]
                     })

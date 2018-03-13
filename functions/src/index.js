@@ -15,6 +15,7 @@ import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
 import onAddCartItem from './modules/cart/onAddCartItem'
+import onRemoveCartItem from './modules/cart/onRemoveCartItem'
 
 import sampleQuickReply from './modules/sample/quickReply'
 
@@ -41,7 +42,9 @@ function sendResponse ({ responseToUser, response }) {
 }
 
 const actionHandlers = {
-    'order.product': onAddCartItem,
+    'order.product.add': onAddCartItem,
+    'order.product.remove': onRemoveCartItem,
+
     'order.show.cart': onShowCart,
     'order.clear.cart': onClearCart,
 

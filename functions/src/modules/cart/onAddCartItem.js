@@ -1,9 +1,27 @@
+import { getProducts, database } from '../../api/firebase'
+
 export default (args, sendResponse) => {
-    const { parameters } = args
-    const { quantity, product } = parameters
+    const { parameters, payloadData } = args
 
-    // tempCart.push({ quantity, product })
+    const { product } = parameters
+    const quantity = parameters.quantity || 1
 
-    const message = `OK, ${quantity} ${product} added to your cart. Anything else?`
-    sendResponse({ responseToUser: message, ...args })
+    if (payloadData && payloadData.sender && payloadData.sender.id) {
+        const senderId = payloadData.sender.id
+
+        getProducts().then(products => {
+            const selectedProduct = products.find(item => item.name.toLowerCase() === product.toLowerCase())
+            console.log(JSON.stringify(selectedProduct))
+
+            if (selectedProduct) {
+                const { id, name } = selectedProduct
+
+                const cartRef = database.ref(`sessions/${senderId}/cart`)
+                cartRef.push({ product: id, quantity })
+
+                const message = `OK. ${quantity} ${name} (${id}) added to your cart. Anything else?`
+                sendResponse({ responseToUser: message, ...args })
+            }
+        })
+    }
 }

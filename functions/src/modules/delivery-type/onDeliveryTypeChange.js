@@ -5,7 +5,7 @@ export default (args, sendResponse) => {
     const { parameters, payloadData } = args
     const deliveryType = parameters['delivery-type']
 
-    if (payloadData.sender && payloadData.sender.id && deliveryType) {
+    if (payloadData && payloadData.sender && payloadData.sender.id && deliveryType) {
         const senderId = payloadData.sender.id
         database.ref(`sessions/${senderId}`).update({ deliveryType })
     }
