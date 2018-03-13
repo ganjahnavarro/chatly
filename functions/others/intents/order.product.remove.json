@@ -1,0 +1,85 @@
+{
+  "id": "d4b0c31b-9130-433a-aed4-bf48891dccc7",
+  "name": "order.product.remove",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "69af42cb-b5f5-4b48-8958-347d0fa8bdaf",
+          "required": false,
+          "dataType": "@product",
+          "name": "product",
+          "value": "$product",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "facebook": false,
+        "google": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520919991,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "46c2d450-2d6b-422e-ab92-4402ffc8c09a",
+      "data": [
+        {
+          "text": "i don't want ",
+          "userDefined": false
+        },
+        {
+          "text": "kalamata tomato",
+          "alias": "product",
+          "meta": "@product",
+          "userDefined": false
+        },
+        {
+          "text": " anymore",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520919991,
+      "isAuto": false
+    },
+    {
+      "id": "0c77a561-644b-453f-828d-d1680dd576c2",
+      "data": [
+        {
+          "text": "remove ",
+          "userDefined": false
+        },
+        {
+          "text": "kalamata tomato",
+          "alias": "product",
+          "meta": "@product",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520919910,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

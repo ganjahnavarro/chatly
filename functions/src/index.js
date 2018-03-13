@@ -12,6 +12,11 @@ import onReceiveLocation from './modules/location/onReceiveLocation'
 import onAskDeliveryType from './modules/delivery-type/onAskDeliveryType'
 import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
+import onBranchChange from './modules/branch/onBranchChange'
+import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
+
+import onOrderConfirm from './modules/order/onOrderConfirm'
+
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
 import onAddCartItem from './modules/cart/onAddCartItem'
@@ -52,6 +57,10 @@ const actionHandlers = {
     'order.receive.location': onReceiveLocation,
 
     'order.delivery.type.change': onDeliveryTypeChange,
+    'order.phone.number.change': onPhoneNumberChange,
+    'order.branch.change': onBranchChange,
+
+    'order.confirm': onOrderConfirm,
 
     'default.welcome': onWelcome,
     'default.fallback': onDefault,
@@ -68,10 +77,13 @@ function processRequest (request, response) {
     let session = (request.body.session) ? request.body.session : undefined
 
     const originalRequest = request.body.originalDetectIntentRequest
-    let payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
+    const payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
+    const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
+
+    console.log('Action', action)
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
-    const args = { action, parameters, inputContexts, session, payloadData, response }
+    const args = { action, parameters, inputContexts, session, payloadData, response, senderId }
 
     handler(args, sendResponse)
 }

@@ -1,11 +1,12 @@
 import { getUserDetails } from '../../api/messenger'
+import { database } from '../../api/firebase'
 
 export default (args, sendResponse) => {
-    const { payloadData } = args
+    const { senderId } = args
 
-    if (payloadData && payloadData.sender && payloadData.sender.id) {
-        getUserDetails(payloadData.sender.id)
+    if (senderId) {
+        getUserDetails(senderId)
+        database.ref(`sessions/${senderId}`).remove()
     }
-
-    sendResponse({ responseToUser: 'Welcome to chatly', ...args })
+    sendResponse({ responseToUser: 'Welcome!', ...args })
 }

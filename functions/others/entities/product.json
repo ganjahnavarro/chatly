@@ -13,7 +13,8 @@
       "value": "KALAMATA TOMATO",
       "synonyms": [
         "KALAMATA TOMATO",
-        "KALAMATA"
+        "KALAMATA",
+        "TOMATO"
       ]
     },
     {
@@ -53,13 +54,16 @@
       "value": "MARBLED COOKIE BROWNIE (2PCS)",
       "synonyms": [
         "MARBLED COOKIE BROWNIE",
-        "COOKIE BROWNIE"
+        "COOKIE BROWNIE",
+        "BROWNIE"
       ]
     },
     {
       "value": "SPECIALTY CHICKEN - ALOHA BARBECUE",
       "synonyms": [
-        "SPECIALTY CHICKEN - ALOHA BARBECUE"
+        "SPECIALTY CHICKEN - ALOHA BARBECUE",
+        "SPECIAL CHICKEN",
+        "ALOHA BBQ"
       ]
     },
     {
@@ -71,19 +75,23 @@
     {
       "value": "COKE 1.5L",
       "synonyms": [
-        "COKE 1.5L"
+        "COKE 1.5L",
+        "COKE"
       ]
     },
     {
       "value": "MINUTE MAID FRESH",
       "synonyms": [
-        "MINUTE MAID FRESH"
+        "MINUTE MAID FRESH",
+        "MINUTE MAID"
       ]
     },
     {
       "value": "DOMINO'S BOTTLED WATER",
       "synonyms": [
-        "DOMINO'S BOTTLED WATER"
+        "DOMINO'S BOTTLED WATER",
+        "BOTTLED WATER",
+        "WATER"
       ]
     }
   ],

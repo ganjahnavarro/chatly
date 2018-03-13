@@ -32,10 +32,11 @@
   "events": [],
   "userSays": [
     {
-      "id": "afc7e20c-6b8d-4ce4-baa3-35a93f5312b7",
+      "id": "f7750fb3-6117-437e-abab-2802c6cac3d9",
       "data": [
         {
-          "text": "none"
+          "text": "none",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -44,10 +45,11 @@
       "isAuto": false
     },
     {
-      "id": "30ffbc39-59a3-4ba0-b9f3-2bc48cf5686a",
+      "id": "cf746aa1-b7f6-4161-840f-cdbbb0d2bcf5",
       "data": [
         {
-          "text": "nope"
+          "text": "nope",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -56,10 +58,11 @@
       "isAuto": false
     },
     {
-      "id": "32f4fb4a-d3b4-427b-a0c2-e114253dd243",
+      "id": "fcbdca66-35ec-4821-9a63-e8c708a4940a",
       "data": [
         {
-          "text": "I'm done"
+          "text": "I'm done",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -68,10 +71,11 @@
       "isAuto": false
     },
     {
-      "id": "c20880ac-bd94-484f-9dc4-e14ada36b2fe",
+      "id": "d16d7043-a253-446b-bbd8-61dbb8b514b7",
       "data": [
         {
-          "text": "not really"
+          "text": "not really",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -80,10 +84,11 @@
       "isAuto": false
     },
     {
-      "id": "76cde866-9d38-4920-85ed-ef556aeaf79b",
+      "id": "9f93da04-b68e-4ff2-8fcc-6477d7ace182",
       "data": [
         {
-          "text": "I don't think so"
+          "text": "I don't think so",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -92,10 +97,11 @@
       "isAuto": false
     },
     {
-      "id": "7d4ee02e-21c4-4d34-8453-c8a7984b28a1",
+      "id": "3a5fb15a-82eb-43fd-9964-6e5c814e3a6f",
       "data": [
         {
-          "text": "not interested"
+          "text": "not interested",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -104,10 +110,11 @@
       "isAuto": false
     },
     {
-      "id": "3cd8d6fd-d858-4eef-8695-74fc1781a5d5",
+      "id": "dfddcbe7-82cb-4d9a-8969-74088f19f244",
       "data": [
         {
-          "text": "definitely not"
+          "text": "definitely not",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -116,10 +123,11 @@
       "isAuto": false
     },
     {
-      "id": "bd165fc8-38f8-41c9-aa4c-117e10d4149b",
+      "id": "05f80fba-6b7c-4721-a01b-11bc774a5235",
       "data": [
         {
-          "text": "no"
+          "text": "no",
+          "userDefined": false
         }
       ],
       "isTemplate": false,

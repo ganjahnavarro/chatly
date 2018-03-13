@@ -3,12 +3,9 @@ import onAskContactNumber from '../user/onAskContactNumber'
 import onAskBranch from '../branch/onAskBranch'
 
 export default (args, sendResponse) => {
-    const { payloadData } = args
-    if (payloadData && payloadData.postback && payloadData.postback.data &&
-            payloadData.sender && payloadData.sender.id) {
+    const { payloadData, senderId } = args
+    if (payloadData && payloadData.postback && payloadData.postback.data && senderId) {
         const { lat, long } = payloadData.postback.data
-        const senderId = payloadData.sender.id
-
         const sessionRef = database.ref(`sessions/${senderId}`)
 
         const location = { lat, long }
@@ -18,7 +15,7 @@ export default (args, sendResponse) => {
 
         sessionRef.once('value').then(snapshot => {
             const session = snapshot.val()
-            switch (session.deliveryType) {
+            switch (session.delivery_type) {
                 case 'delivery':
                     onAskContactNumber(args, sendResponse)
                     break

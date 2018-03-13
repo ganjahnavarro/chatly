@@ -1,0 +1,34 @@
+{
+  "id": "0a3585b5-ca20-4921-9cea-a34b139cdb13",
+  "name": "branches",
+  "isOverridable": true,
+  "entries": [
+    {
+      "value": "España",
+      "synonyms": [
+        "España",
+        "Espana",
+        "Sampaloc"
+      ]
+    },
+    {
+      "value": "Tutuban",
+      "synonyms": [
+        "Tutuban",
+        "Tutuban Center Mall",
+        "Tutuban Mall",
+        "Recto"
+      ]
+    },
+    {
+      "value": "Shaw Blvd.",
+      "synonyms": [
+        "Shaw Blvd.",
+        "Shaw",
+        "Mandaluyong"
+      ]
+    }
+  ],
+  "isEnum": false,
+  "automatedExpansion": false
+}

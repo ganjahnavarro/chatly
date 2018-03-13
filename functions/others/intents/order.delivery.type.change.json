@@ -6,6 +6,7 @@
   "responses": [
     {
       "resetContexts": false,
+      "action": "order.delivery.type.change",
       "affectedContexts": [],
       "parameters": [
         {
@@ -31,21 +32,18 @@
     }
   ],
   "priority": 500000,
-  "cortanaCommand": {
-    "navigateOrService": "NAVIGATE",
-    "target": ""
-  },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520849937,
+  "lastUpdate": 1520853018,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "e929b4a0-b471-40e3-b3eb-6fdb2d247b3b",
+      "id": "775bfe0c-47e9-4cc7-ab23-4885baed01a7",
       "data": [
         {
-          "text": "Change my "
+          "text": "Change my ",
+          "userDefined": false
         },
         {
           "text": "delivery",
@@ -53,7 +51,8 @@
           "userDefined": false
         },
         {
-          "text": " method to "
+          "text": " method to ",
+          "userDefined": false
         },
         {
           "text": "pick-up",
@@ -68,10 +67,11 @@
       "isAuto": false
     },
     {
-      "id": "6daaf6d0-17de-4eb4-8730-4458767eee9f",
+      "id": "3bbba3f5-047f-42fc-9da4-c139b1f32d04",
       "data": [
         {
-          "text": "Change my "
+          "text": "Change my ",
+          "userDefined": false
         },
         {
           "text": "delivery",
@@ -79,7 +79,8 @@
           "userDefined": false
         },
         {
-          "text": " type to "
+          "text": " type to ",
+          "userDefined": false
         },
         {
           "text": "delivery",
@@ -94,7 +95,7 @@
       "isAuto": false
     },
     {
-      "id": "bf564d3a-2f5e-42d2-b30e-1fdb1e06077f",
+      "id": "6a271329-2027-41c1-abac-0b3a0d02934d",
       "data": [
         {
           "text": "Pick-up",
@@ -109,7 +110,7 @@
       "isAuto": false
     },
     {
-      "id": "400a8801-8f67-4635-80cc-da95b15cedd0",
+      "id": "6d79042e-221a-461e-a8c5-65eaa9b616c6",
       "data": [
         {
           "text": "Delivery",

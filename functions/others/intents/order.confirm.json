@@ -1,55 +1,53 @@
 {
-  "id": "a63a17d6-a844-493e-af3a-77f365e0d672",
-  "name": "order.show.cart",
+  "id": "8222ce58-6e6a-4542-8799-81547ab4a61d",
+  "name": "order.confirm",
   "auto": true,
   "contexts": [],
   "responses": [
     {
       "resetContexts": false,
-      "action": "order.show.cart",
+      "action": "order.confirm",
       "affectedContexts": [],
       "parameters": [],
-      "messages": [
-        {
-          "type": 0,
-          "speech": []
-        }
-      ],
-      "defaultResponsePlatforms": {},
+      "messages": [],
+      "defaultResponsePlatforms": {
+        "facebook": false,
+        "google": false
+      },
       "speech": []
     }
   ],
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520362431,
+  "lastUpdate": 1520966650,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "f7b98350-5c25-4398-b31d-22e2b44edf11",
+      "id": "ef624a26-07ed-4bcf-be27-2347426b4b52",
       "data": [
         {
-          "text": "Can you show me my orders",
+          "text": "Order approved",
           "userDefined": false
         }
       ],
       "isTemplate": false,
       "count": 0,
-      "updated": 1520362431,
+      "updated": 1520966650,
       "isAuto": false
     },
     {
-      "id": "3dc2ae7c-2b64-4760-b76f-ac2ee07abfe9",
+      "id": "228da5c2-dd1c-43bc-956f-3a239560297a",
       "data": [
         {
-          "text": "Show cart",
+          "text": "Confirm order",
           "userDefined": false
         }
       ],
       "isTemplate": false,
       "count": 0,
-      "updated": 1520362431,
+      "updated": 1520966650,
       "isAuto": false
     }
   ],

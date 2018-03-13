@@ -1,12 +1,12 @@
 {
   "id": "42eb51b6-4087-487b-a6f7-5d5cb8f5a53a",
-  "name": "order.product",
+  "name": "order.product.add",
   "auto": true,
   "contexts": [],
   "responses": [
     {
       "resetContexts": false,
-      "action": "order.product",
+      "action": "order.product.add",
       "affectedContexts": [
         {
           "name": "product-added",
@@ -21,18 +21,19 @@
           "dataType": "@product",
           "name": "product",
           "value": "$product",
-          "isList": true
+          "prompts": [],
+          "isList": false
         },
         {
           "id": "6a9a0d21-b868-4cb8-8f33-a727b0ff2c8c",
-          "required": true,
+          "required": false,
           "dataType": "@sys.number",
           "name": "quantity",
           "value": "$quantity",
           "prompts": [
-            "how many"
+            "How"
           ],
-          "isList": true
+          "isList": false
         }
       ],
       "messages": [
@@ -46,21 +47,47 @@
     }
   ],
   "priority": 500000,
-  "cortanaCommand": {
-    "navigateOrService": "NAVIGATE",
-    "target": ""
-  },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520693217,
+  "lastUpdate": 1520968770,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "9f887423-1da0-46eb-ad57-ca88ecf90493",
+      "id": "2de25b1e-02cd-4297-a8e9-b6673110da76",
       "data": [
         {
-          "text": "i want "
+          "text": "add ",
+          "userDefined": false
+        },
+        {
+          "text": "1",
+          "alias": "quantity",
+          "meta": "@sys.number",
+          "userDefined": true
+        },
+        {
+          "text": " ",
+          "userDefined": false
+        },
+        {
+          "text": "chicken bbq",
+          "alias": "product",
+          "meta": "@product",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520966286,
+      "isAuto": false
+    },
+    {
+      "id": "904b88dd-cc51-4bf2-8a2e-41de38a943cf",
+      "data": [
+        {
+          "text": "i want ",
+          "userDefined": false
         },
         {
           "text": "2",
@@ -69,16 +96,27 @@
           "userDefined": true
         },
         {
-          "text": " "
+          "text": " ",
+          "userDefined": false
         },
         {
           "text": "kalamata tomato",
           "alias": "product",
           "meta": "@product",
           "userDefined": false
-        },
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520921699,
+      "isAuto": false
+    },
+    {
+      "id": "81bd3066-3874-41ea-b014-3a1765a94ced",
+      "data": [
         {
-          "text": " and "
+          "text": "i want to order ",
+          "userDefined": false
         },
         {
           "text": "3",
@@ -87,25 +125,8 @@
           "userDefined": true
         },
         {
-          "text": " "
-        },
-        {
-          "text": "extravaganzza",
-          "alias": "product",
-          "meta": "@product",
-          "userDefined": true
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520520724,
-      "isAuto": false
-    },
-    {
-      "id": "c560a176-7483-4f9f-9a4d-4ae21a7690b8",
-      "data": [
-        {
-          "text": "i want to order a "
+          "text": " ",
+          "userDefined": false
         },
         {
           "text": "extravaganzza",
@@ -116,7 +137,7 @@
       ],
       "isTemplate": false,
       "count": 0,
-      "updated": 1520520724,
+      "updated": 1520968770,
       "isAuto": false
     }
   ],

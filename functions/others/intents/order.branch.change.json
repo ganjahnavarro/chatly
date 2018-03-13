@@ -1,0 +1,79 @@
+{
+  "id": "87561518-b472-4278-95be-b4d6c49dde5b",
+  "name": "order.branch.change",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.branch.change",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "0d6d45dd-fc61-465f-bb40-debcba3e610d",
+          "required": false,
+          "dataType": "@branches",
+          "name": "branch",
+          "value": "$branch",
+          "prompts": [],
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "facebook": false,
+        "google": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520953469,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "440af539-83a2-470d-a4f4-2d8b1fb7328e",
+      "data": [
+        {
+          "text": "Tutuban",
+          "alias": "branch",
+          "meta": "@branches",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520953469,
+      "isAuto": false
+    },
+    {
+      "id": "9f71a147-5c81-419a-a0fb-5405b048535e",
+      "data": [
+        {
+          "text": "Change branch to ",
+          "userDefined": false
+        },
+        {
+          "text": "España",
+          "alias": "branch",
+          "meta": "@branches",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520953469,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

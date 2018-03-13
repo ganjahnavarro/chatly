@@ -1,0 +1,88 @@
+{
+  "id": "ef4aab59-0cbf-4d8f-8b29-04d356a31c9c",
+  "name": "order.phone.number.change",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.phone.number.change",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "2e402a94-de5f-4342-954d-e53160425ecd",
+          "required": false,
+          "dataType": "@sys.phone-number",
+          "name": "phone-number",
+          "value": "$phone-number",
+          "isList": false
+        }
+      ],
+      "messages": [],
+      "defaultResponsePlatforms": {
+        "facebook": false,
+        "google": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1520948379,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "aca747b8-51b3-4412-8875-5f6e1071dd2b",
+      "data": [
+        {
+          "text": "change my phone number to ",
+          "userDefined": false
+        },
+        {
+          "text": "09235612141",
+          "alias": "phone-number",
+          "meta": "@sys.phone-number",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520948266,
+      "isAuto": false
+    },
+    {
+      "id": "0c987789-cd57-4fce-a72c-b027a8cf7a74",
+      "data": [
+        {
+          "text": "+639433427345",
+          "alias": "phone-number",
+          "meta": "@sys.phone-number",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520948266,
+      "isAuto": false
+    },
+    {
+      "id": "df15b796-b477-4ac3-9101-1dfe023c7505",
+      "data": [
+        {
+          "text": "09452681512",
+          "alias": "phone-number",
+          "meta": "@sys.phone-number",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520948266,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

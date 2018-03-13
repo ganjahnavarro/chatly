@@ -1,5 +1,5 @@
 {
-  "id": "681d4c9a-82fe-475d-b603-d30e70aca6aa",
+  "id": "6afd36ce-b488-4b40-8fbf-d71b27a1a51a",
   "name": "sample.quick.reply",
   "auto": true,
   "contexts": [],
@@ -22,12 +22,12 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520707171,
+  "lastUpdate": 1520771243,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "067c40f3-4120-4a63-ae0e-e8a4bc0e008c",
+      "id": "caad17ab-a7ab-4e5f-abe9-13284f921451",
       "data": [
         {
           "text": "sample quick reply",

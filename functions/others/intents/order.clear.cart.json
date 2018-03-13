@@ -20,10 +20,6 @@
     }
   ],
   "priority": 500000,
-  "cortanaCommand": {
-    "navigateOrService": "NAVIGATE",
-    "target": ""
-  },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
   "lastUpdate": 1520530336,
@@ -31,10 +27,11 @@
   "events": [],
   "userSays": [
     {
-      "id": "cf747eea-9ae1-4482-aed2-2bec0aa16639",
+      "id": "7c399ead-7353-4dfb-9bc1-f7526ad11dd6",
       "data": [
         {
-          "text": "restart order"
+          "text": "restart order",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -43,10 +40,11 @@
       "isAuto": false
     },
     {
-      "id": "bc85b799-e622-49ef-8637-e77b978091df",
+      "id": "f6522cea-e233-46b2-93c6-690880d77b9c",
       "data": [
         {
-          "text": "reset my order"
+          "text": "reset my order",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -55,10 +53,11 @@
       "isAuto": false
     },
     {
-      "id": "146c3895-e516-4f72-ae0d-98cafedfe5ff",
+      "id": "24e3531d-27c8-4756-893b-4513a96f9dac",
       "data": [
         {
-          "text": "clear all"
+          "text": "clear all",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -67,10 +66,11 @@
       "isAuto": false
     },
     {
-      "id": "0649565f-e56a-48ca-8256-765b45b11c00",
+      "id": "beb82d24-8275-46b3-88fd-5ac16912d83d",
       "data": [
         {
-          "text": "remove all"
+          "text": "remove all",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -79,10 +79,11 @@
       "isAuto": false
     },
     {
-      "id": "c28ac394-6cda-4a47-9712-7a69ca8bfa59",
+      "id": "5d32b421-4977-4460-8e1e-f8e79504ba5a",
       "data": [
         {
-          "text": "clear my cart"
+          "text": "clear my cart",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -91,10 +92,11 @@
       "isAuto": false
     },
     {
-      "id": "6a8835b5-2eb8-471b-8941-fbd0cddd9d63",
+      "id": "e955d835-d61a-4f2b-be0e-86f2ee5878fe",
       "data": [
         {
-          "text": "cancel my order"
+          "text": "cancel my order",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -103,10 +105,11 @@
       "isAuto": false
     },
     {
-      "id": "cf10050b-01ed-4935-95fd-4969943cc73a",
+      "id": "fc3f0af2-f02b-4051-afc1-fe0eeea5cc63",
       "data": [
         {
-          "text": "remove all items on my cart"
+          "text": "remove all items on my cart",
+          "userDefined": false
         }
       ],
       "isTemplate": false,

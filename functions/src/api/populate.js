@@ -87,84 +87,84 @@ export const products = [
         categoryId: 1,
         name: 'Extravaganzza',
         description: `Here's what Domino's is famous for!`,
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/pizza/Extravaganzza.jpg',
+        image_url: '"https://hotels.ng/guides/wp-content/uploads/2017/08/domino1.jpg"',
         price: 209
     },
     {
         categoryId: 1,
         name: 'Kalamata Tomato',
         description: 'Taste the delicious Greek Pizza!',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/pizza/Kalamata.jpg',
+        image_url: 'https://pbs.twimg.com/media/CAnt9R-WUAAsohE.jpg:large',
         price: 189
     },
     {
         categoryId: 1,
         name: 'Chicken BBQ Sausage',
         description: 'Delectably made with flavorful ingredients.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/pizza/Chicken-BBQ-Sausage-250px-PNG.jpg',
+        image_url: 'https://assets3.thrillist.com/v1/image/1170916/size/tmg-facebook_social.jpg',
         price: 209
     },
     {
         categoryId: 2,
         name: 'Creamy Alfredo Spaghetti',
         description: 'Enjoy our own version of the creamy goodness of Pasta Alfredo made with rich sauce and topped with mushrooms and shredded cheddar cheese.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Creamy-Alfredo-Spaghetti.png',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE_l6nxmcEBxjGdc_eAwA7U8GCcY0PDF9Oc_a1ucz14hfKyeFt',
         price: 139
     },
     {
         categoryId: 2,
         name: 'Meaty Bolognese Spaghetti',
         description: 'Relish the taste of our all-time favorite meaty spaghetti, for kids and adults alike.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Meaty-Bolognese-Spaghetti.png',
+        image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiAVHikF-2oLM9cwtDFpNhbsLRy0VVjW6lcilv6JCYFpPBMuc9',
         price: 139
     },
     {
         categoryId: 2,
         name: 'Cheesy Baked Macaroni',
         description: 'Oven baked macaroni, blended with our special red sauce topped with melted mozarella and cheddar cheese.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Cheesy-Baked-Macaroni-250px.png',
+        image_url: 'https://www.inspiredtaste.net/wp-content/uploads/2013/05/Homemade-Macaroni-and-Cheese-Recipe-4_1200.jpg',
         price: 139
     },
     {
         categoryId: 3,
         name: 'Marbled Cookie Brownie (2pcs)',
         description: 'A warm and chewy blend of butterscotch cookie and fudge brownie - now available in 2 pcs.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Marbled-Cookie-Brownie-2pcs-250px-v2.png',
+        image_url: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Marbled-Cookie-Brownie-2pcs-250px-v2.png',
         price: 49
     },
     {
         categoryId: 3,
         name: 'Specialty Chicken - Aloha Barbecue',
         description: 'Breaded, bite-sized tender chicken breast drizzled with BBQ Sauce, then topped with Mozzarella Cheese, and Pineapple Chunks.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Aloha-Barbecue-for-website-250px.png',
+        image_url: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Aloha-Barbecue-for-website-250px.png',
         price: 129
     },
     {
         categoryId: 3,
         name: 'Potato Wedges With BBQ Dip',
         description: 'Enjoy our golden, oven-baked potato wedges with our barbecue dip! Pair it with your pizza as a side dish or enjoy it as a snack.',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Potato-Wedges.png',
+        image_url: 'https://www.dominospizza.ph/uploads/files/products/sides%20desserts/Potato-Wedges.png',
         price: 99
     },
     {
         categoryId: 4,
         name: 'Coke 1.5L',
         description: 'Coke 1.5L',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/beverages/Coca-Cola-Bottle_15.jpg',
+        image_url: 'https://www.dominospizza.ph/uploads/files/products/beverages/Coca-Cola-Bottle_15.jpg',
         price: 95
     },
     {
         categoryId: 4,
         name: 'Minute Maid Fresh',
         description: '250ml',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/beverages/MMFresh.jpg',
+        image_url: 'https://www.dominospizza.ph/uploads/files/products/beverages/MMFresh.jpg',
         price: 29
     },
     {
         categoryId: 4,
         name: 'Domino\'s Bottled Water',
         description: '500ml',
-        imageURL: 'https://www.dominospizza.ph/uploads/files/products/beverages/dominos-water.jpg',
+        image_url: 'https://www.dominospizza.ph/uploads/files/products/beverages/dominos-water.jpg',
         price: 29
     }
 ]

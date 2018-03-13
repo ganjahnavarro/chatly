@@ -12,33 +12,20 @@ export const saveUserDetails = (senderId, data) => {
     database.ref(`users/${senderId}`).set(data)
 }
 
-export const getBranches = () => {
+export const getBranches = () => getItems('branches')
+export const getCategories = () => getItems('categories')
+export const getProducts = () => getItems('products')
+
+const getItems = key => {
     return new Promise((resolve, reject) => {
-        database.ref('branches').once('value', snapshot => resolve(snapshot.val()))
-    })
-}
+        database.ref(key).once('value', snapshot => {
+            const val = snapshot.val()
+            const ids = Object.keys(val)
 
-export const getCategories = () => {
-    return new Promise((resolve, reject) => {
-        database.ref('categories').once('value', snapshot => resolve(snapshot.val()))
-    })
-}
-
-export const getProducts = () => {
-    return new Promise((resolve, reject) => {
-        database.ref('products').once('value', snapshot => {
-            const productSnapshot = snapshot.val()
-            const ids = Object.keys(productSnapshot)
-
-            console.log('Product ids: ', ids)
-
-            const products = ids.map(id => {
-                return { id, ...productSnapshot[id] }
+            const items = ids.map(id => {
+                return { id, ...val[id] }
             })
-
-            console.log('Products: ', products)
-
-            resolve(products)
+            resolve(items)
         })
     })
 }
@@ -63,6 +50,39 @@ export const getProduct = productKey => {
                     category: res
                 })
             })
+        })
+    })
+}
+
+export const getCartItem = (senderId, itemId) => {
+    const sessionRef = database.ref(
+        `sessions/${senderId}/cart/${itemId}`
+    )
+
+    return new Promise((resolve, reject) => {
+        sessionRef.once('value', snapshot => {
+            const { product } = snapshot.val()
+            getProduct(product).then(res => {
+                resolve({
+                    ...snapshot.val(),
+                    product: res
+                })
+            })
+        })
+    })
+}
+
+export const getCartItems = senderId => {
+    const cartRef = database.ref(`sessions/${senderId}/cart`)
+
+    return new Promise((resolve, reject) => {
+        cartRef.once('value', snapshot => {
+            let promises = []
+
+            const keys = Object.keys(snapshot.val())
+            keys.forEach(key => promises.push(getCartItem(senderId, key)))
+
+            Promise.all(promises).then(items => resolve(items))
         })
     })
 }
