@@ -17,6 +17,8 @@ import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
 
 import onOrderConfirm from './modules/order/onOrderConfirm'
 
+import onShowMenu from './modules/product/onShowMenu'
+
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
 import onAddCartItem from './modules/cart/onAddCartItem'
@@ -59,6 +61,8 @@ const actionHandlers = {
     'order.delivery.type.change': onDeliveryTypeChange,
     'order.phone.number.change': onPhoneNumberChange,
     'order.branch.change': onBranchChange,
+
+    'order.show.menu': onShowMenu,
 
     'order.confirm': onOrderConfirm,
 
