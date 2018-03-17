@@ -1,0 +1,185 @@
+{
+  "id": "3d78f83b-a15b-4702-82c5-6a9fd5b124f3",
+  "name": "order.show.menu",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.show.menu",
+      "affectedContexts": [],
+      "parameters": [
+        {
+          "id": "30469e61-fe7a-4d3f-8885-37aa5f8913b8",
+          "required": false,
+          "dataType": "@product-category",
+          "name": "category",
+          "value": "$category",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "facebook": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1521282208,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "770653ac-3428-411a-bc16-839899582871",
+      "data": [
+        {
+          "text": "Can you show me what "
+        },
+        {
+          "text": "pizzas",
+          "alias": "category",
+          "meta": "@product-category",
+          "userDefined": false
+        },
+        {
+          "text": " do you have?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "c6bdf4f1-0d28-440e-b7db-f10138aa18b0",
+      "data": [
+        {
+          "text": "Show me your "
+        },
+        {
+          "text": "pizzas",
+          "alias": "category",
+          "meta": "@product-category",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "0c02cb51-9754-4343-9891-20df89ca573e",
+      "data": [
+        {
+          "text": "Do you have a menu?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "677accb0-957f-483d-8073-3c9626e2b7ab",
+      "data": [
+        {
+          "text": "What "
+        },
+        {
+          "text": "pizzas",
+          "alias": "category",
+          "meta": "@product-category",
+          "userDefined": false
+        },
+        {
+          "text": " do you have?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "6289d972-1f09-499e-9a3f-88199b3d686d",
+      "data": [
+        {
+          "text": "What are your products?"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "c672590d-c416-4e0c-a7a8-9f8447ce0ea9",
+      "data": [
+        {
+          "text": "Show "
+        },
+        {
+          "text": "pizzas",
+          "alias": "category",
+          "meta": "@product-category",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "459facb0-bc1d-4647-85c9-acca819009f1",
+      "data": [
+        {
+          "text": "Show products"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "31842a21-333d-4279-990b-1ba10df11077",
+      "data": [
+        {
+          "text": "Show categories"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "2585fb59-6acc-40fa-9e0e-f793a3a36c55",
+      "data": [
+        {
+          "text": "Show menu"
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}
