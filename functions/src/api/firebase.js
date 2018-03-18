@@ -65,7 +65,8 @@ export const getCartItem = (senderId, itemId) => {
             getProduct(product).then(res => {
                 resolve({
                     ...snapshot.val(),
-                    product: res
+                    product: res,
+                    id: itemId
                 })
             })
         })
@@ -83,6 +84,22 @@ export const getCartItems = senderId => {
             keys.forEach(key => promises.push(getCartItem(senderId, key)))
 
             Promise.all(promises).then(items => resolve(items))
+        })
+    })
+}
+
+export const removeCartItem = (senderId, product) => {
+    const cartRef = database.ref(`sessions/${senderId}/cart`)
+
+    return new Promise((resolve, reject) => {
+        getCartItems(senderId).then(items => {
+            items.forEach(item => {
+                if (item.product.name.toLowerCase() === product.toLowerCase()) {
+                    console.log(`Removing cart ID: ${item.id}`)
+                    cartRef.child(item.id).remove()
+                }
+            })
+            resolve()
         })
     })
 }
