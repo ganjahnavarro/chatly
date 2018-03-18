@@ -11,11 +11,37 @@ export default (args, sendResponse) => {
 
         if (selectedCategory) {
             getProducts().then(products => {
-                console.log('Products:', JSON.stringify(products))
                 const categoryProducts = products.filter(product => product.categoryId === selectedCategory.id)
+                const elements = []
+                categoryProducts.forEach(item => {
+                    elements.push({
+                        title: item.name,
+                        image_url: item.image_url,
+                        subtitle: item.description,
+                        buttons: [
+                            {
+                                type: 'postback',
+                                payload: `I want to order ${item.name}`,
+                                title: 'Add to Cart'
+                            }
+                        ]
+                    })
+                })
 
-                console.log('Category products:', JSON.stringify(categoryProducts))
-                sendResponse({ responseToUser: `Category products count:  ${categoryProducts.length}`, ...args })
+                const payload = {
+                    facebook: {
+                        attachment: {
+                            type: 'template',
+                            payload: {
+                                template_type: 'generic',
+                                elements: elements
+                            }
+                        }
+                    }
+                }
+
+                const responseToUser = { payload }
+                sendResponse({ responseToUser, ...args })
             })
         } else {
             onShowCategories(args, sendResponse)
