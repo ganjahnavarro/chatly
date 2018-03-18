@@ -19,7 +19,7 @@ const onShowCart = (args, sendResponse) => {
                         },
                         {
                             type: 'postback',
-                            payload: item.product.name,
+                            payload: `Remove ${item.product.name}`,
                             title: 'Remove'
                         }
                     ]
