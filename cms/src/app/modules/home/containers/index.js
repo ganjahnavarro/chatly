@@ -8,6 +8,8 @@ import Footer from '../../common/components/Footer';
 import Sidebar from '../../common/components/Sidebar';
 
 import Dashboard from '../../dashboard/container';
+import Product from '../../product/containers';
+import Category from '../../category/containers';
 
 class Home extends Component{
 
@@ -22,6 +24,8 @@ class Home extends Component{
 						<Container fluid>
 							<Switch>
 								<Route exact path="/" name="Dashboard" component={ Dashboard }/>
+								<Route exact path="/products/:productId?" name="Product" component={ Product }/>
+								<Route exact path="/categories/:categoryId?" name="Category" component={ Category }/>
 							</Switch>
 						</Container>
 					</main>

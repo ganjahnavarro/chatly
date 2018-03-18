@@ -5,10 +5,7 @@ class Footer extends Component {
 		return (
 			<footer className="app-footer">
 				<span>
-					<a href="http://coreui.io">CoreUI</a> © 2018 creativeLabs.
-				</span>
-				<span className="ml-auto">
-					Powered by <a href="http://coreui.io">CoreUI</a>
+					© 2018 chatly!.
 				</span>
 			</footer>
 		);

@@ -5,8 +5,10 @@ import { Map } from 'immutable';
 const initStateModal = Map({
 	isOpen: false,
 	content: null,
+	toggle: true,
 	title: 'Modal Title',
-	modalSize: 'modal-md'
+	modalSize: 'modal-md',
+	className: 'primary'
 })
 
 export default {
