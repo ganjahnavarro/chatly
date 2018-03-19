@@ -76,6 +76,9 @@ class Headers extends PureComponent {
 					<NavItem className="px-3">
 						<Link to="/categories">Categories</Link>
 					</NavItem>
+					<NavItem className="px-3">
+						<Link to="/branches">Branches</Link>
+					</NavItem>
 				</Nav>
 				<Nav className="ml-auto" navbar>
 					<HeaderDropdown  handleLogout={ this.handleLogout }/>

@@ -15,5 +15,10 @@ export default {
             url: "/categories",
             icon: "fa fa-glass",
         },
+        {
+            name: "Branches",
+            url: "/branches",
+            icon: "fa fa-building",
+        },
     ]
 };

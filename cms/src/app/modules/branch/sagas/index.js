@@ -12,59 +12,59 @@ import {
 } from "../../../Utils";
 import * as c from "../constants";
 
-const getCategories = () => {
-	const categoriesRef = database.ref(`categories`);
+const getBranches = () => {
+	const branchesRef = database.ref(`branches`);
 	return new Promise((resolve, reject) => {
-		categoriesRef.once("value", snapshot => {
-			let categories = []
+		branchesRef.once("value", snapshot => {
+			let branches = []
 
 			_.forOwn(snapshot.val(), (value, key) => {
-				categories.push({
-					categoryId: key,
+				branches.push({
+					branchId: key,
 					...value
 				})
 			})
 
-			resolve(categories);
+			resolve(branches);
 		})
 	})
 }
 
-const getCategory = (categoryId) => {
-	const categoryRef = database.ref(`categories/${categoryId}`);
+const getBranch = (branchId) => {
+	const branchRef = database.ref(`branches/${branchId}`);
 	return new Promise((resolve, reject) => {
-		categoryRef.once("value", snapshot => {
+		branchRef.once("value", snapshot => {
 			resolve({
 				...snapshot.val(),
-				categoryId: categoryId
+				branchId: branchId
 			});
 		})
 	})
 }
 
-const addCategory = (args) => {
+const addBranch = (args) => {
 	return new Promise((resolve, reject) => {
-		const categoriesRef = database.ref(`categories`);
-		categoriesRef.push().set(args, () => {
-			resolve('Category successfully added.')
+		const branchesRef = database.ref(`branches`);
+		branchesRef.push().set(args, () => {
+			resolve('Branch successfully added.')
 		});
 	});
 }
 
-const editCategory = (args, categoryId) => {
+const editBranch = (args, branchId) => {
 	return new Promise((resolve, reject) => {
-		const categoryRef = database.ref(`categories/${categoryId}`);
-		categoryRef.update(args, () => {
-			resolve('Category successfully updated.')
+		const branchRef = database.ref(`branches/${branchId}`);
+		branchRef.update(args, () => {
+			resolve('Branch successfully updated.')
 		});
 	});
 }
 
-const deleteCategory = (categoryId) => {
+const deleteBranch = (branchId) => {
 	return new Promise((resolve, reject) => {
-		const categoryRef = database.ref(`categories/${categoryId}`);
-			categoryRef.remove(() => {
-				resolve('Category successfully deleted.')
+		const branchRef = database.ref(`branches/${branchId}`);
+			branchRef.remove(() => {
+				resolve('Branch successfully deleted.')
 			});
 	});
 }
@@ -72,8 +72,8 @@ const deleteCategory = (categoryId) => {
 function* getList() {
 	yield put(loading("GET_LIST"));
 
-	const response = yield call(getCategories);
-
+	const response = yield call(getBranches);
+	
 	yield put({
 		type: c.GOT_LIST,
 		data: response
@@ -82,11 +82,11 @@ function* getList() {
 	yield put(loading("GET_LIST", false));
 }
 
-function* get({ categoryId }){
+function* get({ branchId }){
 
 	yield put(loading("GET"));
 
-	const response = yield call(getCategory, categoryId);
+	const response = yield call(getBranch, branchId);
 	
 	yield put({
 		type: c.GOT,
@@ -99,7 +99,7 @@ function* get({ categoryId }){
 function* add ({ args }){
 	yield put(loading("ADD"));
 
-	const response = yield call(addCategory, args);
+	const response = yield call(addBranch, args);
 
 	alert.success(response);
 
@@ -118,16 +118,16 @@ function* add ({ args }){
 	yield put(loading("ADD", false));	
 }
 
-function* edit ({ args, categoryId }){
+function* edit ({ args, branchId }){
 	yield put(loading("EDIT"));
 
-	const response = yield call(editCategory, args, categoryId);
+	const response = yield call(editBranch, args, branchId);
 
 	alert.success(response);
 
 	yield all([
 		getList(),
-		get({ categoryId: categoryId }),
+		get({ branchId: branchId }),
 		put({
 			type: "MODAL",
 			data: {
@@ -141,19 +141,20 @@ function* edit ({ args, categoryId }){
 	yield put(loading("EDIT", false));	
 }
 
-function* omit({ categoryId }){
+function* omit({ branchId }){
 	yield put(loading("DELETE"));
 
-	const response = yield call(deleteCategory, categoryId);
+	const response = yield call(deleteBranch, branchId);
 
 	alert.success(response);
 
-	history.push('/categories');
+	history.push('/branches');
 
 	yield getList();
 
 	yield put(loading("DELETE", false));
 }
+
 
 export default function*() {
 	yield all([
