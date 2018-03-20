@@ -74,16 +74,22 @@ export const getCartItem = (senderId, itemId) => {
 }
 
 export const getCartItems = senderId => {
-    const cartRef = database.ref(`sessions/${senderId}/cart`)
-
     return new Promise((resolve, reject) => {
-        cartRef.once('value', snapshot => {
-            let promises = []
+        const senderRef = database.ref(`sessions/${senderId}`)
+        senderRef.once('value', (senderSnapshot) => {
+            if (senderSnapshot.hasChild('cart')) {
+                const cartRef = database.ref(`sessions/${senderId}/cart`)
+                cartRef.once('value', cartSnapshot => {
+                    let promises = []
 
-            const keys = Object.keys(snapshot.val())
-            keys.forEach(key => promises.push(getCartItem(senderId, key)))
+                    const keys = Object.keys(cartSnapshot.val())
+                    keys.forEach(key => promises.push(getCartItem(senderId, key)))
 
-            Promise.all(promises).then(items => resolve(items))
+                    Promise.all(promises).then(items => resolve(items))
+                })
+            } else {
+                resolve([])
+            }
         })
     })
 }
