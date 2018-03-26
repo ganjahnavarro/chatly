@@ -1,0 +1,74 @@
+{
+  "id": "8789db0c-26a5-4aec-b3da-532e581736d9",
+  "name": "order.product.select.option",
+  "auto": true,
+  "contexts": [
+    "product-incomplete"
+  ],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.product.select.option",
+      "affectedContexts": [
+        {
+          "name": "product-incomplete",
+          "parameters": {},
+          "lifespan": 5
+        }
+      ],
+      "parameters": [
+        {
+          "id": "2669cfcc-3ff6-49b1-afb4-f81340912999",
+          "required": false,
+          "dataType": "@sys.any",
+          "name": "selected-option",
+          "value": "$selected-option",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "google": false,
+        "facebook": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1522084788,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "72b98392-7dea-4832-8d28-f62b0e3b7c36",
+      "data": [
+        {
+          "text": "Option select: "
+        },
+        {
+          "text": "Any",
+          "alias": "selected-option",
+          "meta": "@sys.any",
+          "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1522084788,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

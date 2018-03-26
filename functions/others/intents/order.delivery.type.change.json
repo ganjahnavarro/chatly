@@ -39,26 +39,13 @@
   "events": [],
   "userSays": [
     {
-      "id": "775bfe0c-47e9-4cc7-ab23-4885baed01a7",
+      "id": "bab3fcfd-ec96-441a-8158-18304017d82e",
       "data": [
         {
-          "text": "Change my ",
-          "userDefined": false
-        },
-        {
-          "text": "delivery",
-          "meta": "@sys.ignore",
-          "userDefined": false
-        },
-        {
-          "text": " method to ",
-          "userDefined": false
-        },
-        {
-          "text": "pick-up",
+          "text": "Delivery",
           "alias": "delivery-type",
           "meta": "@delivery-type",
-          "userDefined": true
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -67,7 +54,22 @@
       "isAuto": false
     },
     {
-      "id": "3bbba3f5-047f-42fc-9da4-c139b1f32d04",
+      "id": "daa3ba09-0828-4951-a188-b43181da9b7d",
+      "data": [
+        {
+          "text": "Pick-up",
+          "alias": "delivery-type",
+          "meta": "@delivery-type",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520849937,
+      "isAuto": false
+    },
+    {
+      "id": "c28b125b-5aa3-4cbe-83d9-2a19d0d5993b",
       "data": [
         {
           "text": "Change my ",
@@ -95,28 +97,26 @@
       "isAuto": false
     },
     {
-      "id": "6a271329-2027-41c1-abac-0b3a0d02934d",
+      "id": "35f7c745-07d2-4d11-85a1-5fd5068fcd35",
       "data": [
         {
-          "text": "Pick-up",
-          "alias": "delivery-type",
-          "meta": "@delivery-type",
+          "text": "Change my ",
           "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520849937,
-      "isAuto": false
-    },
-    {
-      "id": "6d79042e-221a-461e-a8c5-65eaa9b616c6",
-      "data": [
+        },
         {
-          "text": "Delivery",
+          "text": "delivery",
+          "meta": "@sys.ignore",
+          "userDefined": false
+        },
+        {
+          "text": " method to ",
+          "userDefined": false
+        },
+        {
+          "text": "pick-up",
           "alias": "delivery-type",
           "meta": "@delivery-type",
-          "userDefined": false
+          "userDefined": true
         }
       ],
       "isTemplate": false,

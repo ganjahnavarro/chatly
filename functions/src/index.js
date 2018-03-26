@@ -50,6 +50,7 @@ function sendResponse ({ responseToUser, response }) {
 
 const actionHandlers = {
     'order.product.add': onAddCartItem,
+    'order.product.select.option': onAddCartItem,
     'order.product.remove': onRemoveCartItem,
 
     'order.show.cart': onShowCart,
@@ -85,6 +86,7 @@ function processRequest (request, response) {
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
 
     console.log('Action', action)
+    console.log('Input contexts', inputContexts)
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
     const args = { action, parameters, inputContexts, session, payloadData, response, senderId }

@@ -11,7 +11,7 @@
     },
     "scripts": {
         "start": "npm run package-functions | firebase serve --only functions:dialogflowFulfillment",
-        "deploy": "npm run lint && npm run package-functions && firebase deploy --only functions:dialogflowFulfillment",
+        "deploy": "npm run lint && npm run package-functions && firebase deploy --only functions:dialogflowFulfillment && beep",
         "package-functions": "babel src -d lib --presets=env --plugins=transform-object-rest-spread",
         "lint": "eslint . --fix"
     },

@@ -1,0 +1,191 @@
+{
+  "id": "f4c0a540-3e90-4aec-9267-deb3c351cbd3",
+  "name": "order.product.add.chefs.choice.salad",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.product.add",
+      "affectedContexts": [
+        {
+          "name": "product-added",
+          "parameters": {},
+          "lifespan": 2
+        },
+        {
+          "name": "orderproductaddchefschoicesalad-followup",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "6eb3698e-4c74-48aa-ad6e-843e4c05a444",
+          "required": false,
+          "dataType": "@pt-chefs-choice-salad",
+          "name": "product-type",
+          "value": "$product-type",
+          "isList": false
+        },
+        {
+          "id": "5f6b2cd4-c090-4e99-801b-606e24ab52f7",
+          "required": false,
+          "dataType": "@attr-dressing",
+          "name": "attr-dressing",
+          "value": "$attr-dressing",
+          "isList": false
+        },
+        {
+          "id": "24d2becf-6dd5-4a61-a074-d065b1940feb",
+          "required": false,
+          "dataType": "@sys.number",
+          "name": "quantity",
+          "value": "$quantity",
+          "isList": false
+        },
+        {
+          "id": "16c7587f-c197-4dde-a591-af9fa0d45e80",
+          "required": false,
+          "dataType": "@attr-salad-size",
+          "name": "attr-salad-size",
+          "value": "$attr-salad-size",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "facebook": false,
+        "google": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1521759570,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "f6e9c74b-b712-4944-8a1e-15a86b2004d4",
+      "data": [
+        {
+          "text": "I want to order "
+        },
+        {
+          "text": "chef's choice salad",
+          "alias": "product-type",
+          "meta": "@pt-chefs-choice-salad",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521759570,
+      "isAuto": false
+    },
+    {
+      "id": "2da5b1d9-3ba2-4ba6-88a4-393025bdc300",
+      "data": [
+        {
+          "text": "Add "
+        },
+        {
+          "text": "2",
+          "alias": "quantity",
+          "meta": "@sys.number",
+          "userDefined": false
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "family",
+          "alias": "attr-salad-size",
+          "meta": "@attr-salad-size",
+          "userDefined": false
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "thousand island",
+          "alias": "attr-dressing",
+          "meta": "@attr-dressing",
+          "userDefined": false
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "chef's choice salad",
+          "alias": "product-type",
+          "meta": "@pt-chefs-choice-salad",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521759570,
+      "isAuto": false
+    },
+    {
+      "id": "c371d0e4-8e1f-4926-9afb-e97fbd7019cb",
+      "data": [
+        {
+          "text": "I want to order "
+        },
+        {
+          "text": "2",
+          "alias": "quantity",
+          "meta": "@sys.number",
+          "userDefined": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "family",
+          "alias": "attr-salad-size",
+          "meta": "@attr-salad-size",
+          "userDefined": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "thousand island",
+          "alias": "attr-dressing",
+          "meta": "@attr-dressing",
+          "userDefined": true
+        },
+        {
+          "text": " "
+        },
+        {
+          "text": "chef's choice salad",
+          "alias": "product-type",
+          "meta": "@pt-chefs-choice-salad",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521759570,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

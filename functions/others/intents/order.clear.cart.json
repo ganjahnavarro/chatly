@@ -27,33 +27,7 @@
   "events": [],
   "userSays": [
     {
-      "id": "7c399ead-7353-4dfb-9bc1-f7526ad11dd6",
-      "data": [
-        {
-          "text": "restart order",
-          "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520530336,
-      "isAuto": false
-    },
-    {
-      "id": "f6522cea-e233-46b2-93c6-690880d77b9c",
-      "data": [
-        {
-          "text": "reset my order",
-          "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520530336,
-      "isAuto": false
-    },
-    {
-      "id": "24e3531d-27c8-4756-893b-4513a96f9dac",
+      "id": "54acd200-7321-4c1f-8d30-609c736d2341",
       "data": [
         {
           "text": "clear all",
@@ -66,7 +40,20 @@
       "isAuto": false
     },
     {
-      "id": "beb82d24-8275-46b3-88fd-5ac16912d83d",
+      "id": "64c9991d-891a-4690-91b4-1da34b01213b",
+      "data": [
+        {
+          "text": "reset my order",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520530336,
+      "isAuto": false
+    },
+    {
+      "id": "e3a9c14c-4d08-4839-8dd5-d328d909e93a",
       "data": [
         {
           "text": "remove all",
@@ -79,7 +66,20 @@
       "isAuto": false
     },
     {
-      "id": "5d32b421-4977-4460-8e1e-f8e79504ba5a",
+      "id": "3d911ea0-d85a-49e1-83e2-d85b6622c821",
+      "data": [
+        {
+          "text": "restart order",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520530336,
+      "isAuto": false
+    },
+    {
+      "id": "38249fb1-0085-4920-882f-418e863e262a",
       "data": [
         {
           "text": "clear my cart",
@@ -92,7 +92,7 @@
       "isAuto": false
     },
     {
-      "id": "e955d835-d61a-4f2b-be0e-86f2ee5878fe",
+      "id": "49c7a954-9325-4b1f-b027-4877862e215e",
       "data": [
         {
           "text": "cancel my order",
@@ -105,7 +105,7 @@
       "isAuto": false
     },
     {
-      "id": "fc3f0af2-f02b-4051-afc1-fe0eeea5cc63",
+      "id": "6ba02fb5-9733-4eaf-9137-044b6925004b",
       "data": [
         {
           "text": "remove all items on my cart",

@@ -27,38 +27,12 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520528165,
+  "lastUpdate": 1521360173,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "f7750fb3-6117-437e-abab-2802c6cac3d9",
-      "data": [
-        {
-          "text": "none",
-          "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520528165,
-      "isAuto": false
-    },
-    {
-      "id": "cf746aa1-b7f6-4161-840f-cdbbb0d2bcf5",
-      "data": [
-        {
-          "text": "nope",
-          "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520528165,
-      "isAuto": false
-    },
-    {
-      "id": "fcbdca66-35ec-4821-9a63-e8c708a4940a",
+      "id": "d39e308b-5c08-4518-b9cf-3fc4fe9296eb",
       "data": [
         {
           "text": "I'm done",
@@ -71,7 +45,7 @@
       "isAuto": false
     },
     {
-      "id": "d16d7043-a253-446b-bbd8-61dbb8b514b7",
+      "id": "7931af34-9d65-45e3-a4b8-39dfdada66dd",
       "data": [
         {
           "text": "not really",
@@ -84,20 +58,20 @@
       "isAuto": false
     },
     {
-      "id": "9f93da04-b68e-4ff2-8fcc-6477d7ace182",
+      "id": "045592c7-517d-4fd5-b8d6-eaf24d264414",
       "data": [
         {
-          "text": "I don't think so",
+          "text": "no",
           "userDefined": false
         }
       ],
       "isTemplate": false,
-      "count": 0,
+      "count": 1,
       "updated": 1520528165,
       "isAuto": false
     },
     {
-      "id": "3a5fb15a-82eb-43fd-9964-6e5c814e3a6f",
+      "id": "8ebb14c2-7d31-448d-8416-17e115b1db2e",
       "data": [
         {
           "text": "not interested",
@@ -110,7 +84,7 @@
       "isAuto": false
     },
     {
-      "id": "dfddcbe7-82cb-4d9a-8969-74088f19f244",
+      "id": "daef6190-d9dd-430e-bd2e-d313fb0b695f",
       "data": [
         {
           "text": "definitely not",
@@ -123,15 +97,41 @@
       "isAuto": false
     },
     {
-      "id": "05f80fba-6b7c-4721-a01b-11bc774a5235",
+      "id": "5f9d8375-4299-4295-b5a4-99c4af8f3c00",
       "data": [
         {
-          "text": "no",
+          "text": "nope",
           "userDefined": false
         }
       ],
       "isTemplate": false,
-      "count": 1,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "dc5c3c84-0093-4381-b042-f7a599eb3ad8",
+      "data": [
+        {
+          "text": "none",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520528165,
+      "isAuto": false
+    },
+    {
+      "id": "5d00b30b-e600-42cd-85bd-a6476617b1f7",
+      "data": [
+        {
+          "text": "I don't think so",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
       "updated": 1520528165,
       "isAuto": false
     }

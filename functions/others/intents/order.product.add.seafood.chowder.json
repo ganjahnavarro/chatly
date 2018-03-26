@@ -1,0 +1,90 @@
+{
+  "id": "0138dfcc-4f7c-4b90-9135-95c6724aea2a",
+  "name": "order.product.add.seafood.chowder",
+  "auto": true,
+  "contexts": [],
+  "responses": [
+    {
+      "resetContexts": false,
+      "action": "order.product.add",
+      "affectedContexts": [
+        {
+          "name": "product-added",
+          "parameters": {},
+          "lifespan": 2
+        }
+      ],
+      "parameters": [
+        {
+          "id": "c2af53aa-f292-4bbd-b558-ae645cab7339",
+          "required": false,
+          "dataType": "@pt-seafood-chowder",
+          "name": "product-type",
+          "value": "$product-type",
+          "isList": false
+        }
+      ],
+      "messages": [
+        {
+          "type": 0,
+          "speech": []
+        }
+      ],
+      "defaultResponsePlatforms": {
+        "google": false,
+        "facebook": false
+      },
+      "speech": []
+    }
+  ],
+  "priority": 500000,
+  "cortanaCommand": {
+    "navigateOrService": "NAVIGATE",
+    "target": ""
+  },
+  "webhookUsed": true,
+  "webhookForSlotFilling": false,
+  "lastUpdate": 1521759201,
+  "fallbackIntent": false,
+  "events": [],
+  "userSays": [
+    {
+      "id": "60453a5e-da3b-4b9c-90dd-7cf65dc931ff",
+      "data": [
+        {
+          "text": "Add "
+        },
+        {
+          "text": "seafood chowder",
+          "alias": "product-type",
+          "meta": "@pt-seafood-chowder",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521759201,
+      "isAuto": false
+    },
+    {
+      "id": "1db69008-2f99-4f83-8e47-2de0c92352a4",
+      "data": [
+        {
+          "text": "I want to order "
+        },
+        {
+          "text": "seafood chowder",
+          "alias": "product-type",
+          "meta": "@pt-seafood-chowder",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521759201,
+      "isAuto": false
+    }
+  ],
+  "followUpIntents": [],
+  "templates": []
+}

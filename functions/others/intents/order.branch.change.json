@@ -35,27 +35,12 @@
   "priority": 500000,
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1520953469,
+  "lastUpdate": 1521362166,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "440af539-83a2-470d-a4f4-2d8b1fb7328e",
-      "data": [
-        {
-          "text": "Tutuban",
-          "alias": "branch",
-          "meta": "@branches",
-          "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520953469,
-      "isAuto": false
-    },
-    {
-      "id": "9f71a147-5c81-419a-a0fb-5405b048535e",
+      "id": "ec0f318d-4dce-44ae-a57a-de6a804d5d42",
       "data": [
         {
           "text": "Change branch to ",
@@ -66,6 +51,21 @@
           "alias": "branch",
           "meta": "@branches",
           "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520953469,
+      "isAuto": false
+    },
+    {
+      "id": "57239237-9189-4242-9a7e-29f8705e1c05",
+      "data": [
+        {
+          "text": "Tutuban",
+          "alias": "branch",
+          "meta": "@branches",
+          "userDefined": false
         }
       ],
       "isTemplate": false,

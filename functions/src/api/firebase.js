@@ -14,7 +14,39 @@ export const saveUserDetails = (senderId, data) => {
 
 export const getBranches = () => getItems('branches')
 export const getCategories = () => getItems('categories')
-export const getProducts = () => getItems('products')
+export const getProductTypes = () => getItems('product_types')
+
+export const getProductTypeAttributes = (productType) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`product_types/${productType.id}/attributes`).once('value', snapshot => {
+            if (snapshot.val()) {
+                let promises = []
+
+                const keys = Object.keys(snapshot.val())
+                keys.forEach(key => {
+                    const attributeId = productType.attributes[key].attribute_id
+                    promises.push(getAttribute(attributeId))
+                })
+                Promise.all(promises).then(items => resolve(items))
+            } else {
+                resolve()
+            }
+        })
+    })
+}
+
+const getAttribute = (attributeId) => {
+    const attributeRef = database.ref(`attributes/${attributeId}`)
+    return new Promise((resolve, reject) => {
+        attributeRef.once('value', snapshot => {
+            const attribute = {
+                ...snapshot.val(),
+                id: attributeId
+            }
+            resolve(attribute)
+        })
+    })
+}
 
 const getItems = key => {
     return new Promise((resolve, reject) => {

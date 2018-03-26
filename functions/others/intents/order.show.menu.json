@@ -31,10 +31,6 @@
     }
   ],
   "priority": 500000,
-  "cortanaCommand": {
-    "navigateOrService": "NAVIGATE",
-    "target": ""
-  },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
   "lastUpdate": 1521282208,
@@ -42,10 +38,11 @@
   "events": [],
   "userSays": [
     {
-      "id": "770653ac-3428-411a-bc16-839899582871",
+      "id": "dd8967cf-16db-426b-a25d-093945ef6fe5",
       "data": [
         {
-          "text": "Can you show me what "
+          "text": "What ",
+          "userDefined": false
         },
         {
           "text": "pizzas",
@@ -54,24 +51,7 @@
           "userDefined": false
         },
         {
-          "text": " do you have?"
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1521282208,
-      "isAuto": false
-    },
-    {
-      "id": "c6bdf4f1-0d28-440e-b7db-f10138aa18b0",
-      "data": [
-        {
-          "text": "Show me your "
-        },
-        {
-          "text": "pizzas",
-          "alias": "category",
-          "meta": "@product-category",
+          "text": " do you have?",
           "userDefined": false
         }
       ],
@@ -81,10 +61,11 @@
       "isAuto": false
     },
     {
-      "id": "0c02cb51-9754-4343-9891-20df89ca573e",
+      "id": "e4907adc-79a4-4f6e-90f7-7bc90aea092d",
       "data": [
         {
-          "text": "Do you have a menu?"
+          "text": "Show products",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -93,10 +74,24 @@
       "isAuto": false
     },
     {
-      "id": "677accb0-957f-483d-8073-3c9626e2b7ab",
+      "id": "5ca92c5c-82e9-4d39-bf92-cb86dcf3c252",
       "data": [
         {
-          "text": "What "
+          "text": "Do you have a menu?",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "e0379ded-c750-4cc4-88ea-f9a3545ad2c9",
+      "data": [
+        {
+          "text": "Can you show me what ",
+          "userDefined": false
         },
         {
           "text": "pizzas",
@@ -105,7 +100,8 @@
           "userDefined": false
         },
         {
-          "text": " do you have?"
+          "text": " do you have?",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -114,22 +110,11 @@
       "isAuto": false
     },
     {
-      "id": "6289d972-1f09-499e-9a3f-88199b3d686d",
+      "id": "d4c84052-3277-4d5a-b711-29f83c0deed0",
       "data": [
         {
-          "text": "What are your products?"
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1521282208,
-      "isAuto": false
-    },
-    {
-      "id": "c672590d-c416-4e0c-a7a8-9f8447ce0ea9",
-      "data": [
-        {
-          "text": "Show "
+          "text": "Show me your ",
+          "userDefined": false
         },
         {
           "text": "pizzas",
@@ -144,10 +129,17 @@
       "isAuto": false
     },
     {
-      "id": "459facb0-bc1d-4647-85c9-acca819009f1",
+      "id": "420985a0-1682-4aa6-a19c-ff55c3e28718",
       "data": [
         {
-          "text": "Show products"
+          "text": "Show ",
+          "userDefined": false
+        },
+        {
+          "text": "pizzas",
+          "alias": "category",
+          "meta": "@product-category",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -156,10 +148,11 @@
       "isAuto": false
     },
     {
-      "id": "31842a21-333d-4279-990b-1ba10df11077",
+      "id": "04814d5f-7a3f-4698-86d1-69e1f8ec7efd",
       "data": [
         {
-          "text": "Show categories"
+          "text": "Show categories",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
@@ -168,10 +161,24 @@
       "isAuto": false
     },
     {
-      "id": "2585fb59-6acc-40fa-9e0e-f793a3a36c55",
+      "id": "26032a0e-80ec-4407-8ffc-0531eb5b7d78",
       "data": [
         {
-          "text": "Show menu"
+          "text": "Show menu",
+          "userDefined": false
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1521282208,
+      "isAuto": false
+    },
+    {
+      "id": "39ede198-8e29-4940-96c7-f3e0af414591",
+      "data": [
+        {
+          "text": "What are your products?",
+          "userDefined": false
         }
       ],
       "isTemplate": false,

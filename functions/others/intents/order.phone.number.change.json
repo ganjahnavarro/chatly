@@ -34,26 +34,7 @@
   "events": [],
   "userSays": [
     {
-      "id": "aca747b8-51b3-4412-8875-5f6e1071dd2b",
-      "data": [
-        {
-          "text": "change my phone number to ",
-          "userDefined": false
-        },
-        {
-          "text": "09235612141",
-          "alias": "phone-number",
-          "meta": "@sys.phone-number",
-          "userDefined": false
-        }
-      ],
-      "isTemplate": false,
-      "count": 0,
-      "updated": 1520948266,
-      "isAuto": false
-    },
-    {
-      "id": "0c987789-cd57-4fce-a72c-b027a8cf7a74",
+      "id": "7d72cbde-11e3-4950-b190-24c33962522c",
       "data": [
         {
           "text": "+639433427345",
@@ -68,13 +49,32 @@
       "isAuto": false
     },
     {
-      "id": "df15b796-b477-4ac3-9101-1dfe023c7505",
+      "id": "c04701fe-9a59-4fb1-9f7c-2dfbc052fb8e",
       "data": [
         {
           "text": "09452681512",
           "alias": "phone-number",
           "meta": "@sys.phone-number",
           "userDefined": true
+        }
+      ],
+      "isTemplate": false,
+      "count": 0,
+      "updated": 1520948266,
+      "isAuto": false
+    },
+    {
+      "id": "d7a3c5a0-4028-4a22-a4da-d887bd2e2fc1",
+      "data": [
+        {
+          "text": "change my phone number to ",
+          "userDefined": false
+        },
+        {
+          "text": "09235612141",
+          "alias": "phone-number",
+          "meta": "@sys.phone-number",
+          "userDefined": false
         }
       ],
       "isTemplate": false,
