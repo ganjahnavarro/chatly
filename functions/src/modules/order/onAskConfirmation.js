@@ -18,9 +18,14 @@ export default (args, sendResponse) => {
                   'Cart: \n'
 
                 items.forEach(item => {
-                    const amount = item.quantity * item.product.price
+                    const { quantity, product, productType } = item
+
+                    const price = product ? product.price : productType.price
+                    const amount = quantity * price
                     totalAmount += amount
-                    message += `${item.quantity} ${item.product.name} (P${amount.toFixed(2)}) \n`
+
+                    const productDescription = product ? ` (${product.description})` : ''
+                    message += `${quantity} ${productType.name}${productDescription} (P${amount.toFixed(2)}) \n`
                 })
 
                 const deliveryTypeMessage = `Delivery Type: ${isDelivery ? 'Delivery' : 'Pick-up'} \n`

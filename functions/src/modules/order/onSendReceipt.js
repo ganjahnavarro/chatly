@@ -5,20 +5,25 @@ export default (args, sendResponse) => {
     if (senderId) {
         getCartItems(senderId).then(items => {
             let totalAmount = 0
-            const elements = []
 
-            items.forEach(item => {
-                const amount = item.quantity * item.product.price
+            const elements = items.map(item => {
+                const { quantity, product, productType } = item
+
+                const price = product ? product.price : productType.price
+                const amount = quantity * price
                 totalAmount += amount
 
-                elements.push({
-                    title: item.product.name,
-                    subtitle: item.product.description,
-                    quantity: item.quantity,
+                const productTypeDescription = productType.description || ''
+                const productDescription = product ? ` (${product.description})` : ''
+
+                return {
+                    title: `${productType.name}${productDescription}`,
+                    subtitle: productTypeDescription,
+                    quantity: quantity,
                     price: amount,
                     currency: 'PHP',
-                    image_url: item.product.image_url
-                })
+                    image_url: productType.image_url
+                }
             })
 
             // TODO Replace order_number, recipient_name, address
@@ -34,7 +39,7 @@ export default (args, sendResponse) => {
                             merchant_name: 'Domino\'s Pizza',
                             order_number: millis,
                             currency: 'PHP',
-                            payment_method: 'Cash',
+                            payment_method: 'To be paid',
                             timestamp: parseInt(millis / 1000),
                             address: {
                                 street_1: '43 Manapat St., Tañong',
