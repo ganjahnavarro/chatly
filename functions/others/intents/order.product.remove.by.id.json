@@ -1,20 +1,20 @@
 {
-  "id": "c68eb236-7fdb-43c7-ae49-736a444b3693",
-  "name": "order.product.remove",
-  "auto": true,
+  "id": "9630b5e1-9b1a-42b1-80bd-ea26f361965e",
+  "name": "order.product.remove.by.id",
+  "auto": false,
   "contexts": [],
   "responses": [
     {
       "resetContexts": false,
-      "action": "order.product.remove",
+      "action": "order.product.remove.by.id",
       "affectedContexts": [],
       "parameters": [
         {
-          "id": "cd92ceb6-d4b1-43a5-a532-db54ad7a76ac",
+          "id": "11685d40-1a32-433b-bab9-718377e581b5",
           "required": false,
-          "dataType": "@product-type",
-          "name": "product-type",
-          "value": "$product-type",
+          "dataType": "@sys.any",
+          "name": "cart-item",
+          "value": "$cart-item",
           "isList": false
         }
       ],
@@ -25,8 +25,8 @@
         }
       ],
       "defaultResponsePlatforms": {
-        "facebook": false,
-        "google": false
+        "google": false,
+        "facebook": false
       },
       "speech": []
     }
@@ -38,29 +38,26 @@
   },
   "webhookUsed": true,
   "webhookForSlotFilling": false,
-  "lastUpdate": 1522171824,
+  "lastUpdate": 1522171479,
   "fallbackIntent": false,
   "events": [],
   "userSays": [
     {
-      "id": "9f85088a-8ad2-466a-835b-e1da893d662d",
+      "id": "3a6239b5-8a23-479c-a3f9-c4da25246388",
       "data": [
         {
-          "text": "Remove "
+          "text": "Remove Cart Item: "
         },
         {
-          "text": "seafood chowder",
-          "alias": "product-type",
-          "meta": "@product-type",
-          "userDefined": false
-        },
-        {
-          "text": " from my cart"
+          "text": "any",
+          "alias": "cart-item",
+          "meta": "@sys.any",
+          "userDefined": true
         }
       ],
       "isTemplate": false,
       "count": 0,
-      "updated": 1522171824,
+      "updated": 1522171479,
       "isAuto": false
     }
   ],
