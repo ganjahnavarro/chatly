@@ -85,9 +85,6 @@ function processRequest (request, response) {
     const payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
 
-    console.log('Action', action)
-    console.log('Input contexts', inputContexts)
-
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
     const args = { action, parameters, inputContexts, session, payloadData, response, senderId }
 

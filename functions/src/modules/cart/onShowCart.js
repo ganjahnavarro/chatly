@@ -3,25 +3,30 @@ import { getCartItems } from '../../api/firebase'
 const getResponse = (items) => {
     let responseToUser = {}
     if (items.length > 0) {
-        const elements = []
-        items.forEach(item => {
-            elements.push({
-                title: item.product.name,
-                image_url: item.product.image_url,
-                subtitle: `${item.product.description} \n Quantity: ${item.quantity}`,
+        const elements = items.map(item => {
+            const { id, quantity, product, productType } = item
+
+            const productTypeDescription = productType.description || ''
+            const productDescription = product ? ` (${product.description})` : ''
+            const title = `${productType.name}${productDescription}`
+
+            return {
+                title,
+                image_url: productType.image_url,
+                subtitle: `Quantity: ${quantity} \n ${productTypeDescription}`,
                 buttons: [
                     {
                         type: 'postback',
-                        payload: item.product.name,
+                        payload: productType.name,
                         title: 'Change Quantity'
                     },
                     {
                         type: 'postback',
-                        payload: `Remove ${item.product.name}`,
+                        payload: `Remove Cart Item: ${id}`,
                         title: 'Remove'
                     }
                 ]
-            })
+            }
         })
         const payload = {
             facebook: {
@@ -38,7 +43,7 @@ const getResponse = (items) => {
     } else {
         const payload = {
             facebook: {
-                text: 'There are no items in this cart.',
+                text: 'There are no items in your cart.',
                 quick_replies: [
                     {
                         content_type: 'text',

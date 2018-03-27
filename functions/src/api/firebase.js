@@ -66,40 +66,57 @@ export const getCategory = categoryKey => {
     const categoryRef = database.ref(`categories/${categoryKey}`)
     return new Promise((resolve, reject) => {
         categoryRef.once('value', snapshot => {
-            resolve(snapshot.val())
+            resolve({
+                ...snapshot.val(),
+                id: categoryKey
+            })
         })
     })
 }
 
-export const getProduct = productKey => {
-    const productsRef = database.ref(`products/${productKey}`)
+export const getProductType = productTypeKey => {
+    const productTypesRef = database.ref(`product_types/${productTypeKey}`)
     return new Promise((resolve, reject) => {
-        productsRef.once('value', snapshot => {
-            const { categoryId } = snapshot.val()
-            getCategory(categoryId).then(res => {
+        productTypesRef.once('value', snapshot => {
+            const { category_id: categoryKey, ...rest } = snapshot.val()
+            getCategory(categoryKey).then(res => {
                 resolve({
-                    ...snapshot.val(),
-                    category: res
+                    ...rest,
+                    category: res,
+                    id: productTypeKey
                 })
             })
         })
     })
 }
 
-export const getCartItem = (senderId, itemId) => {
+export const getCartItem = (senderId, cartItemKey) => {
     const sessionRef = database.ref(
-        `sessions/${senderId}/cart/${itemId}`
+        `sessions/${senderId}/cart/${cartItemKey}`
     )
 
     return new Promise((resolve, reject) => {
         sessionRef.once('value', snapshot => {
-            const { product } = snapshot.val()
-            getProduct(product).then(res => {
-                resolve({
-                    ...snapshot.val(),
-                    product: res,
-                    id: itemId
-                })
+            const {
+                product_id: productKey,
+                product_type_id: productTypeKey,
+                ...rest
+            } = snapshot.val()
+
+            getProductType(productTypeKey).then(productType => {
+                const cartItem = {
+                    ...rest,
+                    productType,
+                    id: cartItemKey
+                }
+
+                if (productKey && productType.products) {
+                    cartItem.product = {
+                        ...productType.products[productKey],
+                        id: productKey
+                    }
+                }
+                resolve(cartItem)
             })
         })
     })
