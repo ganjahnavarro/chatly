@@ -1,5 +1,5 @@
 import onShowCategories from './onShowCategories'
-import { getCategories, getProducts } from '../../api/firebase'
+import { getCategories, getProductTypes } from '../../api/firebase'
 
 export default (args, sendResponse) => {
     const { parameters } = args
@@ -10,11 +10,12 @@ export default (args, sendResponse) => {
         console.log('Selected Category: ', JSON.stringify(selectedCategory))
 
         if (selectedCategory) {
-            getProducts().then(products => {
-                const categoryProducts = products.filter(product => product.categoryId === selectedCategory.id)
-                const elements = []
-                categoryProducts.forEach(item => {
-                    elements.push({
+            getProductTypes().then(productTypes => {
+                const categoryProducts = productTypes
+                    .filter(productType => productType.category_id === selectedCategory.id)
+
+                const elements = categoryProducts.map(item => {
+                    return {
                         title: item.name,
                         image_url: item.image_url,
                         subtitle: item.description,
@@ -25,7 +26,7 @@ export default (args, sendResponse) => {
                                 title: 'Add to Cart'
                             }
                         ]
-                    })
+                    }
                 })
 
                 const payload = {

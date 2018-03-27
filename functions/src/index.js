@@ -23,6 +23,7 @@ import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
 import onAddCartItem from './modules/cart/onAddCartItem'
 import onRemoveCartItem from './modules/cart/onRemoveCartItem'
+import onRemoveCartItemById from './modules/cart/onRemoveCartItemById'
 
 import sampleQuickReply from './modules/sample/quickReply'
 
@@ -52,6 +53,7 @@ const actionHandlers = {
     'order.product.add': onAddCartItem,
     'order.product.select.option': onAddCartItem,
     'order.product.remove': onRemoveCartItem,
+    'order.product.remove.by.id': onRemoveCartItemById,
 
     'order.show.cart': onShowCart,
     'order.clear.cart': onClearCart,
@@ -77,6 +79,7 @@ function processRequest (request, response) {
     const defaultAction = 'default.fallback'
 
     let action = (request.body.queryResult.action) ? request.body.queryResult.action : defaultAction
+    let queryText = request.body.queryResult.queryText
     let parameters = request.body.queryResult.parameters || {}
     let inputContexts = request.body.queryResult.contexts
     let session = (request.body.session) ? request.body.session : undefined
@@ -86,7 +89,7 @@ function processRequest (request, response) {
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
-    const args = { action, parameters, inputContexts, session, payloadData, response, senderId }
+    const args = { action, parameters, inputContexts, session, payloadData, response, senderId, queryText }
 
     handler(args, sendResponse)
 }

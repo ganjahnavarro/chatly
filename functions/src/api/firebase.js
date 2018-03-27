@@ -143,18 +143,26 @@ export const getCartItems = senderId => {
     })
 }
 
-export const removeCartItem = (senderId, product) => {
+export const removeCartItem = (senderId, productType) => {
     const cartRef = database.ref(`sessions/${senderId}/cart`)
 
     return new Promise((resolve, reject) => {
         getCartItems(senderId).then(items => {
             items.forEach(item => {
-                if (item.product.name.toLowerCase() === product.toLowerCase()) {
-                    console.log(`Removing cart ID: ${item.id}`)
+                console.log(item.productType.name, productType,
+                    `matched: ${item.productType.name.toLowerCase() === productType.toLowerCase()}`, item.id)
+
+                if (item.productType.name.toLowerCase() === productType.toLowerCase()) {
+                    console.log(`Removing cart item by product type: ${item.id}`)
                     cartRef.child(item.id).remove()
                 }
             })
-            resolve()
         })
+        resolve()
     })
+}
+
+export const removeCartItemById = (senderId, cartItem) => {
+    console.log(`Removing cart item by ID: ${cartItem}`)
+    return database.ref(`sessions/${senderId}/cart/${cartItem}`).remove()
 }

@@ -1,13 +1,12 @@
+import onShowCart from './onShowCart'
 import { removeCartItem } from '../../api/firebase'
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args
-    const { product } = parameters
+    const productType = parameters['product-type']
 
-    if (senderId && product) {
-        removeCartItem(senderId, product).then(() => {
-            sendResponse({ responseToUser: `Item successfuly removed from cart.`, ...args })
-        })
+    if (senderId && productType) {
+        removeCartItem(senderId, productType).then(() => onShowCart(args, sendResponse))
     } else {
         console.error('Invalid state: ' + JSON.stringify(args))
     }
