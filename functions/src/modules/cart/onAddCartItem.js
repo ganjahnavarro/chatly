@@ -1,11 +1,6 @@
 import _ from 'lodash'
 import { getProductTypes, getProductTypeAttributes, database } from '../../api/firebase'
-
-const toArray = (obj) => {
-    return Object.keys(obj).map(key => {
-        return { id: key, ...obj[key] }
-    })
-}
+import { toArray } from '../../utils'
 
 export default (args, sendResponse) => {
     const { senderId } = args
@@ -108,6 +103,7 @@ const addToCart = (sessionRef, selectedProduct, selectedProductType, quantity) =
         cartItem.product_id = selectedProduct.id
     }
     sessionRef.child('cart').push(cartItem)
+    sessionRef.child('parameters').remove()
 }
 
 const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args, sendResponse) => {

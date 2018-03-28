@@ -1,29 +1,18 @@
 import { database } from '../../api/firebase'
-import onAskContactNumber from '../user/onAskContactNumber'
-import onAskBranch from '../branch/onAskBranch'
+import onOrderContinue from '../order/onOrderContinue'
 
 export default (args, sendResponse) => {
     const { payloadData, senderId } = args
     if (payloadData && payloadData.postback && payloadData.postback.data && senderId) {
         const { lat, long } = payloadData.postback.data
-        const sessionRef = database.ref(`sessions/${senderId}`)
+        const usersRef = database.ref(`users/${senderId}`)
 
         const location = { lat, long }
-        sessionRef.update({ location })
+        usersRef.update({ location })
 
         console.log(`Location received. Sender: ${senderId}, Lat: ${lat}, Long: ${long}.`)
 
-        sessionRef.once('value').then(snapshot => {
-            const session = snapshot.val()
-            switch (session.delivery_type) {
-                case 'delivery':
-                    onAskContactNumber(args, sendResponse)
-                    break
-                case 'pick-up':
-                    onAskBranch(args, sendResponse)
-                    break
-            }
-        })
+        onOrderContinue(args, sendResponse)
     } else {
         console.error('Invalid state. Payload Data: ' + JSON.stringify(payloadData))
     }

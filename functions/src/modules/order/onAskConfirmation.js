@@ -5,11 +5,17 @@ export default (args, sendResponse) => {
     if (senderId) {
         getCartItems(senderId).then(items => {
             const sessionRef = database.ref(`sessions/${senderId}`)
-            sessionRef.once('value').then(snapshot => {
-                const session = snapshot.val()
-                const isDelivery = session.delivery_type === 'delivery'
+            const userRef = database.ref(`users/${senderId}`)
+
+            Promise.all([sessionRef.once('value'), userRef.once('value')]).then(snapshots => {
+                console.log('Snapshots: ', JSON.stringify(snapshots.length))
+
+                const session = snapshots[0].val()
+                const user = snapshots[1].val()
+                const isDelivery = user.delivery_type === 'delivery'
 
                 console.log('Session: ', JSON.stringify(session))
+                console.log('User: ', JSON.stringify(user))
                 console.log('Items: ', JSON.stringify(items))
 
                 let totalAmount = 0
@@ -29,9 +35,9 @@ export default (args, sendResponse) => {
                 })
 
                 const deliveryTypeMessage = `Delivery Type: ${isDelivery ? 'Delivery' : 'Pick-up'} \n`
-                const branchMessage = `Branch: ${session.branch && session.branch.name} \n`
-                const addressMessage = `Address: (lat, long) ${session.location.lat}, ${session.location.long} \n`
-                const phoneNumberMessage = `Contact No.: ${session.phone_number} \n`
+                const branchMessage = `Branch: ${user.branch && user.branch.name} \n`
+                const addressMessage = `Address: (lat, long) ${user.location.lat}, ${user.location.long} \n`
+                const phoneNumberMessage = `Contact No.: ${user.phone_number} \n`
                 const totalAmountMessage = `Total Amount: P${totalAmount.toFixed(2)}`
 
                 message +=

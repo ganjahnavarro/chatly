@@ -9,12 +9,12 @@ import onDefault from './modules/default/onDefault'
 
 import onReceiveLocation from './modules/location/onReceiveLocation'
 
-import onAskDeliveryType from './modules/delivery-type/onAskDeliveryType'
 import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
 import onBranchChange from './modules/branch/onBranchChange'
 import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
 
+import onOrderContinue from './modules/order/onOrderContinue'
 import onOrderConfirm from './modules/order/onOrderConfirm'
 
 import onShowMenu from './modules/product/onShowMenu'
@@ -58,7 +58,7 @@ const actionHandlers = {
     'order.show.cart': onShowCart,
     'order.clear.cart': onClearCart,
 
-    'order.additional.no': onAskDeliveryType,
+    'order.additional.no': onOrderContinue,
     'order.receive.location': onReceiveLocation,
 
     'order.delivery.type.change': onDeliveryTypeChange,

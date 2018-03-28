@@ -1,5 +1,5 @@
 import { getBranches, database } from '../../api/firebase'
-import onAskContactNumber from '../user/onAskContactNumber'
+import onOrderContinue from '../order/onOrderContinue'
 
 export default (args, sendResponse) => {
     const { parameters, senderId } = args
@@ -9,9 +9,9 @@ export default (args, sendResponse) => {
         getBranches().then(branches => {
             const selectedBranch = branches.find(item => item.name.toLowerCase() === branch.toLowerCase())
             if (selectedBranch) {
-                database.ref(`sessions/${senderId}`).update({ branch: selectedBranch })
+                database.ref(`users/${senderId}`).update({ branch: selectedBranch })
             }
         })
     }
-    onAskContactNumber(args, sendResponse)
+    onOrderContinue(args, sendResponse)
 }
