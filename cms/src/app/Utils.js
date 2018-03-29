@@ -5,7 +5,7 @@ import * as services from './Services';
 import alert from 'react-s-alert';
 import history from './History';
 import _ from 'lodash';
-import database from './firebase';
+import database, { auth } from './firebase';
 import Promise from 'promise';
 
 function* watchApiReponse(response = {}, responseOk = function* (){}, response404 = function* (){}){
@@ -31,5 +31,6 @@ export {
     watchApiReponse,
     _,
     database,
+    auth,
     Promise
 }

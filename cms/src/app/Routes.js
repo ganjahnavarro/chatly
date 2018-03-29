@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route, Redirect, } from "react-router-dom";
 import Home from './modules/home/containers';
 import SignIn from './modules/auth/containers/SignIn';
-
+import CreateAccount from './modules/auth/containers/CreateAccount';
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {...rest} render={props => (
@@ -28,7 +28,8 @@ class MainRoutes extends Component{
 
         return (
             <Switch>
-                <Route component={ SignIn } />
+                <Route exact path='/sign-up' component={ CreateAccount } />
+                <Route exact path="/" component={ SignIn } />
             </Switch>
         )
 	}

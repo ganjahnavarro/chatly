@@ -9,9 +9,9 @@ export default (args, sendResponse) => {
         const sessionRef = database.ref(`sessions/${senderId}`)
 
         sessionRef.once('value', snapshot => {
-            const parameters = getParameters(snapshot.val(), args)
+            let parameters = getParameters(snapshot.val(), args)
 
-            const productType = parameters['product-type']
+            const productType = parameters['product-type-2']
             const quantity = parameters.quantity
 
             getProductTypes().then(productTypes => {
@@ -27,13 +27,24 @@ export default (args, sendResponse) => {
                     if (attributes && attributes.length) {
                         attributes.forEach(attribute => {
                             if (!parameters[attribute.code]) {
-                                console.log('argel sdfadsf', selectedAttributeValues, attribute.code)
-                                // loop attribute values
-                                /* toArray(attribute.values).forEach(value => {
-                                    console.log(value, 'argel')
-                                }) */
+                                console.log('selectedAttributeValues', selectedAttributeValues, attribute)
 
-                                missingAttributes.push(attribute)
+                                let hasSelectedAttrib = false
+
+                                const parametersAttribs = _.omit(parameters, ['product-type-2', 'quantity'])
+                                _.forOwn(parametersAttribs, (value, key) => {
+                                    toArray(attribute.values).forEach(attribValue => {
+                                        if (value.toLowerCase() === attribValue.name.toLowerCase()) {
+                                            hasSelectedAttrib = true
+                                            selectedAttributeValues.push(attribValue)
+                                            parameters[attribute.code] = attribValue.name
+                                        }
+                                    })
+                                })
+
+                                if (!hasSelectedAttrib) {
+                                    missingAttributes.push(attribute)
+                                }
                             } else {
                                 const paramValue = parameters[attribute.code].toLowerCase()
                                 const selectedAttributeValue = toArray(attribute.values).find(value => value.name.toLowerCase() === paramValue)
@@ -122,7 +133,7 @@ const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args,
         return {
             content_type: 'text',
             title: value.name,
-            payload: `Option select: ${value.name}`
+            payload: `options: ${value.name}`
         }
     })
 
@@ -136,7 +147,7 @@ const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args,
 
     const outputContexts = [
         {
-            name: `${session}/contexts/product-incomplete`,
+            name: `${session}/contexts/product-incomplete2`,
             lifespanCount: 1,
             parameters: parameters
         }
