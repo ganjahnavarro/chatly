@@ -22,13 +22,12 @@ import onShowMenu from './modules/product/onShowMenu'
 
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
-// import onAddCartItem from './modules/cart/onAddCartItem'
+import onAddCartItem from './modules/car/onAddCartItem'
 import onRemoveCartItem from './modules/cart/onRemoveCartItem'
 import onRemoveCartItemById from './modules/cart/onRemoveCartItemById'
 
 import sampleQuickReply from './modules/sample/quickReply'
 
-import onAddProduct2 from './modules/order/onAddProduct2'
 
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
