@@ -79,7 +79,8 @@ const actionHandlers = {
     'sample.quick.reply': sampleQuickReply,
     'order.product.add': onAddCartItem,
     'order.product.add-option': onAddCartItem,
-    'order.change.quantity': onChangeQuantity
+    'order.change.quantity': onChangeQuantity,
+    'order.change.quantity-value': onChangeQuantity
 }
 
 function processRequest (request, response) {
@@ -88,7 +89,7 @@ function processRequest (request, response) {
     let action = (request.body.queryResult.action) ? request.body.queryResult.action : defaultAction
     let queryText = request.body.queryResult.queryText
     let parameters = request.body.queryResult.parameters || {}
-    let inputContexts = request.body.queryResult.contexts
+    let contexts = request.body.queryResult.outputContexts
     let session = (request.body.session) ? request.body.session : undefined
 
     const originalRequest = request.body.originalDetectIntentRequest
@@ -96,7 +97,7 @@ function processRequest (request, response) {
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
-    const args = { action, parameters, inputContexts, session, payloadData, response, senderId, queryText }
+    const args = { action, parameters, contexts, session, payloadData, response, senderId, queryText }
 
     handler(args, sendResponse)
 }

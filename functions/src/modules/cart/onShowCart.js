@@ -17,7 +17,7 @@ const getResponse = (items) => {
                 buttons: [
                     {
                         type: 'postback',
-                        payload: productType.name,
+                        payload: `Change Quantity of Cart Item ${id} ${productType.name}`,
                         title: 'Change Quantity'
                     },
                     {
