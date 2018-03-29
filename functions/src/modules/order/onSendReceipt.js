@@ -44,8 +44,6 @@ export default (args, sendResponse) => {
                 }
             })
 
-            // TODO Replace address
-
             const payload = {
                 facebook: {
                     attachment: {
@@ -58,13 +56,7 @@ export default (args, sendResponse) => {
                             currency: 'PHP',
                             payment_method: 'To be paid',
                             timestamp: parseInt(timestamp / 1000),
-                            address: {
-                                street_1: '43 Manapat St., Tañong',
-                                city: 'Malabon',
-                                postal_code: '1470',
-                                state: 'Metro Manila',
-                                country: 'PH'
-                            },
+                            address: getAddress(user),
                             summary: {
                                 total_cost: totalAmount
                             },
@@ -79,5 +71,21 @@ export default (args, sendResponse) => {
         })
     } else {
         console.error('Invalid state: ' + JSON.stringify(args))
+    }
+}
+
+const getAddress = (user) => {
+    const { mapsData } = user.location
+
+    const streetNumber = mapsData.street_number ? `${mapsData.street_number} ` : ''
+    const route = mapsData.route ? `${mapsData.route} St.` : ''
+    const sublocality = mapsData.sublocality ? `, ${mapsData.sublocality}` : ''
+
+    return {
+        street_1: `${streetNumber}${route}${sublocality}`,
+        city: mapsData.locality,
+        postal_code: mapsData.postal_code,
+        state: mapsData.administrative_area,
+        country: mapsData.country
     }
 }
