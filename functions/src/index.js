@@ -8,6 +8,7 @@ import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
 
 import onReceiveLocation from './modules/location/onReceiveLocation'
+import onAskLocation from './modules/location/onAskLocation'
 
 import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
@@ -60,6 +61,7 @@ const actionHandlers = {
 
     'order.additional.no': onOrderContinue,
     'order.receive.location': onReceiveLocation,
+    'order.address.change': onAskLocation,
 
     'order.delivery.type.change': onDeliveryTypeChange,
     'order.phone.number.change': onPhoneNumberChange,

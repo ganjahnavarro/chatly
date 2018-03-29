@@ -18,11 +18,17 @@ export const getUserDetails = (senderId) => {
         saveUserDetails(senderId, data)
     }
 
-    const pageAccessToken = functions.config().messenger.page.access.token
-    axios.get(`${endpoint}${version}/${senderId}`, {
-        params: {
-            fields: fields.join(','),
-            access_token: pageAccessToken
-        }
-    }).then(onSuccess).catch(console.error)
+    const messengerConfig = functions.config().messenger
+
+    if (messengerConfig) {
+        const pageAccessToken = messengerConfig.page.access.token
+        axios.get(`${endpoint}${version}/${senderId}`, {
+            params: {
+                fields: fields.join(','),
+                access_token: pageAccessToken
+            }
+        }).then(onSuccess).catch(console.error)
+    } else {
+        throw new Error('No messenger config: messenger.page.access.token')
+    }
 }

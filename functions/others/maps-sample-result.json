@@ -1,0 +1,69 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "1071",
+               "short_name" : "1071",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "United Nations Avenue",
+               "short_name" : "U.N. Avenue",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Paco",
+               "short_name" : "Paco",
+               "types" : [ "political", "sublocality", "sublocality_level_1" ]
+            },
+            {
+               "long_name" : "Manila",
+               "short_name" : "Manila",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Metro Manila",
+               "short_name" : "Metro Manila",
+               "types" : [ "administrative_area_level_2", "political" ]
+            },
+            {
+               "long_name" : "Metro Manila",
+               "short_name" : "NCR",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "Philippines",
+               "short_name" : "PH",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "1000",
+               "short_name" : "1000",
+               "types" : [ "postal_code" ]
+            }
+         ],
+         "formatted_address" : "1071 United Nations Ave, Paco, Manila, 1000 Metro Manila, Philippines",
+         "geometry" : {
+            "location" : {
+               "lat" : 14.5841896,
+               "lng" : 120.9884939
+            },
+            "location_type" : "ROOFTOP",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 14.5855385802915,
+                  "lng" : 120.9898428802915
+               },
+               "southwest" : {
+                  "lat" : 14.5828406197085,
+                  "lng" : 120.9871449197085
+               }
+            }
+         },
+         "place_id" : "ChIJmYrmGIrJlzMRyTpJOyO0Crg",
+         "types" : [ "street_address" ]
+      }
+   ],
+   "status" : "OK"
+}
