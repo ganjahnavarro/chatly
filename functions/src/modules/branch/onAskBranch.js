@@ -10,7 +10,7 @@ export default (args, sendResponse) => {
             quickReplies.push({
                 content_type: 'text',
                 title: branch.name,
-                payload: branch.name
+                payload: `Change branch to ${branch.name}`
             })
         })
 

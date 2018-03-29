@@ -1,4 +1,6 @@
 export default (args, sendResponse) => {
+    const { session } = args
+
     const text = 'Delivery or pick-up?'
     const payload = {
         facebook: {
@@ -6,18 +8,30 @@ export default (args, sendResponse) => {
             quick_replies: [
                 {
                     content_type: 'text',
-                    title: 'Delivery',
-                    payload: 'Delivery'
+                    payload: 'Change my delivery type to delivery',
+                    title: 'Delivery'
                 },
                 {
                     content_type: 'text',
-                    title: 'Pick-up',
-                    payload: 'Pick-up'
+                    payload: 'Change my delivery type to pick-up',
+                    title: 'Pick-up'
                 }
             ]
         }
     }
-    const responseToUser = { fulfillmentText: text, payload }
+
+    const outputContexts = [
+        {
+            name: `${session}/contexts/awaiting-delivery-type`,
+            lifespanCount: 1
+        }
+    ]
+
+    const responseToUser = {
+        fulfillmentText: text,
+        outputContexts,
+        payload
+    }
 
     sendResponse({
         responseToUser,
