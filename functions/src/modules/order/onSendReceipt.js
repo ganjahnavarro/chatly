@@ -1,12 +1,30 @@
-import { getCartItems } from '../../api/firebase'
+import { database } from '../../api/firebase'
+import { toArray } from '../../utils'
 
 export default (args, sendResponse) => {
-    const { senderId } = args
-    if (senderId) {
-        getCartItems(senderId).then(items => {
+    const { orderId } = args
+    if (orderId) {
+        const getCompanyPromise = new Promise((resolve, reject) => {
+            database.ref('company').once('value', snapshot => {
+                resolve(snapshot.val())
+            })
+        })
+
+        const getOrderPromise = new Promise((resolve, reject) => {
+            database.ref(`orders/${orderId}`).once('value', snapshot => {
+                resolve(snapshot.val())
+            })
+        })
+
+        Promise.all([getOrderPromise, getCompanyPromise]).then(results => {
+            const order = results[0]
+            const company = results[1]
+
+            const { id, items, user, timestamp } = order
+
             let totalAmount = 0
 
-            const elements = items.map(item => {
+            const elements = toArray(items).map(item => {
                 const { quantity, product, productType } = item
 
                 const price = product ? product.price : productType.price
@@ -26,21 +44,20 @@ export default (args, sendResponse) => {
                 }
             })
 
-            // TODO Replace order_number, recipient_name, address
+            // TODO Replace address
 
-            const millis = new Date().getTime()
             const payload = {
                 facebook: {
                     attachment: {
                         type: 'template',
                         payload: {
                             template_type: 'receipt',
-                            recipient_name: 'Gan Jah Navarro',
-                            merchant_name: 'Domino\'s Pizza',
-                            order_number: millis,
+                            recipient_name: `${user.first_name} ${user.last_name}`,
+                            merchant_name: company.name,
+                            order_number: id,
                             currency: 'PHP',
                             payment_method: 'To be paid',
-                            timestamp: parseInt(millis / 1000),
+                            timestamp: parseInt(timestamp / 1000),
                             address: {
                                 street_1: '43 Manapat St., Tañong',
                                 city: 'Malabon',
