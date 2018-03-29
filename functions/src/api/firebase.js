@@ -3,6 +3,8 @@ import * as firebase from 'firebase'
 import * as functions from 'firebase-functions'
 import Promise from 'promise'
 
+import { toArray } from '../utils'
+
 admin.initializeApp(functions.config().firebase)
 firebase.initializeApp(functions.config().firebase)
 
@@ -51,13 +53,7 @@ const getAttribute = (attributeId) => {
 const getItems = key => {
     return new Promise((resolve, reject) => {
         database.ref(key).once('value', snapshot => {
-            const val = snapshot.val()
-            const ids = Object.keys(val)
-
-            const items = ids.map(id => {
-                return { id, ...val[id] }
-            })
-            resolve(items)
+            resolve(toArray(snapshot.val()))
         })
     })
 }
@@ -90,7 +86,7 @@ export const getProductType = productTypeKey => {
     })
 }
 
-export const getCartItem = (senderId, cartItemKey) => {
+export const getCartItem = (senderId, cartItemKey, includeAttributes) => {
     const sessionRef = database.ref(
         `sessions/${senderId}/cart/${cartItemKey}`
     )
@@ -116,24 +112,54 @@ export const getCartItem = (senderId, cartItemKey) => {
                         id: productKey
                     }
                 }
-                resolve(cartItem)
+
+                if (includeAttributes && productType.attributes) {
+                    const promises = toArray(productType.attributes)
+                        .map(attribute => getAttribute(attribute.attribute_id))
+
+                    Promise.all(promises).then(items => {
+                        const attributes = productType.attributes
+                        Object.keys(attributes).forEach(attributeKey => {
+                            const attribute = items.find(item => item.id === attributes[attributeKey].attribute_id)
+                            cartItem.productType.attributes[attributeKey] = attribute
+                        })
+
+                        let values = []
+                        items.forEach(item => {
+                            values = values.concat(toArray(item.values))
+                        })
+
+                        const products = productType.products
+                        Object.keys(products).forEach(productKey => {
+                            const attributeValues = products[productKey].attribute_values
+                            Object.keys(attributeValues).forEach(attributeValueKey => {
+                                const attributeValue = values.find(value => {
+                                    return value.id === attributeValues[attributeValueKey].attribute_value_id
+                                })
+
+                                attributeValues[attributeValueKey] = attributeValue
+                                cartItem.productType.products[productKey] = attributeValues[attributeValueKey]
+                            })
+                        })
+                        resolve(cartItem)
+                    })
+                } else {
+                    resolve(cartItem)
+                }
             })
         })
     })
 }
 
-export const getCartItems = senderId => {
+export const getCartItems = (senderId, includeAttributes) => {
     return new Promise((resolve, reject) => {
         const senderRef = database.ref(`sessions/${senderId}`)
         senderRef.once('value', (senderSnapshot) => {
             if (senderSnapshot.hasChild('cart')) {
                 const cartRef = database.ref(`sessions/${senderId}/cart`)
                 cartRef.once('value', cartSnapshot => {
-                    let promises = []
-
                     const keys = Object.keys(cartSnapshot.val())
-                    keys.forEach(key => promises.push(getCartItem(senderId, key)))
-
+                    const promises = keys.map(key => getCartItem(senderId, key, includeAttributes))
                     Promise.all(promises).then(items => resolve(items))
                 })
             } else {
