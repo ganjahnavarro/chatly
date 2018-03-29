@@ -12,11 +12,8 @@ export default (args, sendResponse) => {
         console.log(`Location received. Sender: ${senderId}, Lat: ${lat}, Long: ${long}.`)
 
         getAddress(lat, long).then(response => {
-            console.log('Get address response: ', response.status)
-
             let location = { lat, long }
             location.mapsData = response
-            // location.mapsData = response.results[0]
 
             usersRef.update({ location })
             onOrderContinue(args, sendResponse)

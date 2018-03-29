@@ -12,8 +12,6 @@ export default (args, sendResponse) => {
             })
         })
 
-        console.log('Saving order..')
-
         Promise.all([getCartItemsPromise, getUserPromise]).then(results => {
             const items = {}
             results[0].forEach(item => {
@@ -35,9 +33,7 @@ export default (args, sendResponse) => {
             const orderRef = database.ref('orders').push(order)
             const orderId = orderRef.key
 
-            console.log('Added order ID: ', orderId)
             onSendReceipt({ orderId, ...args }, sendResponse)
-
             database.ref(`sessions/${senderId}`).remove()
         })
     } else {

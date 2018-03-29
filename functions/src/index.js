@@ -22,13 +22,11 @@ import onShowMenu from './modules/product/onShowMenu'
 
 import onClearCart from './modules/cart/onClearCart'
 import onShowCart from './modules/cart/onShowCart'
-// import onAddCartItem from './modules/cart/onAddCartItem'
+import onAddCartItem from './modules/cart/onAddCartItem'
 import onRemoveCartItem from './modules/cart/onRemoveCartItem'
 import onRemoveCartItemById from './modules/cart/onRemoveCartItemById'
 
 import sampleQuickReply from './modules/sample/quickReply'
-
-import onAddProduct2 from './modules/order/onAddProduct2'
 
 import onChangeQuantity from './modules/cart/onChangeQuantity'
 
@@ -79,8 +77,8 @@ const actionHandlers = {
     'default.fallback': onDefault,
 
     'sample.quick.reply': sampleQuickReply,
-    'order.product.add': onAddProduct2,
-    'order.product.add-option': onAddProduct2,
+    'order.product.add': onAddCartItem,
+    'order.product.add-option': onAddCartItem,
     'order.change.quantity': onChangeQuantity
 }
 
