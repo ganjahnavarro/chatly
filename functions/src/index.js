@@ -30,6 +30,8 @@ import sampleQuickReply from './modules/sample/quickReply'
 
 import onAddProduct2 from './modules/order/onAddProduct2'
 
+import onChangeQuantity from './modules/cart/onChangeQuantity'
+
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
     console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
@@ -78,7 +80,8 @@ const actionHandlers = {
 
     'sample.quick.reply': sampleQuickReply,
     'order.product.add': onAddProduct2,
-    'order.product.add-option': onAddProduct2
+    'order.product.add-option': onAddProduct2,
+    'order.change.quantity': onChangeQuantity
 }
 
 function processRequest (request, response) {

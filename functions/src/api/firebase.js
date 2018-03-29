@@ -192,3 +192,8 @@ export const removeCartItemById = (senderId, cartItem) => {
     console.log(`Removing cart item by ID: ${cartItem}`)
     return database.ref(`sessions/${senderId}/cart/${cartItem}`).remove()
 }
+
+export const changeQuantity = (senderId, cartItem) => {
+    console.log(`Changing quantity of product in cart item by ID: ${cartItem}`)
+    return database.ref(`sessions/${senderId}/cart/${cartItem}`)
+}

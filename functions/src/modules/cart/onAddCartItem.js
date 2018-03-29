@@ -27,12 +27,6 @@ export default (args, sendResponse) => {
                     if (attributes && attributes.length) {
                         attributes.forEach(attribute => {
                             if (!parameters[attribute.code]) {
-                                console.log('argel sdfadsf', selectedAttributeValues, attribute.code)
-                                // loop attribute values
-                                /* toArray(attribute.values).forEach(value => {
-                                    console.log(value, 'argel')
-                                }) */
-
                                 missingAttributes.push(attribute)
                             } else {
                                 const paramValue = parameters[attribute.code].toLowerCase()
