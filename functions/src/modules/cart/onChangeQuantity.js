@@ -1,12 +1,9 @@
 import { database } from '../../api/firebase'
 import Promise from 'promise'
-/* changeQuantity */
 
 export default (args, sendResponse) => {
     const { session, senderId, parameters, contexts } = args
     const { quantity } = parameters
-
-    console.log(args, contexts, 'sdfsd')
 
     if (!quantity) {
         const message = 'How many?'
@@ -33,7 +30,6 @@ export default (args, sendResponse) => {
         const cartRef = database.ref(`sessions/${senderId}/cart/${cartItem}`)
 
         getCart(cartRef, senderId, cartItem).then(res => {
-            console.log('LAST VALUE', res)
             cartRef.update({
                 ...res,
                 quantity: quantity

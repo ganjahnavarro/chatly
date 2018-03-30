@@ -80,12 +80,23 @@ const getParameters = (sessionData, args) => {
     const parameters = Object.assign({}, sessionParameters, args.parameters)
     parameters.quantity = parameters.quantity || 1
 
-    if (sessionData && sessionData.asked_attribute && args.parameters['selected-option']) {
-        parameters[sessionData.asked_attribute] = parameters['selected-option']
+    const askedAttribute = getAskedAttribute(args)
+
+    if (askedAttribute && args.parameters['selected-option']) {
+        parameters[askedAttribute] = parameters['selected-option']
         delete parameters['selected-option']
     }
     console.log('Parameters: ', JSON.stringify(parameters))
     return parameters
+}
+
+const getAskedAttribute = ({ session, contexts }) => {
+    let context = null
+    if (contexts && contexts.length) {
+        context = contexts.find(item => item.name === `${session}/contexts/product-incomplete`)
+    }
+
+    return context ? context.parameters['asked-attribute'] : undefined
 }
 
 const getSelectedProduct = (selectedProductType, selectedAttributeValues) => {
@@ -149,7 +160,10 @@ const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args,
         {
             name: `${session}/contexts/product-incomplete`,
             lifespanCount: 1,
-            parameters: parameters
+            parameters: {
+                'asked-attribute': missingAttribute.code,
+                ...parameters
+            }
         }
     ]
 
@@ -159,10 +173,7 @@ const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args,
         payload
     }
 
-    sessionRef.update({
-        parameters,
-        asked_attribute: missingAttribute.code
-    })
+    sessionRef.update({ parameters })
 
     sendResponse({
         responseToUser,
