@@ -13,7 +13,7 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 // Override core variables
-// @import "core-variables";
+@import "core-variables";
 
 // Import core styles
 @import "core/core";
