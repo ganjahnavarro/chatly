@@ -11,12 +11,13 @@ import {
 const onCheckAuth = () => {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged(user => {
+            console.log(user, 'sdfs')
             if(user){
                 resolve({
                     email: user.email
                 })
             }else{
-                reject('you need to sign in')
+                resolve(null)
             }
         })
     })
@@ -26,6 +27,8 @@ function* checkAuthentication() {
     yield put(loading('CHECK_AUTH'));
 
     const response = yield call(onCheckAuth)
+
+    console.log(response, 'herer')
 
     if(response){
         yield put({
