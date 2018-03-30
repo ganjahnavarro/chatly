@@ -12,6 +12,8 @@ import onAskLocation from './modules/location/onAskLocation'
 
 import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
+import onAddPromoCode from './modules/discount/onAddPromoCode'
+
 import onBranchChange from './modules/branch/onBranchChange'
 import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
 
@@ -25,8 +27,6 @@ import onShowCart from './modules/cart/onShowCart'
 import onAddCartItem from './modules/cart/onAddCartItem'
 import onRemoveCartItem from './modules/cart/onRemoveCartItem'
 import onRemoveCartItemById from './modules/cart/onRemoveCartItemById'
-
-import sampleQuickReply from './modules/sample/quickReply'
 
 import onChangeQuantity from './modules/cart/onChangeQuantity'
 
@@ -53,8 +53,6 @@ function sendResponse ({ responseToUser, response }) {
 }
 
 const actionHandlers = {
-    // 'order.product.add': onAddCartItem,
-    // 'order.product.select.option': onAddCartItem,
     'order.product.remove': onRemoveCartItem,
     'order.product.remove.by.id': onRemoveCartItemById,
 
@@ -62,9 +60,12 @@ const actionHandlers = {
     'order.clear.cart': onClearCart,
 
     'order.additional.no': onOrderContinue,
+    'order.continue': onOrderContinue,
+
     'order.receive.location': onReceiveLocation,
     'order.address.change': onAskLocation,
 
+    'order.promo.code.change': onAddPromoCode,
     'order.delivery.type.change': onDeliveryTypeChange,
     'order.phone.number.change': onPhoneNumberChange,
     'order.branch.change': onBranchChange,
@@ -76,7 +77,6 @@ const actionHandlers = {
     'default.welcome': onWelcome,
     'default.fallback': onDefault,
 
-    'sample.quick.reply': sampleQuickReply,
     'order.product.add': onAddCartItem,
     'order.product.add-option': onAddCartItem,
     'order.change.quantity': onChangeQuantity,
@@ -95,9 +95,10 @@ function processRequest (request, response) {
     const originalRequest = request.body.originalDetectIntentRequest
     const payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
+    const timestamp = payloadData.timestamp
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
-    const args = { action, parameters, contexts, session, payloadData, response, senderId, queryText }
+    const args = { action, parameters, contexts, session, payloadData, response, senderId, timestamp, queryText }
 
     handler(args, sendResponse)
 }

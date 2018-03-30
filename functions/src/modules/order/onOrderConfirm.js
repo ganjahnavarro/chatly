@@ -6,13 +6,7 @@ export default (args, sendResponse) => {
     const { senderId } = args
     if (senderId) {
         const getCartItemsPromise = getCartItems(senderId, true)
-        const getUserPromise = new Promise((resolve, reject) => {
-            database.ref(`users/${senderId}`).once('value', snapshot => {
-                resolve(snapshot.val())
-            })
-        })
-
-        Promise.all([getCartItemsPromise, getUserPromise]).then(results => {
+        Promise.all([getCartItemsPromise, getUserPromise(senderId), getPromoPromise(senderId)]).then(results => {
             const items = {}
             results[0].forEach(item => {
                 const { id, ...rest } = item
@@ -20,6 +14,7 @@ export default (args, sendResponse) => {
             })
 
             const user = results[1]
+            const promo = results[2]
 
             const millis = new Date().getTime()
             const order = {
@@ -27,6 +22,7 @@ export default (args, sendResponse) => {
                 timestamp: millis,
                 senderId,
                 items,
+                promo,
                 user
             }
 
@@ -39,4 +35,20 @@ export default (args, sendResponse) => {
     } else {
         console.error('Invalid state: ' + JSON.stringify(args))
     }
+}
+
+const getUserPromise = (senderId) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`users/${senderId}`).once('value', snapshot => {
+            resolve(snapshot.val())
+        })
+    })
+}
+
+const getPromoPromise = (senderId) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`sessions/${senderId}/promo`).once('value', snapshot => {
+            resolve(snapshot ? snapshot.val() : null)
+        })
+    })
 }

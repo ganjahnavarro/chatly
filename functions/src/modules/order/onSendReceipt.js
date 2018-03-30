@@ -20,9 +20,10 @@ export default (args, sendResponse) => {
             const order = results[0]
             const company = results[1]
 
-            const { id, items, user, timestamp } = order
+            const { id, items, user, timestamp, promo } = order
 
             let totalAmount = 0
+            let discountAmount = 0
 
             const elements = toArray(items).map(item => {
                 const { quantity, product, productType } = item
@@ -44,26 +45,36 @@ export default (args, sendResponse) => {
                 }
             })
 
-            const payload = {
-                facebook: {
-                    attachment: {
-                        type: 'template',
-                        payload: {
-                            template_type: 'receipt',
-                            recipient_name: `${user.first_name} ${user.last_name}`,
-                            merchant_name: company.name,
-                            order_number: id,
-                            currency: 'PHP',
-                            payment_method: 'To be paid',
-                            timestamp: parseInt(timestamp / 1000),
-                            address: getAddress(user),
-                            summary: {
-                                total_cost: totalAmount
-                            },
-                            elements
-                        }
-                    }
+            const attachment = {
+                type: 'template',
+                payload: {
+                    template_type: 'receipt',
+                    recipient_name: `${user.first_name} ${user.last_name}`,
+                    merchant_name: company.name,
+                    order_number: id,
+                    currency: 'PHP',
+                    payment_method: 'To be paid',
+                    timestamp: parseInt(timestamp / 1000),
+                    address: getAddress(user),
+                    elements
                 }
+            }
+
+            if (promo) {
+                attachment.payload.adjustments = [{
+                    name: `Promo Code (${promo.code})`,
+                    amount: promo.discount_amount
+                }]
+                discountAmount = promo.discount_amount
+            }
+
+            attachment.payload.summary = {
+                subtotal: totalAmount,
+                total_cost: totalAmount - discountAmount
+            }
+
+            const payload = {
+                facebook: { attachment }
             }
 
             const responseToUser = { payload }
