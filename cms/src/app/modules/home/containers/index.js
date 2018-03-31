@@ -12,6 +12,7 @@ import Product from '../../product/containers';
 import Category from '../../category/containers';
 import Branch from '../../branch/containers';
 import ProductType from '../../product_type/containers';
+import Attribute from '../../attribute/containers';
 
 class Home extends Component{
 
@@ -30,6 +31,7 @@ class Home extends Component{
 								<Route exact path="/categories/:categoryId?" name="Category" component={ Category }/>
 								<Route exact path="/branches/:branchId?" name="Branch" component={ Branch }/>
 								<Route exact path="/product-types/:productTypeId?" name="ProductType" component={ ProductType }/>
+								<Route exact path="/attributes/:attributeId?" name="Attribute" component={ Attribute }/>
 							</Switch>
 						</Container>
 					</main>

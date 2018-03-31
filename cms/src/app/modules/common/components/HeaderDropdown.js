@@ -7,7 +7,7 @@ import {
   Dropdown
 } from 'reactstrap';
 
-import profile_pic from '../../../../assets/img/avatars/6.jpg';
+import profile_pic from '../../../../assets/img/avatars/5.jpg';
 
 class HeaderDropdown extends PureComponent{
 

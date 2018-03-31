@@ -113,8 +113,7 @@ class Sidebar extends PureComponent {
                               to={url}
                               className={classes.link}
                               activeClassName="active"
-                              onClick={this.hideMobile}
-                          >
+                              onClick={this.hideMobile}>
                               <i className={classes.icon} />
                               {item.name}
                               {badge(item.badge)}

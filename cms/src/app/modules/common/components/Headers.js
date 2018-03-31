@@ -71,7 +71,7 @@ class Headers extends PureComponent {
 						<Link to="/">Dashboard</Link>
 					</NavItem>
 					<NavItem className="px-3">
-						<Link to="/products">Products</Link>
+						<Link to="/product-types">Products</Link>
 					</NavItem>
 					<NavItem className="px-3">
 						<Link to="/categories">Categories</Link>

@@ -19,6 +19,8 @@ export default (state = initState, action) => {
 			return state.update(action.form, (formData) => formData.merge(fromJS(action.data)))
 		case c.GOT_PRODUCT:
 			return state.set('selected_product', fromJS(action.data));
+		case c.CLEAR_STATE:
+			return initState;
 		default:
 			return state;
 	}

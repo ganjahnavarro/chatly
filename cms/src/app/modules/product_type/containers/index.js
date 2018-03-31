@@ -117,6 +117,13 @@ class Product extends Component {
 		});
 	}
 
+	componentWillUnmount(){
+		const { dispatch } = this.props;
+		dispatch({
+			type: c.CLEAR_STATE
+		})
+	}
+
 	render() {
 		const { list, selected, match } = this.props;
 		return (
@@ -162,7 +169,7 @@ class Product extends Component {
 						</Card>
 						<Card>
 							<CardHeader>
-								<strong>Product Type Info</strong>
+								<strong>Products Info</strong>
 							</CardHeader>
 							<CardBody style={{ height: 350 }}>
 								<ProductList 
