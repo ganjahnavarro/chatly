@@ -19,35 +19,28 @@ export default (args, sendResponse) => {
                 location
             } = user
 
-            console.log('On order continue: ', JSON.stringify(user))
-
             if (!deliveryType) {
-                console.log('On order continue: onAskDeliveryType.')
                 onAskDeliveryType(args, sendResponse)
                 return
             }
 
             if (!location) {
-                console.log('On order continue: onAskLocation.')
                 onAskLocation(args, sendResponse)
                 return
             }
 
             if (deliveryType === 'pick-up') {
                 if (!branch) {
-                    console.log('On order continue: onAskBranch.')
                     onAskBranch(args, sendResponse)
                     return
                 }
             }
 
             if (!phoneNumber) {
-                console.log('On order continue: onAskContactNumber.')
                 onAskContactNumber(args, sendResponse)
                 return
             }
 
-            console.log('On order continue: onAskConfirmation.')
             onAskConfirmation(args, sendResponse)
         })
     }
