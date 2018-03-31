@@ -8,7 +8,8 @@ class UploadCare extends Component {
         label: "Upload Attachment",
         crop: "240x240",
         tabs: ["file", "camera"],
-        instruction: null
+        instruction: null,
+        className: "btn btn-info btn-block"
     }
 
     state = {
@@ -75,7 +76,6 @@ class UploadCare extends Component {
     }
 
     render() {
-
         const Progress = () => {
             if(this.state.isUploading) {
                 return (
@@ -121,7 +121,7 @@ class UploadCare extends Component {
                 <button 
                     key="upload-button"
                     onClick={ this.props.instruction ? this.handleShowInstruction(true) : this.handleUpload } 
-                    className="btn btn-sm btn-info btn-block">
+                    className={ this.props.className }>
                     {
                         this.state.isUploading
                             ? <Progress/>

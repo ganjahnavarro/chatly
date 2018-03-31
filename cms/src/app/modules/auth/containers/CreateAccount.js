@@ -37,7 +37,6 @@ class CreateAccount extends Component{
 
 
     render(){
-        console.log('here')
         return(
             <div className="app flex-row align-items-center">
                 <Container>
@@ -90,11 +89,11 @@ class CreateAccount extends Component{
                                                     </Button>
                                                 </Col>
                                                 <Col xs="6" className="text-right">
-                                                    <Button
+                                                    {/*<Button
                                                         color="link"
                                                         className="px-0">
                                                         Forgot password?
-                                                    </Button>
+                                                    </Button>*/}
                                                 </Col>
                                             </Row>
                                         </CardBody>

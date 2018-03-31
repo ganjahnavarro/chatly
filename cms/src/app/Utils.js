@@ -32,5 +32,5 @@ export {
     _,
     database,
     auth,
-    Promise
+    Promise,
 }

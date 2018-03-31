@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
     Container,
@@ -89,11 +89,11 @@ class SignIn extends Component {
                                                     </Button>
                                                 </Col>
                                                 <Col xs="6" className="text-right">
-                                                    <Button
-                                                        color="link"
+                                                    <Link
+                                                        to="/sign-up"
                                                         className="px-0">
-                                                        Forgot password?
-                                                    </Button>
+                                                        Create an Account
+                                                    </Link>
                                                 </Col>
                                             </Row>
                                         </CardBody>

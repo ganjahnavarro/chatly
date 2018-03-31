@@ -1,21 +1,17 @@
 import { takeEvery, put, call, all } from 'redux-saga/effects';
 import * as c from '../constants';
-import { delay } from 'redux-saga';
 import {
     auth,
     loading,
     alert,
-    // history,
+    history,
 } from '../../../Utils';
 
 const onCheckAuth = () => {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged(user => {
-            console.log(user, 'sdfs')
             if(user){
-                resolve({
-                    email: user.email
-                })
+                resolve({ email: user.email })
             }else{
                 resolve(null)
             }
@@ -27,8 +23,6 @@ function* checkAuthentication() {
     yield put(loading('CHECK_AUTH'));
 
     const response = yield call(onCheckAuth)
-
-    console.log(response, 'herer')
 
     if(response){
         yield put({
@@ -43,83 +37,66 @@ function* checkAuthentication() {
     }
 
     yield put(loading('CHECK_AUTH', false));
+}
 
-    // const token = sessionStorage.getItem('token');
-    // if(token) {
-    //     yield put({
-    //         type: c.AUTHENTICATE,
-    //         isSuccess: true
-    //     })
-    //     return;
-    // }
-
-    // yield put({
-    //     type: c.AUTHENTICATE,
-    //     isSuccess: false
-    // })
+const onLogin = ({ email, password }) => {
+    return new Promise((resolve, reject) => {
+        auth.signInWithEmailAndPassword(email, password)
+            .then(res => resolve(res))
+            .catch(err => {
+                console.log(err)
+                alert.error(err.message)
+                resolve(false)
+            })
+    })
 }
 
 function* login({ args }){
     yield put(loading('LOGIN'));
 
-    const { email, password } = args;
-
-    const authentication = auth.signInWithEmailAndPassword(email, password);
-
-    authentication
-        .then(res => {
-            console.log(res, 'success')
-        })
-        .catch(err => {
-            console.log(err, 'sdfsdf')
-        })
-
-    yield call(delay, 1000)
-
-    sessionStorage.setItem('token', 'sampleToken');
+    const response = yield call(onLogin, args)
 
     yield put({
-        type: "AUTH/CHECK_AUTH",
-        isSuccess: true
+        type: c.AUTHENTICATE,
+        isSuccess: response ? true : false
     })
-    
+
     yield put(loading('LOGIN', false));
 }
 
-const onSignout = () => {
+export const onSignout = () => {
     return new Promise((resolve, reject) => {
         const firebaseSingout = auth.signOut();
         firebaseSingout
-            .then(() => resolve())
-            .catch(error => reject(reject))
+            .then(() => resolve(false))
+            .catch(error => resolve(true))
 
     })
 }
 
 
 function* logout(){
-    
-    
+    yield put(loading('LOGOUT'));
 
-    sessionStorage.clear();
+    const response = yield call(onSignout)
 
     yield put({
-        type: "AUTH/CHECK_AUTH",
-        isSuccess: false
+        type: c.AUTHENTICATE,
+        isSuccess: response
     })
+
+    if(!response)   
+        history.push("/")
     
+    yield put(loading('LOGOUT', false));
 }
 
 const onSignUp = ({ email, password }) => {
     const firebaseSignUp = auth.createUserWithEmailAndPassword(email, password);
 
     return firebaseSignUp
-        .then(res => {
-            return res
-        })
-        .catch(err => {
-            alert.error(err.message)
-        })
+        .then(res => res)
+        .catch(err => alert.error(err.message))
     
 }
 
@@ -131,6 +108,7 @@ function* signUp({ args }) {
 
     if(response){
         yield checkAuthentication()
+        history.push("/")
     }
 
     yield put(loading('CREATE_ACCOUNT', false));

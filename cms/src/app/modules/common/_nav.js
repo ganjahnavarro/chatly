@@ -7,8 +7,13 @@ export default {
         },
         {
             name: "Products",
-            url: "/products",
+            url: "/product-types",
             icon: "fa fa-shopping-cart",
+        },
+        {
+            name: "Attributes",
+            url: "/attributes",
+            icon: "fa fa-quote-right",
         },
         {
             name: "Categories",

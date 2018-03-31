@@ -17,15 +17,21 @@ class App extends Component {
     }
 
     render() {
-        const { isAuthenticated, isLoading } = this.props;
+        const { isAuthenticated, isLoading, isCheckAuth } = this.props;
+
+        if(isCheckAuth)
+            return(
+                <div>
+                    <Loading show={ isCheckAuth } showSpinner={false} color="red" />
+                </div>
+            );
+        
         return (
             <div>
                 <Loading show={ isLoading } showSpinner={false} color="red" />
                 <Routes isAuthenticated={isAuthenticated} />
                 <Modal />
-
                 <Alert
-                    // timeout="none"
                     stack={{ limit: 2 }}
                     effect="slide"
                 />
@@ -36,6 +42,7 @@ class App extends Component {
 
 const mapStateToProps = ({ auth, loading }, routeParams) => {
     return {
+        isCheckAuth: loading.loadingTypes.includes("CHECK_AUTH"),
         isAuthenticated: auth.get("isAuthenticated"),
         isLoading: loading.loadingTypes.length > 0
     };
