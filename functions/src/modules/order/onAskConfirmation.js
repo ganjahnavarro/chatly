@@ -16,6 +16,8 @@ export default (args, sendResponse) => {
                 console.log('User: ', JSON.stringify(user))
                 console.log('Items: ', JSON.stringify(items))
 
+                const promo = session.promo
+
                 let totalAmount = 0
                 let message =
                   `Here's your order details: \n\n` +
@@ -32,10 +34,18 @@ export default (args, sendResponse) => {
                     message += `${quantity} ${productType.name}${productDescription} (P${amount.toFixed(2)}) \n`
                 })
 
+                if (promo) {
+                    totalAmount -= promo.discount_amount
+                }
+
                 const deliveryTypeMessage = `Delivery Type: ${isDelivery ? 'Delivery' : 'Pick-up'} \n`
                 const branchMessage = `Branch: ${user.branch && user.branch.name} \n`
                 const addressMessage = `Address: ${user.location.mapsData.formatted_address} \n`
                 const phoneNumberMessage = `Contact No.: ${user.phone_number} \n`
+
+                const promoCodeMessage = promo ? `Promo code: ${promo.code} \n` +
+                  `Discount: ${promo.discount_amount} \n` : ''
+
                 const totalAmountMessage = `Total Amount: P${totalAmount.toFixed(2)}`
 
                 message +=
@@ -44,6 +54,7 @@ export default (args, sendResponse) => {
                   (isDelivery ? addressMessage : branchMessage) +
                   phoneNumberMessage +
                   '\n' +
+                  promoCodeMessage +
                   totalAmountMessage
 
                 const payload = {
@@ -68,6 +79,11 @@ const getActions = (isDelivery) => {
             content_type: 'text',
             title: 'Confirm Order',
             payload: 'Confirm Order'
+        },
+        {
+            content_type: 'text',
+            title: 'Enter Promo Code',
+            payload: 'Enter Promo Code'
         },
         {
             content_type: 'text',
