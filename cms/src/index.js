@@ -13,6 +13,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'simple-line-icons/css/simple-line-icons.css';
 import 'react-s-alert/dist/s-alert-default.css';
 import 'react-s-alert/dist/s-alert-css-effects/slide.css';
+import 'react-select/dist/react-select.css';
 import './assets/css/style.css';
 
 const store = configureStore();

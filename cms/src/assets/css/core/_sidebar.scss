@@ -452,3 +452,17 @@
     }
   }
 }
+.Select-control {
+  border-radius: 1px;
+  color: #3e515b;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #c2cfd6;
+}
+.Select.is-focused > .Select-control, .Select.is-open > .Select-control, .Select.is-open > .Select-menu-outer{
+  color: #3e515b;
+  background-color: #fff;
+  border-color: #8ad4ee;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25);
+  box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25)}

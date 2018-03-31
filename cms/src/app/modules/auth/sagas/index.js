@@ -11,7 +11,7 @@ import {
 const onCheckAuth = () => {
     return new Promise((resolve, reject) => {
         auth.onAuthStateChanged(user => {
-            console.log(user, 'sdfs')
+            // console.log(user, 'sdfs')
             if(user){
                 resolve({
                     email: user.email
@@ -28,7 +28,7 @@ function* checkAuthentication() {
 
     const response = yield call(onCheckAuth)
 
-    console.log(response, 'herer')
+    // console.log(response, 'herer')
 
     if(response){
         yield put({
@@ -86,7 +86,7 @@ function* login({ args }){
     yield put(loading('LOGIN', false));
 }
 
-const onSignout = () => {
+export const onSignout = () => {
     return new Promise((resolve, reject) => {
         const firebaseSingout = auth.signOut();
         firebaseSingout

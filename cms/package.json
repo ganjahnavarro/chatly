@@ -27,6 +27,7 @@
     "react-router-dom": "^4.2.2",
     "react-router-redux": "next",
     "react-s-alert": "^1.4.1",
+    "react-select": "^1.2.1",
     "react-transition-group": "2.2.1",
     "reactstrap": "5.0.0-beta",
     "redux": "^3.7.2",
