@@ -2,13 +2,14 @@
 
 import * as functions from 'firebase-functions'
 
-import populateDatabase from './api/populate'
+import { createEntity } from './api/dialogflow'
+import { database } from './api/firebase'
 
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
 
-import onReceiveLocation from './modules/location/onReceiveLocation'
 import onAskLocation from './modules/location/onAskLocation'
+import onReceiveCoordinates from './modules/location/onReceiveCoordinates'
 
 import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 
@@ -46,6 +47,29 @@ exports.dialogflowFulfillment = functions.https.onRequest((request, response) =>
     }
 })
 
+exports.addDialogflowEntity = functions.database
+    .ref('/attributes/{pushId}')
+    .onWrite(event => {
+        const attribute = event.data.val()
+
+        if (attribute.synced) {
+            return null
+        }
+
+        console.log('Syncing..')
+        attribute.code = `attr-${sanitize(attribute.name)}`
+        attribute.synced = true
+
+        const updateDialogflow = createEntity(attribute)
+        const updateDatabase = event.data.ref.set(attribute)
+
+        return Promise.all([updateDatabase, updateDialogflow])
+    })
+
+function sanitize (name) {
+    return name.replace(/\s+/g, '-').toLowerCase()
+}
+
 function sendResponse ({ responseToUser, response }) {
     if (typeof responseToUser === 'string') {
         let responseJson = { fulfillmentText: responseToUser }
@@ -66,8 +90,8 @@ const actionHandlers = {
     'order.additional.no': onOrderContinue,
     'order.continue': onOrderContinue,
 
-    'order.receive.location': onReceiveLocation,
     'order.address.change': onAskLocation,
+    'order.receive.coordinates': onReceiveCoordinates,
 
     'order.promo.code.change': onAddPromoCode,
     'order.delivery.type.change': onDeliveryTypeChange,
@@ -100,14 +124,18 @@ function processRequest (request, response) {
     let session = (request.body.session) ? request.body.session : undefined
 
     const originalRequest = request.body.originalDetectIntentRequest
-    const payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
+    let payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
+
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
     const timestamp = payloadData.timestamp
+
+    payloadData.supportsLocationQuickReply = true
+    if (payloadData && payloadData.message && payloadData.message.tags) {
+        payloadData.supportsLocationQuickReply = payloadData.message.tags.source === 'customer_chat_plugin'
+    }
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
     const args = { action, parameters, contexts, session, payloadData, response, senderId, timestamp, queryText }
 
     handler(args, sendResponse)
 }
-
-populateDatabase()
