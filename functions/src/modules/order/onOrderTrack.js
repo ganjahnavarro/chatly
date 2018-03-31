@@ -41,15 +41,31 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
     const responseToUser = {}
 
     const elements = filteredUserOrders.map(userOrder => {
-        const formattedTimestamp = moment(userOrder.timestamp).format('YYYY-MM-DD HH:mm')
+        const {
+            timestamp,
+            document_no: documentNo,
+            total_amount: totalAmount
+        } = userOrder
+
+        const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
         return {
-            title: `Order #: ${userOrder.document_no}`,
-            subtitle: `Date: ${formattedTimestamp}`,
+            title: `Order #: ${documentNo}`,
+            subtitle: `Total Amount: P${totalAmount.toFixed(2)} \nDate: ${formattedTimestamp}`,
             buttons: [
                 {
                     type: 'postback',
-                    payload: `Cancel order no.: ${userOrder.document_no}`,
-                    title: 'Cancel this order'
+                    payload: `View receipt order no.: ${documentNo}`,
+                    title: 'View Receipt'
+                },
+                {
+                    type: 'postback',
+                    payload: `Track order no.: ${documentNo}`,
+                    title: 'View status'
+                },
+                {
+                    type: 'postback',
+                    payload: `Cancel order no.: ${documentNo}`,
+                    title: 'Cancel order'
                 }
             ]
         }
@@ -67,7 +83,7 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
     }
 
     responseToUser.payload = payload
-    responseToUser.fulfillmentText = 'You have multiple orders in progress. Which one of your orders you want to cancel?'
+    responseToUser.fulfillmentText = 'You have multiple orders in progress. Which one of your orders you want to check?'
 
     sendResponse({
         responseToUser,
@@ -76,30 +92,14 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
 }
 
 const handleSingleOrder = (args, sendResponse, userOrder) => {
-    const { timestamp, senderId } = args
+    let message = `Order # ${userOrder.document_no} status history: \n`
 
-    const endStatuses = ['PROCESSED', 'CANCELLED']
-    if (userOrder.status === 'PENDING') {
-        const cancelledStatus = 'CANCELLED'
-        const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
-
-        const userOrderRef = database.ref(`orders/${senderId}/${userOrder.id}`)
-        userOrderRef.update({ status: cancelledStatus })
-
-        userOrderRef.child('status_history').push({
-            status: cancelledStatus,
-            date: formattedTimestamp
-        })
-
-        const responseToUser = `Order # ${userOrder.document_no} is successfully cancelled.`
-        sendResponse({ responseToUser, ...args })
-    } else if (endStatuses.includes(userOrder.status)) {
-        const responseToUser = `Order is already ${userOrder.status.toLowerCase()}. Don't hesitate to call us for more information.`
-        sendResponse({ responseToUser, ...args })
-    } else {
-        const responseToUser = 'Sorry order is already on the way! You can\'t cancel at this time. Don\'t hesitate to call us for more information.'
-        sendResponse({ responseToUser, ...args })
-    }
+    const statusHistories = toArray(userOrder.status_history)
+    statusHistories.forEach(statusHistory => {
+        const formattedTimestamp = moment(statusHistory.timestamp).format('YYYY-MM-DD HH:mm')
+        message += '\n' + `Status changed to: ${statusHistory.status} at ${formattedTimestamp}`
+    })
+    sendResponse({ responseToUser: message, ...args })
 }
 
 const getUserOrders = (args) => {

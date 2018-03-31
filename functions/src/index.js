@@ -20,6 +20,9 @@ import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
 import onOrderContinue from './modules/order/onOrderContinue'
 import onOrderConfirm from './modules/order/onOrderConfirm'
 import onOrderCancel from './modules/order/onOrderCancel'
+import onOrderTrack from './modules/order/onOrderTrack'
+
+import onSendReceipt from './modules/order/onSendReceipt'
 
 import onShowMenu from './modules/product/onShowMenu'
 
@@ -74,7 +77,9 @@ const actionHandlers = {
     'order.show.menu': onShowMenu,
 
     'order.cancel': onOrderCancel,
+    'order.track': onOrderTrack,
     'order.confirm': onOrderConfirm,
+    'order.view.receipt': onSendReceipt,
 
     'default.welcome': onWelcome,
     'default.fallback': onDefault,

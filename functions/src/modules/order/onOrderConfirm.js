@@ -1,4 +1,3 @@
-import moment from 'moment'
 import { getCartItems, database } from '../../api/firebase'
 
 import onSendReceipt from './onSendReceipt'
@@ -21,19 +20,17 @@ export default (args, sendResponse) => {
 
 const createOrder = (args, results) => {
     const { senderId, timestamp } = args
-    const items = processCartItems(results[0])
-
     const user = results[1]
     const promo = results[2]
 
-    const defaultStatus = 'PENDING'
-    const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
+    const { items, totalAmount } = processCartItems(results[0], promo)
 
+    const defaultStatus = 'PENDING'
     const millis = new Date().getTime()
     const order = {
         document_no: millis,
+        total_amount: totalAmount,
         timestamp,
-        formatted_timestamp: formattedTimestamp,
 
         status: defaultStatus,
         sender_id: senderId,
@@ -52,13 +49,26 @@ const createOrder = (args, results) => {
     return orderKey
 }
 
-const processCartItems = (cartItems) => {
+const processCartItems = (cartItems, promo) => {
+    let totalAmount = 0
     const items = {}
+
     cartItems.forEach(item => {
+        const { quantity, product, productType } = item
+
+        const price = product ? product.price : productType.price
+        const amount = quantity * price
+        totalAmount += amount
+
         const { id, ...rest } = item
         items[id] = rest
     })
-    return items
+
+    if (promo) {
+        totalAmount -= promo.discount_amount
+    }
+
+    return { items, totalAmount }
 }
 
 const getUserPromise = (senderId) => {
