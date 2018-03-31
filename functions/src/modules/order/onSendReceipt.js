@@ -2,8 +2,9 @@ import { database } from '../../api/firebase'
 import { toArray } from '../../utils'
 
 export default (args, sendResponse) => {
-    const { orderId } = args
-    if (orderId) {
+    const { orderKey, senderId } = args
+
+    if (orderKey) {
         const getCompanyPromise = new Promise((resolve, reject) => {
             database.ref('company').once('value', snapshot => {
                 resolve(snapshot.val())
@@ -11,7 +12,7 @@ export default (args, sendResponse) => {
         })
 
         const getOrderPromise = new Promise((resolve, reject) => {
-            database.ref(`orders/${orderId}`).once('value', snapshot => {
+            database.ref(`orders/${senderId}/${orderKey}`).once('value', snapshot => {
                 resolve(snapshot.val())
             })
         })
@@ -20,7 +21,7 @@ export default (args, sendResponse) => {
             const order = results[0]
             const company = results[1]
 
-            const { id, items, user, timestamp, promo } = order
+            const { document_no: documentNo, items, user, timestamp, promo } = order
 
             let totalAmount = 0
             let discountAmount = 0
@@ -51,7 +52,7 @@ export default (args, sendResponse) => {
                     template_type: 'receipt',
                     recipient_name: `${user.first_name} ${user.last_name}`,
                     merchant_name: company.name,
-                    order_number: id,
+                    order_number: documentNo,
                     currency: 'PHP',
                     payment_method: 'To be paid',
                     timestamp: parseInt(timestamp / 1000),

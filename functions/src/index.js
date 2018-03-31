@@ -19,6 +19,7 @@ import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
 
 import onOrderContinue from './modules/order/onOrderContinue'
 import onOrderConfirm from './modules/order/onOrderConfirm'
+import onOrderCancel from './modules/order/onOrderCancel'
 
 import onShowMenu from './modules/product/onShowMenu'
 
@@ -72,6 +73,7 @@ const actionHandlers = {
 
     'order.show.menu': onShowMenu,
 
+    'order.cancel': onOrderCancel,
     'order.confirm': onOrderConfirm,
 
     'default.welcome': onWelcome,
