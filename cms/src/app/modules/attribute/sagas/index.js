@@ -75,8 +75,8 @@ const addAttribute = (args) => {
 	return new Promise((resolve, reject) => {
 		const attributesRef = database.ref(`attributes`);
 		const attributeRef = attributesRef.push();
-		const { code, name, values } = args;
-		attributeRef.set({ code, name }, () => {
+		const { /*code,*/ name, values } = args;
+		attributeRef.set({ /*code,*/ name }, () => {
 			values.forEach(item => {
 				const valuesRef = attributeRef.child("values").push()
 				valuesRef.set(item)

@@ -3,6 +3,12 @@
   right: 30px;
   z-index: 999999; }
 
+.hide-options .Select-arrow-zone {
+  display: none; }
+
+.hide-options .Select-menu-outer {
+  display: none; }
+
 .chart-legend,
 .bar-legend,
 .line-legend,

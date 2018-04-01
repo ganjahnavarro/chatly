@@ -9,6 +9,6 @@ export const SET_FORM = "ATTRIBUTE/SET_FORM";
 
 export const ATTRIBUTE_FORM = {
 	name: "",
-	code: "",
-	values: []
+	// code: "",
+	values: [],
 };

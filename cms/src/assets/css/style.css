@@ -7859,6 +7859,12 @@ a.text-gray-900:hover, a.text-gray-900:focus {
   right: 30px;
   z-index: 999999; }
 
+.hide-options .Select-arrow-zone {
+  display: none; }
+
+.hide-options .Select-menu-outer {
+  display: none; }
+
 body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; }

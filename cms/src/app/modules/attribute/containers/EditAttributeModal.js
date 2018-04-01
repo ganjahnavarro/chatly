@@ -70,6 +70,19 @@ class EditAttributeModal extends PureComponent {
 		})
 	}
 
+	componentWillUnmount(){
+		const { dispatch } = this.props;
+		dispatch({
+			type: c.SET_FORM,
+			form: 'attribute_form',
+			data: {
+				name: "",
+				code: "",
+				values: [ { name: "", synonyms: [] } ],
+			}
+		})
+	}
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		const { form, dispatch, attributeId } = this.props;
@@ -130,7 +143,7 @@ class EditAttributeModal extends PureComponent {
 								/>
 							</FormGroup>
 						</Col>
-						<Col xs="4">
+						{/*<Col xs="4">
 							<FormGroup>
 								<Label>Code</Label>
 								<Input
@@ -140,7 +153,7 @@ class EditAttributeModal extends PureComponent {
 									placeholder="Code"
 								/>
 							</FormGroup>
-						</Col>
+						</Col>*/}
 					</Row>
 					{ values }
 				</ModalBody>
