@@ -3,6 +3,7 @@
 import * as functions from 'firebase-functions'
 
 import { createEntity, createIntent } from './api/dialogflow'
+import { database } from './api/firebase'
 
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
@@ -138,5 +139,18 @@ function processRequest (request, response) {
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
     const args = { action, parameters, contexts, session, payloadData, response, senderId, timestamp, queryText }
 
+    recordRequest(request, args)
     handler(args, sendResponse)
+}
+
+const recordRequest = (request, args) => {
+    console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
+    const { senderId, timestamp } = args
+
+    if (senderId) {
+        database.ref(`conversations/${senderId}`).push({
+            request_body: JSON.stringify(request.body),
+            timestamp
+        })
+    }
 }
