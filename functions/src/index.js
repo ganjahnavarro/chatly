@@ -2,7 +2,7 @@
 
 import * as functions from 'firebase-functions'
 
-import { createEntity, createIntent } from './api/dialogflow'
+import { createEntity, getIntent, updateIntent } from './api/dialogflow'
 import { database } from './api/firebase'
 
 import onWelcome from './modules/default/onWelcome'
@@ -60,12 +60,17 @@ exports.addDialogflowEntityAndIntent = functions.database
         attribute.code = `attr-${sanitize(attribute.name)}`
         attribute.synced = true
 
-        const updateDialogflowEntity = createEntity(attribute)
-        const updateDialogflowIntent = createIntent(attribute)
-        const updateDatabase = event.data.ref.set(attribute)
+        const getDiaglogflowIntent = getIntent()
 
-        return Promise.all([updateDatabase, updateDialogflowEntity, updateDialogflowIntent])
-            .then(() => console.log('Success!'))
+        getDiaglogflowIntent.then(oldIntent => {
+            const updateDialogflowEntity = createEntity(attribute)
+            const updateDialogflowIntent = updateIntent(oldIntent, attribute)
+            const updateDatabase = event.data.ref.set(attribute)
+
+            return Promise.all([updateDatabase, updateDialogflowEntity, updateDialogflowIntent])
+                .then((responses) => console.log('Success!', JSON.stringify(responses)))
+                .catch(err => console.log('Error', JSON.stringify(err)))
+        })
     })
 
 function sanitize (name) {
