@@ -72,14 +72,20 @@ function sanitize (name) {
     return name.replace(/\s+/g, '-').toLowerCase()
 }
 
-function sendResponse ({ responseToUser, response }) {
-    if (typeof responseToUser === 'string') {
-        let responseJson = { fulfillmentText: responseToUser }
-        response.json(responseJson)
-    } else {
-        console.log('Response to Dialogflow: ' + JSON.stringify(responseToUser))
-        response.json(responseToUser)
+function sendResponse ({ responseToUser, response, senderId, timestamp }) {
+    const isString = typeof responseToUser === 'string'
+    const responseJson = isString ? { fulfillmentText: responseToUser } : responseToUser
+
+    console.log('Response to Dialogflow: ' + JSON.stringify(responseJson))
+
+    if (senderId) {
+        database.ref(`conversations/${senderId}`).push({
+            content: JSON.stringify(responseJson),
+            type: 'response',
+            timestamp
+        })
     }
+    response.json(responseJson)
 }
 
 const actionHandlers = {
@@ -149,7 +155,8 @@ const recordRequest = (request, args) => {
 
     if (senderId) {
         database.ref(`conversations/${senderId}`).push({
-            request_body: JSON.stringify(request.body),
+            content: JSON.stringify(request.body),
+            type: 'request',
             timestamp
         })
     }

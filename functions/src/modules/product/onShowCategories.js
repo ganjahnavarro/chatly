@@ -3,6 +3,7 @@ import { getCategories } from '../../api/firebase'
 export default (args, sendResponse) => {
     getCategories().then(items => {
         console.log('Categories: ', JSON.stringify(items))
+        items.sort((a, b) => a.index < b.index)
 
         const elements = []
 

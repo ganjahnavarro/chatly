@@ -144,7 +144,7 @@ const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args,
         return {
             content_type: 'text',
             title: value.name,
-            payload: `options: ${value.name}`
+            payload: `Options: ${value.name}`
         }
     })
 
