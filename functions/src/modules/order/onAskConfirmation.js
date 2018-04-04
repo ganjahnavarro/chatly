@@ -40,7 +40,7 @@ export default (args, sendResponse) => {
 
                 const deliveryTypeMessage = `Delivery Type: ${isDelivery ? 'Delivery' : 'Pick-up'} \n`
                 const branchMessage = `Branch: ${user.branch && user.branch.name} \n`
-                const addressMessage = `Address: ${user.location.mapsData.formatted_address} \n`
+                const addressMessage = `Address: ${user.location && user.location.mapsData ? user.location.mapsData.formatted_address : '(Coordinates only)'} \n`
                 const phoneNumberMessage = `Contact No.: ${user.phone_number} \n`
 
                 const promoCodeMessage = promo ? `Promo code: ${promo.code} \n` +

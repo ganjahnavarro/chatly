@@ -2,7 +2,7 @@
 
 import * as functions from 'firebase-functions'
 
-import { createEntity, getIntent, updateIntent } from './api/dialogflow'
+// import { createEntity, getIntent, updateIntent } from './api/dialogflow'
 import { database } from './api/firebase'
 
 import onWelcome from './modules/default/onWelcome'
@@ -47,6 +47,7 @@ exports.dialogflowFulfillment = functions.https.onRequest((request, response) =>
     }
 })
 
+/*
 exports.addDialogflowEntityAndIntent = functions.database
     .ref('/attributes/{pushId}')
     .onWrite(event => {
@@ -76,6 +77,7 @@ exports.addDialogflowEntityAndIntent = functions.database
 function sanitize (name) {
     return name.replace(/\s+/g, '-').toLowerCase()
 }
+*/
 
 function sendResponse ({ responseToUser, response, senderId, timestamp }) {
     const isString = typeof responseToUser === 'string'
@@ -83,13 +85,21 @@ function sendResponse ({ responseToUser, response, senderId, timestamp }) {
 
     console.log('Response to Dialogflow: ' + JSON.stringify(responseJson))
 
-    if (senderId) {
-        database.ref(`conversations/${senderId}`).push({
-            content: JSON.stringify(responseJson),
-            type: 'response',
-            timestamp
-        })
+    try {
+        if (senderId) {
+            const message = {
+                content: JSON.stringify(responseJson),
+                type: 'response'
+            }
+            if (timestamp) {
+                message.timestamp = timestamp
+            }
+            database.ref(`conversations/${senderId}`).push(message)
+        }
+    } catch (error) {
+        console.error('Error recording response', error)
     }
+
     response.json(responseJson)
 }
 
@@ -123,8 +133,7 @@ const actionHandlers = {
 
     'order.product.add': onAddCartItem,
     'order.product.add-option': onAddCartItem,
-    'order.change.quantity': onChangeQuantity,
-    'order.change.quantity-value': onChangeQuantity
+    'order.change.quantity': onChangeQuantity
 }
 
 function processRequest (request, response) {
@@ -155,14 +164,21 @@ function processRequest (request, response) {
 }
 
 const recordRequest = (request, args) => {
-    console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
-    const { senderId, timestamp } = args
+    try {
+        console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
+        const { senderId, timestamp } = args
 
-    if (senderId) {
-        database.ref(`conversations/${senderId}`).push({
-            content: JSON.stringify(request.body),
-            type: 'request',
-            timestamp
-        })
+        if (senderId) {
+            const message = {
+                content: JSON.stringify(request.body),
+                type: 'request'
+            }
+            if (timestamp) {
+                message.timestamp = timestamp
+            }
+            database.ref(`conversations/${senderId}`).push(message)
+        }
+    } catch (error) {
+        console.error('Error recording request', error)
     }
 }

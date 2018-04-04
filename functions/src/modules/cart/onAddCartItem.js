@@ -3,7 +3,7 @@ import { getProductTypes, getProductTypeAttributes, database } from '../../api/f
 import { toArray } from '../../utils'
 
 export default (args, sendResponse) => {
-    const { senderId } = args
+    const { senderId, session } = args
 
     if (senderId) {
         const sessionRef = database.ref(`sessions/${senderId}`)
@@ -68,7 +68,15 @@ export default (args, sendResponse) => {
 
                     const description = selectedProduct ? `${selectedProduct.description} ` : ''
                     const message = `OK. ${quantity} ${description}${selectedProductType.name} added to your cart. Anything else?`
-                    sendResponse({ responseToUser: message, ...args })
+
+                    const outputContexts = [
+                        { name: `${session}/contexts/product-added`, lifespanCount: 1 }
+                    ]
+                    const responseToUser = {
+                        fulfillmentText: message,
+                        outputContexts
+                    }
+                    sendResponse({ responseToUser, ...args })
                 })
             })
         })

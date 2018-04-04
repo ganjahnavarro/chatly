@@ -7,13 +7,13 @@ const getResponse = (items) => {
             const { id, quantity, product, productType } = item
 
             const productTypeDescription = productType.description || ''
-            const productDescription = product ? ` (${product.description})` : ''
+            const productDescription = product && product.description ? ` (${product.description})` : ''
             const title = `${productType.name}${productDescription}`
 
             return {
                 title,
                 image_url: productType.image_url,
-                subtitle: `Quantity: ${quantity} \n ${productTypeDescription}`,
+                subtitle: `Quantity: ${quantity} \n${productTypeDescription}`,
                 buttons: [
                     {
                         type: 'postback',

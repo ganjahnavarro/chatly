@@ -68,5 +68,5 @@ const processResponse = (response) => {
 
 const getAddressComponent = (components, key) => {
     const addressComponent = components.find(component => component.types.includes(key))
-    return addressComponent ? addressComponent.short_name : undefined
+    return addressComponent ? addressComponent.short_name : ''
 }

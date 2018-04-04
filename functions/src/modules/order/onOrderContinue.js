@@ -10,8 +10,31 @@ export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
-        database.ref(`users/${senderId}`).once('value').then(snapshot => {
-            const user = snapshot.val()
+        const userPromise = database.ref(`users/${senderId}`).once('value')
+        const cartPromise = database.ref(`sessions/${senderId}/cart`).once('value')
+
+        Promise.all([userPromise, cartPromise]).then(results => {
+            const user = results[0].val()
+            const hasCart = results[1].exists()
+
+            if (!hasCart) {
+                const payload = {
+                    facebook: {
+                        text: 'There are no items in your cart. Please add an item to continue.',
+                        quick_replies: [
+                            {
+                                content_type: 'text',
+                                title: 'Show menu',
+                                payload: 'Show menu'
+                            }
+                        ]
+                    }
+                }
+                const responseToUser = { payload }
+                sendResponse({ responseToUser, ...args })
+                return
+            }
+
             const {
                 branch,
                 delivery_type: deliveryType,

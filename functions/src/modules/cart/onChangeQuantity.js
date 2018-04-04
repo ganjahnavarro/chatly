@@ -35,7 +35,7 @@ export default (args, sendResponse) => {
                 quantity: quantity
             })
 
-            const message = `${name} is Updated. Please add an order to continue.`
+            const message = `${name} quantity updated.`
             sendResponse({ responseToUser: message, ...args })
         })
     }

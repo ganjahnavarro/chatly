@@ -18,7 +18,7 @@ export default (args, sendResponse) => {
                     return {
                         title: item.name,
                         image_url: item.image_url,
-                        subtitle: item.description,
+                        subtitle: `${item.price ? `Price: ${parseFloat(item.price).toFixed(2)} \n` : ''}${item.description}`,
                         buttons: [
                             {
                                 type: 'postback',

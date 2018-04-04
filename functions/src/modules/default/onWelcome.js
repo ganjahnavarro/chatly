@@ -12,7 +12,7 @@ export default (args, sendResponse) => {
     const elements = [
         {
             title: 'Welcome to Shakey\'s Pizza Parlor',
-            image_url: 'http://images.gmanews.tv/webpics/2016/11/640_Shakeys_2016_11_30_12_23_07.jpg',
+            image_url: 'https://i.imgur.com/r2fUAc8.jpg',
             subtitle: 'Shakey’s has been creating over 40 years of great times and great memories in the Philippines.',
             buttons: [
                 {
@@ -22,8 +22,8 @@ export default (args, sendResponse) => {
                 },
                 {
                     type: 'postback',
-                    payload: 'How to use',
-                    title: 'How to use'
+                    payload: 'About Us',
+                    title: 'About Us'
                 }
             ]
         },
@@ -33,13 +33,9 @@ export default (args, sendResponse) => {
             subtitle: 'Having started its first store in Metro Manila way back in 1975, Shakey’s now operates nationwide with a strong store count of 189 stores.',
             buttons: [
                 {
-                    type: 'postback',
-                    payload: 'About Us',
-                    title: 'About Us'
-                },
-                {
-                    type: 'postback',
-                    payload: 'Stores',
+                    type: 'web_url',
+                    url: 'http://shakeyspizza.ph/store-finder.asp',
+                    webview_height_ratio: 'full',
                     title: 'View Stores'
                 }
             ]
