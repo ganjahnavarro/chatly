@@ -2,7 +2,7 @@
 
 import * as functions from 'firebase-functions'
 
-// import { createEntity, getIntent, updateIntent } from './api/dialogflow'
+import { createEntity, getIntent, updateIntent } from './api/dialogflow'
 import { database } from './api/firebase'
 
 import onWelcome from './modules/default/onWelcome'
@@ -47,20 +47,12 @@ exports.dialogflowFulfillment = functions.https.onRequest((request, response) =>
     }
 })
 
-/*
 exports.addDialogflowEntityAndIntent = functions.database
     .ref('/attributes/{pushId}')
-    .onWrite(event => {
+    .onCreate(event => {
         const attribute = event.data.val()
 
-        if (attribute.synced) {
-            return null
-        }
-
-        console.log('Syncing..')
         attribute.code = `attr-${sanitize(attribute.name)}`
-        attribute.synced = true
-
         const getDiaglogflowIntent = getIntent()
 
         getDiaglogflowIntent.then(oldIntent => {
@@ -77,7 +69,6 @@ exports.addDialogflowEntityAndIntent = functions.database
 function sanitize (name) {
     return name.replace(/\s+/g, '-').toLowerCase()
 }
-*/
 
 function sendResponse ({ responseToUser, response, senderId, timestamp }) {
     const isString = typeof responseToUser === 'string'
