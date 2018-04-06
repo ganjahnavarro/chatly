@@ -35,6 +35,8 @@ import onRemoveCartItemById from './modules/cart/onRemoveCartItemById'
 
 import onChangeQuantity from './modules/cart/onChangeQuantity'
 
+import onTestMultipleResponse from './modules/user/onTestMultipleResponse'
+
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
     console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
@@ -75,22 +77,7 @@ function sendResponse ({ responseToUser, response, senderId, timestamp }) {
     const responseJson = isString ? { fulfillmentText: responseToUser } : responseToUser
 
     console.log('Response to Dialogflow: ' + JSON.stringify(responseJson))
-
-    try {
-        if (senderId) {
-            const message = {
-                content: JSON.stringify(responseJson),
-                type: 'response'
-            }
-            if (timestamp) {
-                message.timestamp = timestamp
-            }
-            database.ref(`conversations/${senderId}`).push(message)
-        }
-    } catch (error) {
-        console.error('Error recording response', error)
-    }
-
+    recordResponse({ senderId, timestamp, responseJson })
     response.json(responseJson)
 }
 
@@ -124,7 +111,9 @@ const actionHandlers = {
 
     'order.product.add': onAddCartItem,
     'order.product.add-option': onAddCartItem,
-    'order.change.quantity': onChangeQuantity
+    'order.change.quantity': onChangeQuantity,
+
+    'test.multiple.response': onTestMultipleResponse
 }
 
 function processRequest (request, response) {
@@ -140,11 +129,11 @@ function processRequest (request, response) {
     let payloadData = (originalRequest && originalRequest.payload) ? originalRequest.payload.data : undefined
 
     const senderId = payloadData && payloadData.sender ? payloadData.sender.id : undefined
-    const timestamp = payloadData.timestamp
+    const timestamp = payloadData ? payloadData.timestamp : undefined
 
-    payloadData.supportsLocationQuickReply = true
-    if (payloadData && payloadData.message && payloadData.message.tags) {
-        payloadData.supportsLocationQuickReply = payloadData.message.tags.source === 'customer_chat_plugin'
+    if (payloadData) {
+        payloadData.supportsLocationQuickReply = payloadData.message && payloadData.message.tags
+            ? payloadData.message.tags.source !== 'customer_chat_plugin' : true
     }
 
     const handler = actionHandlers[action] || actionHandlers[defaultAction]
@@ -152,6 +141,23 @@ function processRequest (request, response) {
 
     recordRequest(request, args)
     handler(args, sendResponse)
+}
+
+const recordResponse = ({ senderId, timestamp, responseJson }) => {
+    try {
+        if (senderId) {
+            const message = {
+                content: JSON.stringify(responseJson),
+                type: 'response'
+            }
+            if (timestamp) {
+                message.timestamp = timestamp
+            }
+            database.ref(`conversations/${senderId}`).push(message)
+        }
+    } catch (error) {
+        console.error('Error recording response', error)
+    }
 }
 
 const recordRequest = (request, args) => {
