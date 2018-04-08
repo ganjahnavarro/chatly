@@ -35,7 +35,8 @@ import onRemoveCartItemById from './modules/cart/onRemoveCartItemById'
 
 import onChangeQuantity from './modules/cart/onChangeQuantity'
 
-import onTestMultipleResponse from './modules/user/onTestMultipleResponse'
+import onMultipleResponse from './modules/sample/onMultipleResponse'
+import onPay from './modules/sample/onPay'
 
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
@@ -113,7 +114,8 @@ const actionHandlers = {
     'order.product.add-option': onAddCartItem,
     'order.change.quantity': onChangeQuantity,
 
-    'test.multiple.response': onTestMultipleResponse
+    'sample.multiple.response': onMultipleResponse,
+    'sample.pay': onPay
 }
 
 function processRequest (request, response) {
