@@ -1,12 +1,12 @@
-const mongodb = require('mongodb')
-const express = require('express')
+import { MongoClient } from 'mongodb'
+import express from 'express'
 
 const app = express()
 
 const uri = 'mongodb://localhost:27017/chatly'
 console.log(uri)
 
-mongodb.MongoClient.connect(uri, (err, rootDatabase) => {
+MongoClient.connect(uri, (err, rootDatabase) => {
     if (err) {
         throw err
     }
@@ -46,5 +46,5 @@ mongodb.MongoClient.connect(uri, (err, rootDatabase) => {
         res.end()
     })
 
-    app.listen(3000, () => console.log('Example app listening on port 3000!'))
+    app.listen(3000, () => console.log('App listening on port 3000!'))
 })

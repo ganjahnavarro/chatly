@@ -1,0 +1,53 @@
+RESTORE .JSON TO A COLLECTION:
+
+    mongoimport --db chatly --collection attributes --file chatly-bot-attributes-export.json.json
+
+RUN CODE:
+
+    const database = rootDatabase.db('chatly')
+    const fbaseCollection = database.collection('fbase')
+    const attributesCollection = database.collection('attributes')
+
+    fbaseCollection.findOne().then(result => {
+        if (err) {
+            throw err
+        }
+
+        const items = Object.values(result)
+        items.forEach((item, index) => {
+            console.log(`index: ${index}`, JSON.stringify(item))
+            console.log('--')
+
+            if (item.code) {
+                const { _id, ...rest } = item
+                attributesCollection.insert(Object.assign({}, rest, {
+                    values: Object.values(item.values).map(value => {
+                        return {
+                            _id: new ObjectID(),
+                            name: value.name
+                        }
+                    })
+                }))
+            }
+        })
+    })
+
+SAMPLE DATA:
+
+    "[
+        {
+            "_id": "5acbb68f8dd4d27ce8a89740",
+            "code": "attr-dressing",
+            "name": "Dressing",
+            "values": [
+                {
+                    "id": "5acbb68f8dd4d27ce8a8973e",
+                    "name": "Ranch"
+                },
+                {
+                    "id": "5acbb68f8dd4d27ce8a8973f",
+                    "name": "Thousand Island"
+                }
+            ]
+        }
+    ]"
