@@ -1,4 +1,6 @@
-import { getCategories } from '../../api/firebase'
+import api from '../../api'
+
+const { getCategories } = api
 
 export default (args, sendResponse) => {
     getCategories().then(items => {

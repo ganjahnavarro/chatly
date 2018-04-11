@@ -1,6 +1,8 @@
 import _ from 'lodash'
-import { getProductTypes, getProductTypeAttributes, database } from '../../api/firebase'
 import { toArray } from '../../utils'
+import api from '../../api'
+
+const { getProductTypes, getProductTypeAttributes, database } = api
 
 export default (args, sendResponse) => {
     const { senderId, session } = args

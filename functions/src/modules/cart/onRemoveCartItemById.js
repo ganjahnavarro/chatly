@@ -1,5 +1,7 @@
 import onShowCart from './onShowCart'
-import { removeCartItemById } from '../../api/firebase'
+import api from '../../api'
+
+const { removeCartItemById } = api
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args

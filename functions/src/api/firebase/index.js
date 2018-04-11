@@ -3,22 +3,22 @@ import * as firebase from 'firebase'
 import * as functions from 'firebase-functions'
 import Promise from 'promise'
 
-import { toArray } from '../utils'
+import { toArray } from '../../utils'
 
 admin.initializeApp(functions.config().firebase)
 firebase.initializeApp(functions.config().firebase)
 
-export const database = firebase.database()
+const database = firebase.database()
 
-export const saveUserDetails = (senderId, data) => {
+const saveUserDetails = (senderId, data) => {
     database.ref(`users/${senderId}`).set(data)
 }
 
-export const getBranches = () => getItems('branches')
-export const getCategories = () => getItems('categories')
-export const getProductTypes = () => getItems('product_types')
+const getBranches = () => getItems('branches')
+const getCategories = () => getItems('categories')
+const getProductTypes = () => getItems('product_types')
 
-export const getProductTypeAttributes = (productType) => {
+const getProductTypeAttributes = (productType) => {
     return new Promise((resolve, reject) => {
         database.ref(`product_types/${productType.id}/attributes`).once('value', snapshot => {
             if (snapshot.val()) {
@@ -58,7 +58,7 @@ const getItems = key => {
     })
 }
 
-export const getCategory = categoryKey => {
+const getCategory = categoryKey => {
     const categoryRef = database.ref(`categories/${categoryKey}`)
     return new Promise((resolve, reject) => {
         categoryRef.once('value', snapshot => {
@@ -70,7 +70,7 @@ export const getCategory = categoryKey => {
     })
 }
 
-export const getProductType = productTypeKey => {
+const getProductType = productTypeKey => {
     const productTypesRef = database.ref(`product_types/${productTypeKey}`)
     return new Promise((resolve, reject) => {
         productTypesRef.once('value', snapshot => {
@@ -86,7 +86,7 @@ export const getProductType = productTypeKey => {
     })
 }
 
-export const getCartItem = (senderId, cartItemKey, includeAttributes) => {
+const getCartItem = (senderId, cartItemKey, includeAttributes) => {
     const sessionRef = database.ref(
         `sessions/${senderId}/cart/${cartItemKey}`
     )
@@ -151,7 +151,7 @@ export const getCartItem = (senderId, cartItemKey, includeAttributes) => {
     })
 }
 
-export const getCartItems = (senderId, includeAttributes) => {
+const getCartItems = (senderId, includeAttributes) => {
     return new Promise((resolve, reject) => {
         const senderRef = database.ref(`sessions/${senderId}`)
         senderRef.once('value', (senderSnapshot) => {
@@ -169,7 +169,7 @@ export const getCartItems = (senderId, includeAttributes) => {
     })
 }
 
-export const removeCartItem = (senderId, productType) => {
+const removeCartItem = (senderId, productType) => {
     const cartRef = database.ref(`sessions/${senderId}/cart`)
 
     return new Promise((resolve, reject) => {
@@ -188,12 +188,29 @@ export const removeCartItem = (senderId, productType) => {
     })
 }
 
-export const removeCartItemById = (senderId, cartItem) => {
+const removeCartItemById = (senderId, cartItem) => {
     console.log(`Removing cart item by ID: ${cartItem}`)
     return database.ref(`sessions/${senderId}/cart/${cartItem}`).remove()
 }
 
-export const changeQuantity = (senderId, cartItem) => {
+const changeQuantity = (senderId, cartItem) => {
     console.log(`Changing quantity of product in cart item by ID: ${cartItem}`)
     return database.ref(`sessions/${senderId}/cart/${cartItem}`)
+}
+
+export default {
+    database,
+    saveUserDetails,
+    getBranches,
+    getCategories,
+    getProductTypes,
+    getProductTypeAttributes,
+    getAttribute,
+    getCategory,
+    getProductType,
+    getCartItem,
+    getCartItems,
+    removeCartItem,
+    removeCartItemById,
+    changeQuantity
 }

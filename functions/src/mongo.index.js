@@ -42,6 +42,7 @@ MongoClient.connect(uri, (err, rootDatabase) => {
         res.writeHead(200, {
             'Content-Type': 'text/plain'
         })
+
         res.write('OK')
         res.end()
     })

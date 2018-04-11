@@ -1,7 +1,8 @@
-import { getBranches, database } from '../../api/firebase'
-
 import onAskBranch from './onAskBranch'
 import onOrderContinue from '../order/onOrderContinue'
+import api from '../../api'
+
+const { getBranches, database } = api
 
 export default (args, sendResponse) => {
     const { parameters, senderId } = args

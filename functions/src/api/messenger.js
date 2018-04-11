@@ -3,7 +3,8 @@
 import * as functions from 'firebase-functions'
 import axios from 'axios'
 
-import { saveUserDetails } from './firebase'
+import api from './'
+const { saveUserDetails } = api
 
 const endpoint = 'https://graph.facebook.com/'
 const version = 'v2.12'

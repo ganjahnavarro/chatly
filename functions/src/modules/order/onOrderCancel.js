@@ -1,7 +1,8 @@
 import moment from 'moment'
-
-import { database } from '../../api/firebase'
 import { toArray } from '../../utils'
+import api from '../../api'
+
+const { database } = api
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args

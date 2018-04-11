@@ -1,6 +1,7 @@
-import { getCartItems, database } from '../../api/firebase'
-
 import onSendReceipt from './onSendReceipt'
+import api from '../../api'
+
+const { getCartItems, database } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args

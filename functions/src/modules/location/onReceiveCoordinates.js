@@ -1,7 +1,9 @@
-import { database } from '../../api/firebase'
+import onOrderContinue from '../order/onOrderContinue'
 import { getAddress } from '../../api/maps'
 
-import onOrderContinue from '../order/onOrderContinue'
+import api from '../../api'
+
+const { database } = api
 
 export default (args, sendResponse) => {
     const { payloadData, senderId } = args

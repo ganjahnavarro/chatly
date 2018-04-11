@@ -1,10 +1,11 @@
-import { database } from '../../api/firebase'
-
 import onAskBranch from '../branch/onAskBranch'
 import onAskLocation from '../location/onAskLocation'
 import onAskDeliveryType from '../delivery-type/onAskDeliveryType'
 import onAskContactNumber from '../user/onAskContactNumber'
 import onAskConfirmation from '../order/onAskConfirmation'
+import api from '../../api'
+
+const { database } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args

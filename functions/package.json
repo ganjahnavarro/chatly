@@ -1,7 +1,7 @@
 {
     "name": "chatly-functions",
     "description": "Chatly Cloud Functions",
-    "main": "lib/index.js",
+    "main": "lib/firebase.index.js",
     "version": "0.0.1",
     "private": true,
     "license": "Apache Version 2.0",
@@ -10,9 +10,8 @@
         "node": "~6.0"
     },
     "scripts": {
-        "start": "npm run package-functions && node lib/index.js",
-        "start-v1": "npm run package-functions | firebase serve --only functions",
-        "deploy": "npm run lint && npm run package-functions && firebase deploy --only functions",
+        "start-mongo": "npm run package-functions && node lib/mongo.index.js",
+        "deploy-firebase": "npm run lint && npm run package-functions && firebase deploy --only functions",
         "package-functions": "babel src -d lib --presets=env --plugins=transform-object-rest-spread",
         "lint": "eslint . --fix"
     },

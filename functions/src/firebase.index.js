@@ -3,7 +3,7 @@
 import * as functions from 'firebase-functions'
 
 import { createEntity, getIntent, updateIntent } from './api/dialogflow'
-import { database } from './api/firebase'
+import { database } from './api/'
 
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'

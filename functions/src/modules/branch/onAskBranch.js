@@ -1,4 +1,6 @@
-import { database } from '../../api/firebase'
+import api from '../../api'
+
+const { database } = api
 
 export default (args, sendResponse) => {
     database.ref('branches').once('value').then(snapshot => {

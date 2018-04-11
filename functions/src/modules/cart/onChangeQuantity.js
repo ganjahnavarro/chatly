@@ -1,5 +1,7 @@
-import { database } from '../../api/firebase'
 import Promise from 'promise'
+import api from '../../api'
+
+const { database } = api
 
 export default (args, sendResponse) => {
     const { session, senderId, parameters, contexts } = args

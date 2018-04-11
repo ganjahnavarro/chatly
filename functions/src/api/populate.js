@@ -1,4 +1,5 @@
-import { database } from './firebase'
+import api from './'
+const { database } = api
 
 export default () => {
     const branchesRef = database.ref('branches')

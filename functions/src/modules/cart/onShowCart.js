@@ -1,4 +1,6 @@
-import { getCartItems } from '../../api/firebase'
+import api from '../../api'
+
+const { getCartItems } = api
 
 const getResponse = (items) => {
     let responseToUser = {}

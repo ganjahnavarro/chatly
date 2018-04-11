@@ -1,5 +1,7 @@
 import onShowCategories from './onShowCategories'
-import { getCategories, getProductTypes } from '../../api/firebase'
+import api from '../../api'
+
+const { getCategories, getProductTypes } = api
 
 export default (args, sendResponse) => {
     const { parameters } = args
