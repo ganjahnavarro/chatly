@@ -2,7 +2,7 @@ import onAskContactNumber from './onAskContactNumber'
 import onOrderContinue from '../order/onOrderContinue'
 import api from '../../api'
 
-const { database } = api
+const { updateUserDetails } = api
 
 export default (args, sendResponse) => {
     const { parameters, senderId } = args
@@ -14,7 +14,7 @@ export default (args, sendResponse) => {
             return
         }
 
-        database.ref(`users/${senderId}`).update({ phone_number: phoneNumber })
+        updateUserDetails(senderId, { phone_number: phoneNumber })
         onOrderContinue(args, sendResponse)
     }
 }

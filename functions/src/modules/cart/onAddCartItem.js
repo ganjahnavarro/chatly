@@ -2,16 +2,15 @@ import _ from 'lodash'
 import { toArray } from '../../utils'
 import api from '../../api'
 
-const { getProductTypes, getProductTypeAttributes, database } = api
+const { getProductTypes, getProductTypeAttributes, getSessionDetails,
+    updateSessionDetails, addCartItem } = api
 
 export default (args, sendResponse) => {
     const { senderId, session } = args
 
     if (senderId) {
-        const sessionRef = database.ref(`sessions/${senderId}`)
-
-        sessionRef.once('value', snapshot => {
-            let parameters = getParameters(snapshot.val(), args)
+        getSessionDetails(senderId).then(sessionData => {
+            let parameters = getParameters(sessionData, args)
 
             const productType = parameters['product-type']
             const quantity = parameters.quantity
@@ -60,13 +59,13 @@ export default (args, sendResponse) => {
                         console.log('Selected Attributes Values', JSON.stringify(selectedAttributeValues))
 
                         if (missingAttributes.length) {
-                            askForMissingAttribute(sessionRef, missingAttributes, parameters, args, sendResponse)
+                            askForMissingAttribute(missingAttributes, parameters, args, sendResponse)
                             return
                         }
                     }
 
                     const selectedProduct = getSelectedProduct(selectedProductType, selectedAttributeValues)
-                    addToCart(sessionRef, selectedProduct, selectedProductType, quantity)
+                    addToCart(args, selectedProduct, selectedProductType, quantity)
 
                     const description = selectedProduct ? `${selectedProduct.description} ` : ''
                     const message = `OK. ${quantity} ${description}${selectedProductType.name} added to your cart. Anything else?`
@@ -131,7 +130,9 @@ const getSelectedProduct = (selectedProductType, selectedAttributeValues) => {
     return selectedProduct
 }
 
-const addToCart = (sessionRef, selectedProduct, selectedProductType, quantity) => {
+const addToCart = (args, selectedProduct, selectedProductType, quantity) => {
+    const { senderId } = args
+
     const cartItem = {
         product_type_id: selectedProductType.id,
         quantity
@@ -140,12 +141,13 @@ const addToCart = (sessionRef, selectedProduct, selectedProductType, quantity) =
     if (selectedProduct) {
         cartItem.product_id = selectedProduct.id
     }
-    sessionRef.child('cart').push(cartItem)
-    sessionRef.child('parameters').remove()
+
+    addCartItem(senderId, cartItem)
+    updateSessionDetails(senderId, { parameters: null })
 }
 
-const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args, sendResponse) => {
-    const { session } = args
+const askForMissingAttribute = (missingAttributes, parameters, args, sendResponse) => {
+    const { session, senderId } = args
 
     const missingAttribute = missingAttributes[0]
     const values = toArray(missingAttribute.values)
@@ -183,8 +185,7 @@ const askForMissingAttribute = (sessionRef, missingAttributes, parameters, args,
         payload
     }
 
-    sessionRef.update({ parameters })
-
+    updateSessionDetails(senderId, { parameters })
     sendResponse({
         responseToUser,
         ...args

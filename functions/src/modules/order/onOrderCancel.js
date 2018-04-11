@@ -1,8 +1,7 @@
 import moment from 'moment'
-import { toArray } from '../../utils'
 import api from '../../api'
 
-const { database } = api
+const { getUserOrders, updateOrderDetails, updateOrderStatusHistory } = api
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args
@@ -84,10 +83,8 @@ const handleSingleOrder = (args, sendResponse, userOrder) => {
         const cancelledStatus = 'CANCELLED'
         const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
 
-        const userOrderRef = database.ref(`orders/${senderId}/${userOrder.id}`)
-        userOrderRef.update({ status: cancelledStatus })
-
-        userOrderRef.child('status_history').push({
+        updateOrderDetails(senderId, userOrder.id, { status: cancelledStatus })
+        updateOrderStatusHistory(senderId, userOrder.id, {
             status: cancelledStatus,
             date: formattedTimestamp
         })
@@ -101,17 +98,4 @@ const handleSingleOrder = (args, sendResponse, userOrder) => {
         const responseToUser = 'Sorry order is already on the way! You can\'t cancel at this time. Don\'t hesitate to call us for more information.'
         sendResponse({ responseToUser, ...args })
     }
-}
-
-const getUserOrders = (args) => {
-    const { senderId } = args
-    return new Promise((resolve, reject) => {
-        database.ref(`orders/${senderId}`).once('value', snapshot => {
-            if (snapshot && snapshot.val()) {
-                resolve(toArray(snapshot.val()))
-            } else {
-                resolve([])
-            }
-        })
-    })
 }

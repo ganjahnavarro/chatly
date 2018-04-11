@@ -1,12 +1,12 @@
 import api from '../../api'
 
-const { database } = api
+const { removeCartItems } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
-        database.ref(`sessions/${senderId}/cart`).remove().then(() => {
+        removeCartItems().then(() => {
             const payload = {
                 facebook: {
                     text: 'Cart cleared. Please add an order to continue.',

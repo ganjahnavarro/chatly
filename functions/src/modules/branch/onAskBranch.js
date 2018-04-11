@@ -1,12 +1,9 @@
 import api from '../../api'
 
-const { database } = api
+const { getBranches } = api
 
 export default (args, sendResponse) => {
-    database.ref('branches').once('value').then(snapshot => {
-        const branchesSnapshot = snapshot.val()
-        const branches = Object.keys(branchesSnapshot).map(key => branchesSnapshot[key])
-
+    getBranches().then(branches => {
         const quickReplies = []
         branches.forEach(branch => {
             quickReplies.push({

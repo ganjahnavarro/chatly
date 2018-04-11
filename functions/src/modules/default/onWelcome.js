@@ -1,14 +1,14 @@
 import { getUserDetails } from '../../api/messenger'
 import api from '../../api'
 
-const { database } = api
+const { updateSessionDetails } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
         getUserDetails(senderId)
-        database.ref(`sessions/${senderId}`).remove()
+        updateSessionDetails(senderId, null)
     }
 
     const elements = [

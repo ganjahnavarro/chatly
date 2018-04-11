@@ -1,7 +1,6 @@
-import Promise from 'promise'
 import api from '../../api'
 
-const { database } = api
+const { updateCartItem } = api
 
 export default (args, sendResponse) => {
     const { session, senderId, parameters, contexts } = args
@@ -29,24 +28,7 @@ export default (args, sendResponse) => {
         const cartItem = filterContext[0].parameters['cart-item']
         const name = filterContext[0].parameters['name']
 
-        const cartRef = database.ref(`sessions/${senderId}/cart/${cartItem}`)
-
-        getCart(cartRef, senderId, cartItem).then(res => {
-            cartRef.update({
-                ...res,
-                quantity: quantity
-            })
-
-            const message = `${name} quantity updated.`
-            sendResponse({ responseToUser: message, ...args })
-        })
+        updateCartItem(senderId, cartItem, { quantity })
+        sendResponse({ responseToUser: `${name} quantity updated.`, ...args })
     }
-}
-
-const getCart = (cartRef, senderId, cartItem) => {
-    return new Promise((resolve, reject) => {
-        cartRef.once('value', snapshot => {
-            resolve(snapshot.val())
-        })
-    })
 }

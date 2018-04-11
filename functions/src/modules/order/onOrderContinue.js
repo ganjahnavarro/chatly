@@ -5,18 +5,19 @@ import onAskContactNumber from '../user/onAskContactNumber'
 import onAskConfirmation from '../order/onAskConfirmation'
 import api from '../../api'
 
-const { database } = api
+const { getUserDetails, hasCartItems } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
-        const userPromise = database.ref(`users/${senderId}`).once('value')
-        const cartPromise = database.ref(`sessions/${senderId}/cart`).once('value')
-
-        Promise.all([userPromise, cartPromise]).then(results => {
-            const user = results[0].val()
-            const hasCart = results[1].exists()
+        const promises = [
+            getUserDetails(senderId),
+            hasCartItems(senderId)
+        ]
+        Promise.all(promises).then(results => {
+            const user = results[0]
+            const hasCart = results[1]
 
             if (!hasCart) {
                 const payload = {

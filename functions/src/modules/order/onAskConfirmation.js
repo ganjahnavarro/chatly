@@ -1,15 +1,16 @@
 import api from '../../api'
 
-const { getCartItems, database } = api
+const { getCartItems, getUserDetails, getSessionDetails } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
     if (senderId) {
         getCartItems(senderId).then(items => {
-            const sessionRef = database.ref(`sessions/${senderId}`)
-            const userRef = database.ref(`users/${senderId}`)
-
-            Promise.all([sessionRef.once('value'), userRef.once('value')]).then(snapshots => {
+            const promises = [
+                getSessionDetails(senderId),
+                getUserDetails(senderId)
+            ]
+            Promise.all(promises).then(snapshots => {
                 const session = snapshots[0].val()
                 const user = snapshots[1].val()
                 const isDelivery = user.delivery_type === 'delivery'

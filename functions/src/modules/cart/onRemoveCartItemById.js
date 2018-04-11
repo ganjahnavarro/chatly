@@ -5,7 +5,7 @@ const { removeCartItemById } = api
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args
-    const cartItem = parameters['cart-item'] || getParsedCartItem(args)
+    const cartItem = getParsedCartItem(args)
 
     console.log('onRemoveCartItemById', parameters['cart-item'], getParsedCartItem(args))
 

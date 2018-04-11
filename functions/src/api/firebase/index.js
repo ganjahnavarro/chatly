@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import * as admin from 'firebase-admin'
 import * as firebase from 'firebase'
 import * as functions from 'firebase-functions'
@@ -10,8 +12,12 @@ firebase.initializeApp(functions.config().firebase)
 
 const database = firebase.database()
 
-const saveUserDetails = (senderId, data) => {
-    database.ref(`users/${senderId}`).set(data)
+const updateUserDetails = (senderId, data) => {
+    database.ref(`users/${senderId}`).update(data)
+}
+
+const updateSessionDetails = (senderId, data) => {
+    database.ref(`sessions/${senderId}`).update(data)
 }
 
 const getBranches = () => getItems('branches')
@@ -151,6 +157,12 @@ const getCartItem = (senderId, cartItemKey, includeAttributes) => {
     })
 }
 
+const hasCartItems = (senderId) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`sessions/${senderId}/cart`).once('value', snapshot => resolve(snapshot.exists()))
+    })
+}
+
 const getCartItems = (senderId, includeAttributes) => {
     return new Promise((resolve, reject) => {
         const senderRef = database.ref(`sessions/${senderId}`)
@@ -188,29 +200,189 @@ const removeCartItem = (senderId, productType) => {
     })
 }
 
+const removeCartItems = (senderId) => {
+    return database.ref(`sessions/${senderId}/cart`).remove()
+}
+
 const removeCartItemById = (senderId, cartItem) => {
     console.log(`Removing cart item by ID: ${cartItem}`)
     return database.ref(`sessions/${senderId}/cart/${cartItem}`).remove()
 }
 
-const changeQuantity = (senderId, cartItem) => {
-    console.log(`Changing quantity of product in cart item by ID: ${cartItem}`)
-    return database.ref(`sessions/${senderId}/cart/${cartItem}`)
+const getSessionDetails = (senderId) => {
+    return new Promise((resolve, reject) => {
+        const sessionRef = database.ref(`sessions/${senderId}`)
+
+        sessionRef.once('value', snapshot => {
+            resolve(snapshot.val())
+        })
+    })
+}
+
+const getUserDetails = (senderId) => {
+    return new Promise((resolve, reject) => {
+        const sessionRef = database.ref(`users/${senderId}`)
+
+        sessionRef.once('value', snapshot => {
+            resolve(snapshot.val())
+        })
+    })
+}
+
+const updateCartItem = (senderId, id, data) => {
+    database.ref(`sessions/${senderId}/cart/${id}`).update(data)
+}
+
+const addCartItem = (senderId, cartItem) => {
+    database.ref(`sessions/${senderId}/cart`).push(cartItem)
+}
+
+const getPromoCode = (promoCode, timestamp) => {
+    return new Promise((resolve, reject) => {
+        database.ref('promos').once('value').then(snapshot => {
+            const promos = toArray(snapshot.val())
+            const selectedPromo = promos.find(promo => {
+                if (promo.code === promoCode && promo.active) {
+                    const requestDate = moment(timestamp)
+                    const startDate = moment(promo.start_date, 'YYYY-MM-DD HH:mm')
+                    const endDate = moment(promo.end_date, 'YYYY-MM-DD HH:mm')
+                    return requestDate.isBetween(startDate, endDate)
+                }
+                return false
+            })
+            resolve(selectedPromo)
+        })
+    })
+}
+
+const addOrder = (senderId, order) => {
+    const orderRef = database.ref(`orders/${senderId}`).push(order)
+    return orderRef.key
+}
+
+const getUserOrders = (senderId) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`orders/${senderId}`).once('value', snapshot => {
+            if (snapshot && snapshot.val()) {
+                resolve(toArray(snapshot.val()))
+            } else {
+                resolve([])
+            }
+        })
+    })
+}
+
+const getUserOrderByKey = (senderId, orderKey) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`orders/${senderId}/${orderKey}`)
+            .once('value', snapshot => resolve(snapshot.val()))
+    })
+}
+
+const getUserOrderByDocumentNo = (senderId, documentNo) => {
+    return new Promise((resolve, reject) => {
+        database.ref(`orders/${senderId}`).once('value', snapshot => {
+            if (snapshot && snapshot.val()) {
+                const orders = toArray(snapshot.val())
+                const order = orders.find(order => String(order.document_no) === documentNo)
+                resolve(order)
+            }
+        })
+    })
+}
+
+const updateOrderDetails = (senderId, id, data) => {
+    database.ref(`orders/${senderId}/${id}`).update(data)
+}
+
+const updateOrderStatusHistory = (senderId, id, data) => {
+    database.ref(`orders/${senderId}/${id}/status_history`).push(data)
+}
+
+const getCompany = () => {
+    return new Promise((resolve, reject) => {
+        database.ref('company').once('value', snapshot => {
+            resolve(snapshot.val())
+        })
+    })
+}
+
+const recordRequest = (request, args) => {
+    try {
+        const { senderId, timestamp } = args
+
+        if (senderId) {
+            const message = {
+                content: JSON.stringify(request.body),
+                type: 'request'
+            }
+            if (timestamp) {
+                message.timestamp = timestamp
+            }
+            database.ref(`conversations/${senderId}`).push(message)
+        }
+    } catch (error) {
+        console.error('Error recording request', error)
+    }
+}
+
+const recordResponse = (senderId, timestamp, responseJson) => {
+    try {
+        if (senderId) {
+            const message = {
+                content: JSON.stringify(responseJson),
+                type: 'response'
+            }
+            if (timestamp) {
+                message.timestamp = timestamp
+            }
+            database.ref(`conversations/${senderId}`).push(message)
+        }
+    } catch (error) {
+        console.error('Error recording response', error)
+    }
 }
 
 export default {
-    database,
-    saveUserDetails,
     getBranches,
-    getCategories,
-    getProductTypes,
-    getProductTypeAttributes,
-    getAttribute,
+
     getCategory,
+    getCategories,
+
     getProductType,
+    getProductTypes,
+
+    getAttribute,
+    getProductTypeAttributes,
+
     getCartItem,
     getCartItems,
+    hasCartItems,
+
     removeCartItem,
+    removeCartItems,
     removeCartItemById,
-    changeQuantity
+
+    getSessionDetails,
+    updateSessionDetails,
+
+    getUserDetails,
+    updateUserDetails,
+
+    addCartItem,
+    updateCartItem,
+
+    addOrder,
+    getUserOrders,
+    getUserOrderByKey,
+    getUserOrderByDocumentNo,
+
+    updateOrderDetails,
+    updateOrderStatusHistory,
+
+    recordRequest,
+    recordResponse,
+
+    getPromoCode,
+    getCompany
 }

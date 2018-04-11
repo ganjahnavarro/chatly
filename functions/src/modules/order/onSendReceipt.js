@@ -1,16 +1,14 @@
 import { toArray } from '../../utils'
 import api from '../../api'
 
-const { database } = api
+const { getCompany, getUserOrderByKey, getUserOrderByDocumentNo } = api
 
 export default (args, sendResponse) => {
-    const getCompanyPromise = new Promise((resolve, reject) => {
-        database.ref('company').once('value', snapshot => {
-            resolve(snapshot.val())
-        })
-    })
-
-    Promise.all([getOrderPromise(args), getCompanyPromise]).then(results => {
+    const promises = [
+        getOrderPromise(args),
+        getCompany()
+    ]
+    Promise.all(promises).then(results => {
         const order = results[0]
         const company = results[1]
 
@@ -97,18 +95,10 @@ const getOrderPromise = (args) => {
     const documentNo = parameters['document-no']
 
     return new Promise((resolve, reject) => {
-        const orderRef = database.ref(`orders/${senderId}`)
-
         if (orderKey) {
-            orderRef.child(orderKey).once('value', snapshot => resolve(snapshot.val()))
+            return getUserOrderByKey(senderId, orderKey)
         } else if (documentNo) {
-            orderRef.once('value', snapshot => {
-                if (snapshot && snapshot.val()) {
-                    const orders = toArray(snapshot.val())
-                    const order = orders.find(order => String(order.document_no) === documentNo)
-                    resolve(order)
-                }
-            })
+            return getUserOrderByDocumentNo(senderId, documentNo)
         }
     })
 }

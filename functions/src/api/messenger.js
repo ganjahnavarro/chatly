@@ -4,7 +4,7 @@ import * as functions from 'firebase-functions'
 import axios from 'axios'
 
 import api from './'
-const { saveUserDetails } = api
+const { updateUserDetails } = api
 
 const endpoint = 'https://graph.facebook.com/'
 const version = 'v2.12'
@@ -16,7 +16,7 @@ export const getUserDetails = (senderId) => {
     const onSuccess = (response) => {
         const data = response.data
         delete data.id
-        saveUserDetails(senderId, data)
+        updateUserDetails(senderId, data)
     }
 
     const messengerConfig = functions.config().messenger

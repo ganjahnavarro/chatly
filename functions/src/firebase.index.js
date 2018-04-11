@@ -3,7 +3,7 @@
 import * as functions from 'firebase-functions'
 
 import { createEntity, getIntent, updateIntent } from './api/dialogflow'
-import { database } from './api/'
+import api from './api'
 
 import onWelcome from './modules/default/onWelcome'
 import onDefault from './modules/default/onDefault'
@@ -37,6 +37,8 @@ import onChangeQuantity from './modules/cart/onChangeQuantity'
 
 import onMultipleResponse from './modules/sample/onMultipleResponse'
 import onPay from './modules/sample/onPay'
+
+const { recordRequest, recordResponse } = api
 
 exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
@@ -78,7 +80,8 @@ function sendResponse ({ responseToUser, response, senderId, timestamp }) {
     const responseJson = isString ? { fulfillmentText: responseToUser } : responseToUser
 
     console.log('Response to Dialogflow: ' + JSON.stringify(responseJson))
-    recordResponse({ senderId, timestamp, responseJson })
+    recordResponse(senderId, timestamp, responseJson)
+
     response.json(responseJson)
 }
 
@@ -143,41 +146,4 @@ function processRequest (request, response) {
 
     recordRequest(request, args)
     handler(args, sendResponse)
-}
-
-const recordResponse = ({ senderId, timestamp, responseJson }) => {
-    try {
-        if (senderId) {
-            const message = {
-                content: JSON.stringify(responseJson),
-                type: 'response'
-            }
-            if (timestamp) {
-                message.timestamp = timestamp
-            }
-            database.ref(`conversations/${senderId}`).push(message)
-        }
-    } catch (error) {
-        console.error('Error recording response', error)
-    }
-}
-
-const recordRequest = (request, args) => {
-    try {
-        console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
-        const { senderId, timestamp } = args
-
-        if (senderId) {
-            const message = {
-                content: JSON.stringify(request.body),
-                type: 'request'
-            }
-            if (timestamp) {
-                message.timestamp = timestamp
-            }
-            database.ref(`conversations/${senderId}`).push(message)
-        }
-    } catch (error) {
-        console.error('Error recording request', error)
-    }
 }
