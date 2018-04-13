@@ -1,10 +1,15 @@
 import { recordRequest, recordResponse } from './modules/conversations'
 import { updateSessionDetails } from './modules/sessions'
 import { updateUserDetails } from './modules/users'
+import { getCategories, getCategory } from './modules/categories'
 
 export default {
-    recordRequest,
-    recordResponse,
+    getCategory,
+    getCategories,
+
     updateSessionDetails,
-    updateUserDetails
+    updateUserDetails,
+
+    recordRequest,
+    recordResponse
 }
