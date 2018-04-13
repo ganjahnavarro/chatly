@@ -1,3 +1,3 @@
-import api from './firebase/'
+import api from './mongodb/'
 
 export default api

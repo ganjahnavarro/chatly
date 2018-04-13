@@ -1,8 +1,5 @@
 'use strict'
 
-import * as functions from 'firebase-functions'
-
-import { createEntity, getIntent, updateIntent } from './api/dialogflow'
 import api from './api'
 
 import onWelcome from './modules/default/onWelcome'
@@ -40,40 +37,7 @@ import onPay from './modules/sample/onPay'
 
 const { recordRequest, recordResponse } = api
 
-exports.dialogflowFulfillment = functions.https.onRequest((request, response) => {
-    console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
-    console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
-
-    if (request.body.queryResult) {
-        processRequest(request, response)
-    } else {
-        console.log('Invalid Request')
-        return response.status(400).end('Invalid Webhook Request (expecting v2 webhook request)')
-    }
-})
-
-exports.addDialogflowEntityAndIntent = functions.database
-    .ref('/attributes/{pushId}')
-    .onCreate(event => {
-        const attribute = event.data.val()
-
-        attribute.code = `attr-${sanitize(attribute.name)}`
-        const getDiaglogflowIntent = getIntent()
-
-        getDiaglogflowIntent.then(oldIntent => {
-            const updateDialogflowEntity = createEntity(attribute)
-            const updateDialogflowIntent = updateIntent(oldIntent, attribute)
-            const updateDatabase = event.data.ref.set(attribute)
-
-            return Promise.all([updateDatabase, updateDialogflowEntity, updateDialogflowIntent])
-                .then((responses) => console.log('Success!', JSON.stringify(responses)))
-                .catch(err => console.log('Error', JSON.stringify(err)))
-        })
-    })
-
-function sanitize (name) {
-    return name.replace(/\s+/g, '-').toLowerCase()
-}
+const Controller = {}
 
 function sendResponse ({ responseToUser, response, senderId, timestamp }) {
     const isString = typeof responseToUser === 'string'
@@ -147,3 +111,17 @@ function processRequest (request, response) {
     recordRequest(request, args)
     handler(args, sendResponse)
 }
+
+Controller.handle = (request, response) => {
+    console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers))
+    console.log('Dialogflow Request body: ' + JSON.stringify(request.body))
+
+    if (request.body.queryResult) {
+        processRequest(request, response)
+    } else {
+        console.log('Invalid Request')
+        return response.status(400).end('Invalid Webhook Request (expecting v2 webhook request)')
+    }
+}
+
+export default Controller
