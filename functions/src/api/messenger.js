@@ -1,6 +1,5 @@
 'use strict'
 
-import * as functions from 'firebase-functions'
 import axios from 'axios'
 
 import api from './'
@@ -19,10 +18,8 @@ export const getUserDetails = (senderId) => {
         updateUserDetails(senderId, data)
     }
 
-    const messengerConfig = functions.config().messenger
-
-    if (messengerConfig) {
-        const pageAccessToken = messengerConfig.page.access.token
+    const pageAccessToken = process.env.MESSENGER_PAGE_ACCESS_TOKEN
+    if (pageAccessToken) {
         axios.get(`${endpoint}${version}/${senderId}`, {
             params: {
                 fields: fields.join(','),

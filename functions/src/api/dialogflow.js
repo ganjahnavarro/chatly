@@ -1,6 +1,5 @@
 'use strict'
 
-import * as functions from 'firebase-functions'
 import axios from 'axios'
 
 import { toArray } from '../utils'
@@ -9,10 +8,8 @@ const endpoint = 'https://api.dialogflow.com/v1/'
 const version = '20170712'
 
 export const createEntity = attribute => {
-    const dialogflowConfig = functions.config().dialogflow
-
-    if (dialogflowConfig) {
-        const developerAccessToken = dialogflowConfig.developer.access.token
+    const developerAccessToken = process.env.DIALOGFLOW_DEV_ACCESS_TOKEN
+    if (developerAccessToken) {
         const data = {
             name: attribute.code,
             entries: toArray(attribute.values).map(item => {
@@ -40,16 +37,15 @@ export const createEntity = attribute => {
         return axios(config)
     } else {
         throw new Error(
-            'No messenger config: dialogflow.developer.access.token'
+            'No config available: dialogflow.developer.access.token'
         )
     }
 }
 
 export const createIntent = attribute => {
-    const dialogflowConfig = functions.config().dialogflow
-    if (dialogflowConfig) {
+    const developerAccessToken = process.env.DIALOGFLOW_DEV_ACCESS_TOKEN
+    if (developerAccessToken) {
         console.log('ATTRIBUTE', toArray(attribute.values))
-        const developerAccessToken = dialogflowConfig.developer.access.token
         const data = {
             contexts: [],
             events: [],
@@ -169,9 +165,8 @@ export const createIntent = attribute => {
 }
 
 export const getIntent = (id = 'bebbd90a-6893-4c24-8eaa-1c5b81ec4f0c') => {
-    const dialogflowConfig = functions.config().dialogflow
-    if (dialogflowConfig) {
-        const developerAccessToken = dialogflowConfig.developer.access.token
+    const developerAccessToken = process.env.DIALOGFLOW_DEV_ACCESS_TOKEN
+    if (developerAccessToken) {
         const url = `${endpoint}intents/${id}`
         const method = 'get'
         const params = { v: version }
@@ -194,8 +189,8 @@ export const getIntent = (id = 'bebbd90a-6893-4c24-8eaa-1c5b81ec4f0c') => {
 }
 
 export const updateIntent = (oldIntent, attribute) => {
-    const dialogflowConfig = functions.config().dialogflow
-    if (dialogflowConfig) {
+    const developerAccessToken = process.env.DIALOGFLOW_DEV_ACCESS_TOKEN
+    if (developerAccessToken) {
         let newIntent = oldIntent
         let parameters = newIntent.responses[0].parameters
         let userSays = newIntent.userSays
@@ -227,7 +222,6 @@ export const updateIntent = (oldIntent, attribute) => {
         userSays[0].data.push(data)
         newIntent.userSays = userSays
 
-        const developerAccessToken = dialogflowConfig.developer.access.token
         const url = `${endpoint}intents/${newIntent.id}`
         const method = 'put'
         const params = { v: version }

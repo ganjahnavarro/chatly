@@ -1,4 +1,3 @@
-import * as functions from 'firebase-functions'
 import axios from 'axios'
 
 const endpoint = 'https://maps.googleapis.com/maps/api/geocode/json'
@@ -9,15 +8,14 @@ const language = 'en'
 export const getAddress = (lat, long) => {
     console.log(`Getting address. Lat, long: ${lat}, ${long}`)
 
-    const mapsConfig = functions.config().maps
-
-    if (mapsConfig) {
+    const mapsApiKey = process.env.MAPS_API_KEY
+    if (mapsApiKey) {
         return new Promise((resolve, reject) => {
             const params = {
                 latlng: `${lat},${long}`,
                 location_type: locationType,
                 result_type: resultType,
-                key: mapsConfig.api.key,
+                key: mapsApiKey,
                 language
             }
 
