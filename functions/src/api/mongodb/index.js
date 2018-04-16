@@ -6,6 +6,8 @@ import { getCategories, getCategory } from './modules/categories'
 import { getProductTypes, getProductType } from './modules/productTypes'
 import { getProductTypeAttributes, getAttribute } from './modules/attributes'
 import { getCartItems, getCartItem, addCartItem, hasCartItems } from './modules/cart'
+import { getPromoCode } from './modules/promos'
+import { getCompany } from './modules/company'
 
 export default {
     getBranches,
@@ -32,5 +34,8 @@ export default {
     addCartItem,
 
     recordRequest,
-    recordResponse
+    recordResponse,
+
+    getPromoCode,
+    getCompany
 }
