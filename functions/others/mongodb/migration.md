@@ -43,13 +43,16 @@ RUN CODE:
                         return new Promise((resolve, reject) => {
                             database.collection('attributes')
                                 .findOne({ 'values.old_id': attributeValue.attribute_value_id })
-                                .then(foundAttributeValue => resolve(foundAttributeValue))
+                                .then(foundAttribute => {
+                                    resolve(foundAttribute.values.find(value => value.old_id === attributeValue.attribute_value_id))
+                                })
                         })
                     }
 
-                    const createProductPromise = (name, product) => {
+                    const createProductPromise = (product) => {
                         return new Promise((resolve, reject) => {
                             const promises = Object.values(product.attribute_values).map(item => createAttributeValuePromise(item))
+
                             Promise.all(promises).then(avs => {
                                 resolve({
                                     ...product,

@@ -115,14 +115,12 @@ const getSelectedProduct = (selectedProductType, selectedAttributeValues) => {
         const products = toArray(selectedProductType.products)
         console.log('Products', JSON.stringify(products))
 
-        const selectedAttributeValueIds = selectedAttributeValues.map(value => value.id).sort()
+        const selectedAttributeValueIds = selectedAttributeValues.map(value => value._id).sort()
         console.log('Selected attribute value IDs:', selectedAttributeValueIds)
 
         selectedProduct = products.find(product => {
-            const productAttributeValues = _.values(product.attribute_values)
-                .map(item => item.attribute_value_id)
-            console.log('Product Attribute value IDs:', productAttributeValues)
-            return _.isEqual(productAttributeValues.sort(), selectedAttributeValueIds)
+            console.log('Product Attribute value IDs:', product.attribute_values)
+            return _.isEqual(product.attribute_values.sort(), selectedAttributeValueIds)
         })
     }
 
@@ -134,12 +132,12 @@ const addToCart = (args, selectedProduct, selectedProductType, quantity) => {
     const { senderId } = args
 
     const cartItem = {
-        product_type_id: selectedProductType.id,
+        product_type_id: selectedProductType._id,
         quantity
     }
 
     if (selectedProduct) {
-        cartItem.product_id = selectedProduct.id
+        cartItem.product_id = selectedProduct._id
     }
 
     addCartItem(senderId, cartItem)

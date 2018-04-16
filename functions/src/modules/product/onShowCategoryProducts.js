@@ -12,11 +12,8 @@ export default (args, sendResponse) => {
         console.log('Selected Category: ', JSON.stringify(selectedCategory))
 
         if (selectedCategory) {
-            getProductTypes().then(productTypes => {
-                const categoryProducts = productTypes
-                    .filter(productType => productType.category_id === selectedCategory.id)
-
-                const elements = categoryProducts.map(item => {
+            getProductTypes(selectedCategory._id).then(productTypes => {
+                const elements = productTypes.map(item => {
                     return {
                         title: item.name,
                         image_url: item.image_url,
