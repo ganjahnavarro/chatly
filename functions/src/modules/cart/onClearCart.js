@@ -6,7 +6,7 @@ export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
-        removeCartItems().then(() => {
+        removeCartItems(senderId).then(() => {
             const payload = {
                 facebook: {
                     text: 'Cart cleared. Please add an order to continue.',

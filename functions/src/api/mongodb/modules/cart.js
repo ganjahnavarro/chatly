@@ -32,6 +32,11 @@ export const hasCartItems = senderId => {
 }
 
 /*
+
+const updateCartItem = (senderId, id, data) => {
+    database.ref(`sessions/${senderId}/cart/${id}`).update(data)
+}
+
 export const getCartItems = (senderId, includeAttributes) => {
     return new Promise((resolve, reject) => {
         Client.getCollection('sessions').aggregate([
@@ -72,4 +77,52 @@ export const getCartItem = (senderId, cartItemId, includeAttributes) => {
         })
     })
 }
+
+export const removeCartItem = (senderId, productType) => {
+    const cartRef = database.ref(`sessions/${senderId}/cart`)
+
+    return new Promise((resolve, reject) => {
+        getCartItems(senderId).then(items => {
+            items.forEach(item => {
+                console.log(item.productType.name, productType,
+                    `matched: ${item.productType.name.toLowerCase() === productType.toLowerCase()}`, item.id)
+
+                if (item.productType.name.toLowerCase() === productType.toLowerCase()) {
+                    console.log(`Removing cart item by product type: ${item.id}`)
+                    cartRef.child(item.id).remove()
+                }
+            })
+        })
+        resolve()
+    })
+}
+
 */
+
+export const removeCartItemById = (senderId, cartItemId) => {
+    console.log(`Removing cart item by ID: ${cartItemId}`)
+
+    return new Promise((resolve, reject) => {
+        Client.getCollection('sessions').update(
+            { senderId },
+            {
+                $pull: {
+                    cart: { _id: ObjectId(cartItemId) }
+                }
+            }
+        )
+        resolve()
+    })
+}
+
+export const removeCartItems = senderId => {
+    return new Promise((resolve, reject) => {
+        Client.getCollection('sessions').update(
+            { senderId },
+            {
+                $unset: { cart: 1 }
+            }
+        )
+        resolve()
+    })
+}
