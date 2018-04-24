@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb'
+import { MongoClient, ObjectId } from 'mongodb'
 
 const uri = 'mongodb://localhost:27017/chatly'
 
@@ -37,15 +37,19 @@ MongoClient.connect(uri, (err, rootDatabase) => {
                     return new Promise((resolve, reject) => {
                         database.collection('attributes')
                             .findOne({ 'values.old_id': attributeValue.attribute_value_id })
-                            .then(foundAttributeValue => resolve(foundAttributeValue))
+                            .then(foundAttribute => {
+                                resolve(foundAttribute.values.find(value => value.old_id === attributeValue.attribute_value_id))
+                            })
                     })
                 }
 
-                const createProductPromise = (name, product) => {
+                const createProductPromise = (product) => {
                     return new Promise((resolve, reject) => {
                         const promises = Object.values(product.attribute_values).map(item => createAttributeValuePromise(item))
+
                         Promise.all(promises).then(avs => {
                             resolve({
+                                _id: ObjectId(),
                                 ...product,
                                 attribute_values: avs.map(attrValue => attrValue._id)
                             })
@@ -78,11 +82,22 @@ MongoClient.connect(uri, (err, rootDatabase) => {
                     const attributes = productTypeData[1]
                     const products = productTypeData[2]
 
-                    rest.category_id = category._id
-                    rest.attributes = attributes.map(attr => attr._id)
-                    rest.products = products
-                    mongoCollection.insert(rest)
+                    const attributeIds = attributes.map(attr => attr._id)
 
+                    rest.category_id = category._id
+
+                    rest.attributes = attributeIds
+                    rest.products = products
+
+                    if (!rest.attributes || !rest.attributes.length) {
+                        delete rest.attributes
+                    }
+
+                    if (!rest.products || !rest.products.length) {
+                        delete rest.products
+                    }
+
+                    mongoCollection.insert(rest)
                     console.log('Done..')
                 })
             }

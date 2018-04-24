@@ -6,7 +6,7 @@ const getResponse = (items) => {
     let responseToUser = {}
     if (items.length > 0) {
         const elements = items.map(item => {
-            const { id, quantity, product, productType } = item
+            const { id, quantity, product, product_type: productType } = item
 
             const productTypeDescription = productType.description || ''
             const productDescription = product && product.description ? ` (${product.description})` : ''

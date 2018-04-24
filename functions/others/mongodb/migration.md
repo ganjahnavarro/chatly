@@ -4,7 +4,7 @@ RESTORE .JSON TO A COLLECTION:
 
 RUN CODE:
 
-    import { MongoClient } from 'mongodb'
+    import { MongoClient, ObjectId } from 'mongodb'
 
     const uri = 'mongodb://localhost:27017/chatly'
 
@@ -55,6 +55,7 @@ RUN CODE:
 
                             Promise.all(promises).then(avs => {
                                 resolve({
+                                    _id: ObjectId(),
                                     ...product,
                                     attribute_values: avs.map(attrValue => attrValue._id)
                                 })
@@ -87,11 +88,22 @@ RUN CODE:
                         const attributes = productTypeData[1]
                         const products = productTypeData[2]
 
-                        rest.category_id = category._id
-                        rest.attributes = attributes.map(attr => attr._id)
-                        rest.products = products
-                        mongoCollection.insert(rest)
+                        const attributeIds = attributes.map(attr => attr._id)
 
+                        rest.category_id = category._id
+
+                        rest.attributes = attributeIds
+                        rest.products = products
+
+                        if (!rest.attributes || !rest.attributes.length) {
+                            delete rest.attributes
+                        }
+
+                        if (!rest.products || !rest.products.length) {
+                            delete rest.products
+                        }
+
+                        mongoCollection.insert(rest)
                         console.log('Done..')
                     })
                 }
