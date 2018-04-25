@@ -46,28 +46,23 @@ export const updateCartItemQuantity = (senderId, cartItemId, quantity) => {
     )
 }
 
-/*
-
-export const removeCartItem = (senderId, productType) => {
-    const cartRef = database.ref(`sessions/${senderId}/cart`)
-
+export const removeCartItem = (senderId, productTypeName) => {
     return new Promise((resolve, reject) => {
-        getCartItems(senderId).then(items => {
-            items.forEach(item => {
-                console.log(item.productType.name, productType,
-                    `matched: ${item.productType.name.toLowerCase() === productType.toLowerCase()}`, item.id)
-
-                if (item.productType.name.toLowerCase() === productType.toLowerCase()) {
-                    console.log(`Removing cart item by product type: ${item.id}`)
-                    cartRef.child(item.id).remove()
+        Client
+            .getCollection('product_types')
+            .findOne({ name: productTypeName }, (err, data) => {
+                if (err) {
+                    throw err
                 }
+
+                Client.getCollection('sessions').update(
+                    { senderId },
+                    { $pull: { 'cart': { product_type_id: data._id } } }
+                )
+                resolve()
             })
-        })
-        resolve()
     })
 }
-
-*/
 
 const getCartItemsPromise = senderId => new Promise((resolve, reject) => {
     Client.getCollection('sessions').aggregate([

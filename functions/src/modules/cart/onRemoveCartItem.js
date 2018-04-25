@@ -8,7 +8,8 @@ export default (args, sendResponse) => {
     const productType = parameters['product-type']
 
     if (senderId && productType) {
-        removeCartItem(senderId, productType).then(() => onShowCart(args, sendResponse))
+        const onRemoveSuccess = () => onShowCart(args, sendResponse)
+        removeCartItem(senderId, productType).then(onRemoveSuccess)
     } else {
         console.error('Invalid state: ' + JSON.stringify(args))
     }
