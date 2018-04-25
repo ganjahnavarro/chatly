@@ -11,7 +11,7 @@ import { getCompany } from './modules/company'
 import { getCartItems, addCartItem, updateCartItemQuantity, hasCartItems,
     removeCartItems, removeCartItem, removeCartItemById } from './modules/cart'
 
-import { getUserOrders, getUserOrderById, getUserOrderByDocumentNo,
+import { getUserOrders, getUserOrderByDocumentNo,
     addOrder, updateOrderDetails, updateOrderStatusHistory } from './modules/order'
 
 export default {
@@ -44,7 +44,6 @@ export default {
 
     addOrder,
     getUserOrders,
-    getUserOrderById,
     getUserOrderByDocumentNo,
 
     updateOrderDetails,

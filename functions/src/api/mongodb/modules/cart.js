@@ -139,29 +139,46 @@ export const getCartItems = (senderId, includeAttributes) => {
                     }
 
                     const detailedItems = items.map(item => {
-                        const { product_type: productType, ...itemDetails } = item
+                        const { product_type: productType, product, product_id: pId, ...itemDetails } = item
                         const { attributes, products, ...productTypeDetails } = productType
+
+                        const mappedAttributes = attributes && attributes.length
+                            ? attributes.map(mapAttribute) : []
+
+                        const mappedProducts = products && products.length
+                            ? products.map(mapProduct) : []
+
                         return {
                             ...itemDetails,
                             product_type: {
                                 ...productTypeDetails,
-                                attributes: attributes.map(mapAttribute),
-                                products: products.map(mapProduct)
+                                attributes: mappedAttributes,
+                                products: mappedProducts
                             }
                         }
                     })
-                    resolve(detailedItems)
+                    resolve(mapProducts(detailedItems))
                 })
             } else {
-                resolve(items)
+                resolve(mapProducts(items))
             }
         })
     })
 }
 
-export const removeCartItemById = (senderId, cartItemId) => {
-    console.log(`Removing cart item by ID: ${cartItemId}`)
+const mapProducts = items => {
+    return items.map(item => {
+        const { product_type: productType, product_id: productId } = item
+        if (productType.products && productId) {
+            const product = productType.products.find(product => product._id.equals(productId))
+            return { ...item, product }
+        } else {
+            return item
+        }
+    })
+}
 
+export const removeCartItemById = (senderId, cartItemId) => {
     return new Promise((resolve, reject) => {
         Client.getCollection('sessions').update(
             { senderId },

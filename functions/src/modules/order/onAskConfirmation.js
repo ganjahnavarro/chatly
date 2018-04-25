@@ -10,14 +10,10 @@ export default (args, sendResponse) => {
                 getSessionDetails(senderId),
                 getUserDetails(senderId)
             ]
-            Promise.all(promises).then(snapshots => {
-                const session = snapshots[0].val()
-                const user = snapshots[1].val()
+            Promise.all(promises).then(results => {
+                const session = results[0]
+                const user = results[1]
                 const isDelivery = user.delivery_type === 'delivery'
-
-                console.log('Session: ', JSON.stringify(session))
-                console.log('User: ', JSON.stringify(user))
-                console.log('Items: ', JSON.stringify(items))
 
                 const promo = session.promo
 
@@ -27,7 +23,7 @@ export default (args, sendResponse) => {
                   'Cart: \n'
 
                 items.forEach(item => {
-                    const { quantity, product, productType } = item
+                    const { quantity, product, product_type: productType } = item
 
                     const price = product ? product.price : productType.price
                     const amount = quantity * price

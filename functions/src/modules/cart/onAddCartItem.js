@@ -19,16 +19,12 @@ export default (args, sendResponse) => {
                 console.log('Product Type:', JSON.stringify(selectedProductType))
 
                 getProductTypeAttributes(selectedProductType).then(attributes => {
-                    console.log('Attributes', JSON.stringify(attributes))
-
                     const selectedAttributeValues = []
                     const missingAttributes = []
 
                     if (attributes && attributes.length) {
                         attributes.forEach(attribute => {
                             if (!parameters[attribute.code]) {
-                                console.log('selectedAttributeValues', selectedAttributeValues, attribute)
-
                                 let hasSelectedAttrib = false
                                 attribute.values = attribute.values && attribute.values.length ? attribute.values : []
 
@@ -49,14 +45,9 @@ export default (args, sendResponse) => {
                             } else {
                                 const paramValue = parameters[attribute.code].toLowerCase()
                                 const selectedAttributeValue = attribute.values.find(value => value.name.toLowerCase() === paramValue)
-
-                                console.log('selectedAttributeValue', JSON.stringify(selectedAttributeValue))
                                 selectedAttributeValues.push(selectedAttributeValue)
                             }
                         })
-
-                        console.log('Missing Attributes', JSON.stringify(missingAttributes))
-                        console.log('Selected Attributes Values', JSON.stringify(selectedAttributeValues))
 
                         if (missingAttributes.length) {
                             askForMissingAttribute(missingAttributes, parameters, args, sendResponse)
@@ -95,7 +86,6 @@ const getParameters = (sessionData, args) => {
         parameters[askedAttribute] = parameters['selected-option']
         delete parameters['selected-option']
     }
-    console.log('Parameters: ', JSON.stringify(parameters))
     return parameters
 }
 
@@ -112,18 +102,13 @@ const getSelectedProduct = (selectedProductType, selectedAttributeValues) => {
     let selectedProduct
 
     if (selectedProductType.products) {
-        const products = toArray(selectedProductType.products)
-        console.log('Products', JSON.stringify(products))
-
+        const products = selectedProductType.products
         const selectedAttributeValueIds = selectedAttributeValues.map(value => value._id).sort()
-        console.log('Selected attribute value IDs:', selectedAttributeValueIds)
 
         selectedProduct = products.find(product => {
-            console.log('Product Attribute value IDs:', product.attribute_values)
             return _.isEqual(product.attribute_values.sort(), selectedAttributeValueIds)
         })
     }
-
     console.log('Selected Product:', JSON.stringify(selectedProduct))
     return selectedProduct
 }
@@ -148,7 +133,7 @@ const askForMissingAttribute = (missingAttributes, parameters, args, sendRespons
     const { session, senderId } = args
 
     const missingAttribute = missingAttributes[0]
-    const values = toArray(missingAttribute.values)
+    const values = missingAttribute.values
 
     const quickReplies = values.map(value => {
         return {

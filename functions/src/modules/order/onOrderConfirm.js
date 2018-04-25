@@ -2,7 +2,7 @@ import onSendReceipt from './onSendReceipt'
 import api from '../../api'
 
 const { getCartItems, updateSessionDetails, addOrder,
-    updateOrderStatusHistory, getUserDetails, getSessionDetails } = api
+    getUserDetails, getSessionDetails } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
@@ -14,8 +14,9 @@ export default (args, sendResponse) => {
         ]
 
         Promise.all(promises).then(results => {
-            const orderKey = createOrder(args, results)
-            args.orderKey = orderKey
+            const order = createOrder(args, results)
+            addOrder(order)
+            args.order = order
 
             onSendReceipt(args, sendResponse)
             updateSessionDetails(senderId, null)
@@ -31,49 +32,41 @@ const createOrder = (args, results) => {
     const session = results[2]
     const promo = session.promo
 
-    const { items, totalAmount } = processCartItems(results[0], promo)
+    const items = results[0]
+    const totalAmount = getTotalAmount(items, promo)
 
     const defaultStatus = 'PENDING'
     const millis = new Date().getTime()
     const order = {
         document_no: millis,
         total_amount: totalAmount,
+        status: defaultStatus,
         timestamp,
 
-        status: defaultStatus,
-        sender_id: senderId,
-
+        senderId,
         items,
         promo,
-        user
+        user,
+
+        status_history: [
+            { status: defaultStatus, timestamp }
+        ]
     }
-
-    const orderKey = addOrder(senderId, order)
-
-    const statusHistory = { status: defaultStatus, timestamp }
-    updateOrderStatusHistory(senderId, orderKey, statusHistory)
-
-    return orderKey
+    return order
 }
 
-const processCartItems = (cartItems, promo) => {
+const getTotalAmount = (cartItems, promo) => {
     let totalAmount = 0
-    const items = {}
 
     cartItems.forEach(item => {
-        const { quantity, product, productType } = item
-
+        const { quantity, product, product_type: productType } = item
         const price = product ? product.price : productType.price
         const amount = quantity * price
         totalAmount += amount
-
-        const { id, ...rest } = item
-        items[id] = rest
     })
 
     if (promo) {
         totalAmount -= promo.discount_amount
     }
-
-    return { items, totalAmount }
+    return totalAmount
 }

@@ -76,15 +76,15 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
 }
 
 const handleSingleOrder = (args, sendResponse, userOrder) => {
-    const { timestamp, senderId } = args
+    const { timestamp } = args
 
     const endStatuses = ['PROCESSED', 'CANCELLED']
     if (userOrder.status === 'PENDING') {
         const cancelledStatus = 'CANCELLED'
         const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
 
-        updateOrderDetails(senderId, userOrder._id, { status: cancelledStatus })
-        updateOrderStatusHistory(senderId, userOrder._id, {
+        updateOrderDetails(userOrder._id, { status: cancelledStatus })
+        updateOrderStatusHistory(userOrder._id, {
             status: cancelledStatus,
             date: formattedTimestamp
         })

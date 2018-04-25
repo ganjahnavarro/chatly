@@ -1,6 +1,6 @@
 import api from '../../api'
 
-const { getCompany, getUserOrderByKey, getUserOrderByDocumentNo } = api
+const { getCompany, getUserOrderByDocumentNo } = api
 
 export default (args, sendResponse) => {
     const promises = [
@@ -17,7 +17,7 @@ export default (args, sendResponse) => {
         let discountAmount = 0
 
         const elements = items.map(item => {
-            const { quantity, product, productType } = item
+            const { quantity, product, product_type: productType } = item
 
             const price = product ? product.price : productType.price
             const amount = quantity * price
@@ -90,14 +90,9 @@ const getAddress = (user) => {
 }
 
 const getOrderPromise = (args) => {
-    const { orderKey, senderId, parameters } = args
-    const documentNo = parameters['document-no']
-
-    return new Promise((resolve, reject) => {
-        if (orderKey) {
-            return getUserOrderByKey(senderId, orderKey)
-        } else if (documentNo) {
-            return getUserOrderByDocumentNo(senderId, documentNo)
-        }
-    })
+    const { order, senderId, parameters } = args
+    const documentNo = order ? order.document_no : parameters['document-no']
+    if (documentNo) {
+        return getUserOrderByDocumentNo(senderId, documentNo)
+    }
 }

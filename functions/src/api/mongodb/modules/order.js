@@ -1,45 +1,58 @@
-/*
-const addOrder = (senderId, order) => {
-    const orderRef = database.ref(`orders/${senderId}`).push(order)
-    return orderRef.key
+import { ObjectId } from 'mongodb'
+import Client from '../database'
+
+const getCollection = () => Client.getCollection('orders')
+
+export const addOrder = (order) => {
+    const newOrder = order
+    newOrder.status_history = newOrder.status_history.map(item => {
+        return { _id: ObjectId(), ...item }
+    })
+    getCollection().insert(newOrder)
 }
 
-const getUserOrders = (senderId) => {
+export const getUserOrders = (senderId) => {
     return new Promise((resolve, reject) => {
-        database.ref(`orders/${senderId}`).once('value', snapshot => {
-            if (snapshot && snapshot.val()) {
-                resolve(toArray(snapshot.val()))
-            } else {
-                resolve([])
+        getCollection().find({ senderId }).toArray((err, data) => {
+            if (err) {
+                throw err
             }
+            resolve(data)
         })
     })
 }
 
-const getUserOrderById = (senderId, orderId) => {
+export const getUserOrderByDocumentNo = (senderId, documentNo) => {
     return new Promise((resolve, reject) => {
-        database.ref(`orders/${senderId}/${orderKey}`)
-            .once('value', snapshot => resolve(snapshot.val()))
-    })
-}
-
-const getUserOrderByDocumentNo = (senderId, documentNo) => {
-    return new Promise((resolve, reject) => {
-        database.ref(`orders/${senderId}`).once('value', snapshot => {
-            if (snapshot && snapshot.val()) {
-                const orders = toArray(snapshot.val())
-                const order = orders.find(order => String(order.document_no) === documentNo)
-                resolve(order)
+        const criteria = { senderId, document_no: documentNo }
+        getCollection().findOne(criteria, (err, data) => {
+            if (err) {
+                throw err
             }
+            resolve(data)
         })
     })
 }
 
-const updateOrderDetails = (senderId, id, data) => {
-    database.ref(`orders/${senderId}/${id}`).update(data)
+export const updateOrderDetails = (id, data) => {
+    getCollection().update(
+        ObjectId(id),
+        { $set: data },
+        { upsert: true }
+    )
 }
 
-const updateOrderStatusHistory = (senderId, id, data) => {
-    database.ref(`orders/${senderId}/${id}/status_history`).push(data)
+export const updateOrderStatusHistory = (id, data) => {
+    const newStatusHistory = {
+        _id: ObjectId(),
+        ...data
+    }
+
+    getCollection().update(
+        ObjectId(id),
+        {
+            $push: { status_history: newStatusHistory }
+        },
+        { upsert: true }
+    )
 }
-*/
