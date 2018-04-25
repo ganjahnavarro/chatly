@@ -83,8 +83,8 @@ const handleSingleOrder = (args, sendResponse, userOrder) => {
         const cancelledStatus = 'CANCELLED'
         const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
 
-        updateOrderDetails(senderId, userOrder.id, { status: cancelledStatus })
-        updateOrderStatusHistory(senderId, userOrder.id, {
+        updateOrderDetails(senderId, userOrder._id, { status: cancelledStatus })
+        updateOrderStatusHistory(senderId, userOrder._id, {
             status: cancelledStatus,
             date: formattedTimestamp
         })

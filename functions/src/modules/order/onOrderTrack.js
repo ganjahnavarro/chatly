@@ -1,5 +1,4 @@
 import moment from 'moment'
-import { toArray } from '../../utils'
 import api from '../../api'
 
 const { getUserOrders } = api
@@ -95,7 +94,7 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
 const handleSingleOrder = (args, sendResponse, userOrder) => {
     let message = `Order # ${userOrder.document_no} status history: \n`
 
-    const statusHistories = toArray(userOrder.status_history)
+    const statusHistories = userOrder.status_history || []
     statusHistories.forEach(statusHistory => {
         const formattedTimestamp = moment(statusHistory.timestamp).format('YYYY-MM-DD HH:mm')
         message += '\n' + `Status changed to: ${statusHistory.status} at ${formattedTimestamp}`

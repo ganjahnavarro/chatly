@@ -6,7 +6,7 @@ const getResponse = (items) => {
     let responseToUser = {}
     if (items.length > 0) {
         const elements = items.map(item => {
-            const { id, quantity, product, product_type: productType } = item
+            const { _id, quantity, product, product_type: productType } = item
 
             const productTypeDescription = productType.description || ''
             const productDescription = product && product.description ? ` (${product.description})` : ''
@@ -19,12 +19,12 @@ const getResponse = (items) => {
                 buttons: [
                     {
                         type: 'postback',
-                        payload: `Change Quantity of Cart Item ${id} ${productType.name}`,
+                        payload: `Change Quantity of Cart Item ${_id} ${productType.name}`,
                         title: 'Change Quantity'
                     },
                     {
                         type: 'postback',
-                        payload: `Remove Cart Item: ${id}`,
+                        payload: `Remove Cart Item: ${_id}`,
                         title: 'Remove'
                     }
                 ]

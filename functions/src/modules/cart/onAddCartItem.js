@@ -1,5 +1,4 @@
 import _ from 'lodash'
-import { toArray } from '../../utils'
 import api from '../../api'
 
 const { getProductTypes, getProductTypeAttributes, getSessionDetails,
@@ -31,10 +30,11 @@ export default (args, sendResponse) => {
                                 console.log('selectedAttributeValues', selectedAttributeValues, attribute)
 
                                 let hasSelectedAttrib = false
+                                attribute.values = attribute.values && attribute.values.length ? attribute.values : []
 
                                 const parametersAttribs = _.omit(parameters, ['product-type', 'quantity'])
                                 _.forOwn(parametersAttribs, (value, key) => {
-                                    toArray(attribute.values).forEach(attribValue => {
+                                    attribute.values.forEach(attribValue => {
                                         if (value.toLowerCase() === attribValue.name.toLowerCase()) {
                                             hasSelectedAttrib = true
                                             selectedAttributeValues.push(attribValue)
@@ -48,7 +48,7 @@ export default (args, sendResponse) => {
                                 }
                             } else {
                                 const paramValue = parameters[attribute.code].toLowerCase()
-                                const selectedAttributeValue = toArray(attribute.values).find(value => value.name.toLowerCase() === paramValue)
+                                const selectedAttributeValue = attribute.values.find(value => value.name.toLowerCase() === paramValue)
 
                                 console.log('selectedAttributeValue', JSON.stringify(selectedAttributeValue))
                                 selectedAttributeValues.push(selectedAttributeValue)

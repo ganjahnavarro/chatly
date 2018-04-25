@@ -8,7 +8,7 @@ import { getProductTypeAttributes, getAttribute } from './modules/attributes'
 import { getPromoCode } from './modules/promos'
 import { getCompany } from './modules/company'
 
-import { getCartItems, addCartItem, updateCartItem, hasCartItems,
+import { getCartItems, addCartItem, updateCartItemQuantity, hasCartItems,
     removeCartItems, removeCartItem, removeCartItemById } from './modules/cart'
 
 import { getUserOrders, getUserOrderById, getUserOrderByDocumentNo,
@@ -40,7 +40,7 @@ export default {
     updateUserDetails,
 
     addCartItem,
-    updateCartItem,
+    updateCartItemQuantity,
 
     addOrder,
     getUserOrders,

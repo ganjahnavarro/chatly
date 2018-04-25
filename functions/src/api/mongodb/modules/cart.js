@@ -31,11 +31,22 @@ export const hasCartItems = senderId => {
     })
 }
 
-/*
-
-const updateCartItem = (senderId, id, data) => {
-    database.ref(`sessions/${senderId}/cart/${id}`).update(data)
+export const updateCartItemQuantity = (senderId, cartItemId, quantity) => {
+    Client.getCollection('sessions').update(
+        {
+            senderId,
+            'cart._id': ObjectId(cartItemId)
+        },
+        {
+            $set: {
+                'cart.$.quantity': quantity
+            }
+        },
+        { upsert: true }
+    )
 }
+
+/*
 
 export const removeCartItem = (senderId, productType) => {
     const cartRef = database.ref(`sessions/${senderId}/cart`)

@@ -1,4 +1,3 @@
-import { toArray } from '../../utils'
 import api from '../../api'
 
 const { getCompany, getUserOrderByKey, getUserOrderByDocumentNo } = api
@@ -17,7 +16,7 @@ export default (args, sendResponse) => {
         let totalAmount = 0
         let discountAmount = 0
 
-        const elements = toArray(items).map(item => {
+        const elements = items.map(item => {
             const { quantity, product, productType } = item
 
             const price = product ? product.price : productType.price

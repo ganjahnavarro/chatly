@@ -1,6 +1,6 @@
 import api from '../../api'
 
-const { updateCartItem } = api
+const { updateCartItemQuantity } = api
 
 export default (args, sendResponse) => {
     const { session, senderId, parameters, contexts } = args
@@ -28,7 +28,7 @@ export default (args, sendResponse) => {
         const cartItem = filterContext[0].parameters['cart-item']
         const name = filterContext[0].parameters['name']
 
-        updateCartItem(senderId, cartItem, { quantity })
+        updateCartItemQuantity(senderId, cartItem, quantity)
         sendResponse({ responseToUser: `${name} quantity updated.`, ...args })
     }
 }
