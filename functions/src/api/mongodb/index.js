@@ -1,4 +1,4 @@
-import { getBranches } from './modules/branches'
+import { addBranch, updateBranch, deleteBranch, getBranches, getBranch } from './modules/branches'
 import { recordRequest, recordResponse } from './modules/conversations'
 import { getSessionDetails, updateSessionDetails } from './modules/sessions'
 import { getUserDetails, updateUserDetails } from './modules/users'
@@ -15,7 +15,11 @@ import { getUserOrders, getUserOrderByDocumentNo,
     addOrder, updateOrderDetails, updateOrderStatusHistory } from './modules/order'
 
 export default {
+    addBranch,
+    updateBranch,
+    deleteBranch,
     getBranches,
+    getBranch,
 
     addCategory,
     updateCategory,
