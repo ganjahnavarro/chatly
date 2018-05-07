@@ -2,7 +2,7 @@ import { getBranches } from './modules/branches'
 import { recordRequest, recordResponse } from './modules/conversations'
 import { getSessionDetails, updateSessionDetails } from './modules/sessions'
 import { getUserDetails, updateUserDetails } from './modules/users'
-import { getCategories, getCategory } from './modules/categories'
+import { addCategory, updateCategory, deleteCategory, getCategories, getCategory } from './modules/categories'
 import { getProductTypes, getProductType } from './modules/productTypes'
 import { getProductTypeAttributes, getAttribute } from './modules/attributes'
 import { getPromoCode } from './modules/promos'
@@ -17,8 +17,11 @@ import { getUserOrders, getUserOrderByDocumentNo,
 export default {
     getBranches,
 
-    getCategory,
+    addCategory,
+    updateCategory,
+    deleteCategory,
     getCategories,
+    getCategory,
 
     getProductType,
     getProductTypes,
