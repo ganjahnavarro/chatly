@@ -4,6 +4,7 @@ import Controller from '../controller'
 import branches from './branches'
 import categories from './categories'
 import companies from './companies'
+import promos from './promos'
 
 const routes = express.Router()
 
@@ -14,6 +15,7 @@ routes.get('/', (req, res) => {
 routes.use('/branches', branches)
 routes.use('/categories', categories)
 routes.use('/companies', companies)
+routes.use('/promos', promos)
 
 routes.post('/webhook', (req, res) => Controller.handle(req, res))
 

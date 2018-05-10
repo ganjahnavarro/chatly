@@ -3,7 +3,7 @@ import onOrderContinue from '../order/onOrderContinue'
 
 import api from '../../api'
 
-const { updateSessionDetails, getPromoCode } = api
+const { updateSessionDetails, getPromoByCode } = api
 
 export default (args, sendResponse) => {
     const { parameters, senderId } = args
@@ -20,7 +20,7 @@ export default (args, sendResponse) => {
 
 const validatePromoCode = (args, sendResponse, promoCode, senderId) => {
     const { timestamp } = args
-    getPromoCode(promoCode, timestamp).then(selectedPromo => {
+    getPromoByCode(promoCode, timestamp).then(selectedPromo => {
         if (selectedPromo) {
             updateSessionDetails(senderId, { promo: selectedPromo })
             onOrderContinue(args, sendResponse)
