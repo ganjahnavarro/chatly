@@ -30,7 +30,8 @@ export const addCompany = data => {
     Client.getCollection('companies').insert({ ...data, deleted: false })
 }
 
-export const updateCompany = (id, data) => {
+export const updateCompany = (id, company) => {
+    const { _id, ...data } = company
     Client.getCollection('companies').update(
         { _id: ObjectId(id) },
         { $set: data }

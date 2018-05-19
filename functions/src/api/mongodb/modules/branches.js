@@ -30,7 +30,8 @@ export const addBranch = data => {
     Client.getCollection('branches').insert({ ...data, deleted: false })
 }
 
-export const updateBranch = (id, data) => {
+export const updateBranch = (id, branch) => {
+    const { _id, ...data } = branch
     Client.getCollection('branches').update(
         { _id: ObjectId(id) },
         { $set: data }

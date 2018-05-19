@@ -51,7 +51,8 @@ export const addPromo = data => {
     Client.getCollection('promos').insert({ ...data, deleted: false })
 }
 
-export const updatePromo = (id, data) => {
+export const updatePromo = (id, promo) => {
+    const { _id, ...data } = promo
     Client.getCollection('promos').update(
         { _id: ObjectId(id) },
         { $set: data }
