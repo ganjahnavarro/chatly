@@ -34,7 +34,8 @@ export const getUserOrderByDocumentNo = (senderId, documentNo) => {
     })
 }
 
-export const updateOrderDetails = (id, data) => {
+export const updateOrderDetails = (id, orderDetails) => {
+    const { _id, ...data } = orderDetails
     getCollection().update(
         ObjectId(id),
         { $set: data },

@@ -30,7 +30,8 @@ export const addCategory = data => {
     Client.getCollection('categories').insert({ ...data, deleted: false })
 }
 
-export const updateCategory = (id, data) => {
+export const updateCategory = (id, category) => {
+    const { _id, ...data } = category
     Client.getCollection('categories').update(
         { _id: ObjectId(id) },
         { $set: data }
