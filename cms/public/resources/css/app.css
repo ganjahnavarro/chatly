@@ -1,0 +1,114 @@
+    padding: 6em;
+    body {
+}
+
+* {
+    font-family: Roboto;
+    font-size: 16px;
+}
+
+#root, .app, .login {
+    height: 100%;
+}
+
+.screen-center {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.clearfix {
+    clear: both;
+}
+
+tr {
+    height: 2.7em;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    background-color: rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+    -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:vertical {
+    background: rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb:vertical:active {
+    background: rgba(0, 0, 0, 0.4);
+    -webkit-border-radius: 100px;
+}
+
+
+/* Datatable */
+
+tbody tr.selected {
+    background-color: whitesmoke;
+}
+
+tbody tr td.selected {
+    background-color: gainsboro;
+}
+
+tbody tr td.editing {
+    padding: 0;
+}
+
+table input, table select, table div.Select {
+    width: 100%;
+    border-radius: 0;
+    margin: 0;
+}
+
+tr.invalid {
+    background-color: rgba(200, 0, 0, 0.1);
+}
+
+
+
+div.files {
+    max-height: 515px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+span.transaction-placeholder {
+    padding: 25px;
+    border-radius: 5px;
+    border: 1px dashed gainsboro;
+    color: gainsboro;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 22px;
+    display: block;
+}
+
+.ui.form.report-panel,
+.ui.report-panel,
+.report-panel {
+    width: 600px;
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.ui.basic.button.report-option {
+    width: 100%;
+    min-height: 50px;
+}
+
+.ui.tabular.menu + .ui.segment,
+.ui.tabular.menu + .ui.segment + .ui.segment {
+    padding: 2em;
+}

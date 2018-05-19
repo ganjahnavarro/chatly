@@ -1,0 +1,104 @@
+.ui.secondary.menu {
+    margin-bottom: 1.5em;
+}
+
+.dashboard .group {
+    margin: 0 0 2em 0;
+}
+
+.dashboard .label {
+    margin-bottom: 1em;
+}
+
+.dashboard .card .content, .dashboard .card .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.dashboard img {
+    width: 4em;
+}
+
+.ui.cards > .card > .content > .header:not(.ui),
+.ui.card > .content > .header:not(.ui) {
+    font-size: 16px;
+}
+
+.ui.menu {
+    padding-top: 1em;
+}
+
+.ui.dimmer.active {
+    background: none;
+}
+
+.ui.dimmer.active .ui.loader {
+    color: dodgerblue;
+}
+
+.ui.dimmer.active .ui.loader:before {
+    border-color: dodgerblue;
+}
+
+.container .ui.divider {
+    margin: 2rem 0rem;
+}
+
+.actions button.ui.button {
+    margin-left: 0.5em;
+    margin-right: 0;
+}
+
+.actions {
+    margin-top: 2.5em;
+    float: right;
+}
+
+.audit {
+    margin-top: 2.5em;
+    float: left;
+}
+
+.ui.form .disabled.fields .field, .ui.form .disabled.field, .ui.form .field :disabled, .Select.is-disabled > .Select-control {
+    background-color: gainsboro;
+    opacity: 0.45;
+}
+
+.ui.table tbody tr.selected {
+    background-color: whitesmoke;
+}
+
+.ui.table tbody tr td.selected {
+    background-color: gainsboro;
+}
+
+.ui.table tbody tr td.editing {
+    padding: 0;
+}
+
+.ui.icon.buttons .button, .ui.icon.button {
+    padding: 0.25rem;
+}
+
+.login.ui.grid > .column:only-child, .ui.grid > .row > .column:only-child {
+    width: 500px;
+}
+
+.login #brand {
+    width: 10em;
+}
+
+.login p.message {
+    margin: 0.5em 0;
+}
+
+.app .ui.button:not(.icon) > .icon.angle:not(.button):not(.dropdown),
+.table button.ui.icon.button.mini {
+    margin: 0;
+}
+
+.ui.celled.table tr td.amount {
+    text-align: right;
+}
