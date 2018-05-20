@@ -11,7 +11,7 @@ export const addOrder = (order) => {
     getCollection().insert(newOrder)
 }
 
-export const getUserOrders = (senderId) => {
+export const getCustomerOrders = (senderId) => {
     return new Promise((resolve, reject) => {
         getCollection().find({ senderId }).toArray((err, data) => {
             if (err) {
@@ -22,7 +22,7 @@ export const getUserOrders = (senderId) => {
     })
 }
 
-export const getUserOrderByDocumentNo = (senderId, documentNo) => {
+export const getCustomerOrderByDocumentNo = (senderId, documentNo) => {
     return new Promise((resolve, reject) => {
         const criteria = { senderId, document_no: documentNo }
         getCollection().findOne(criteria, (err, data) => {

@@ -7,10 +7,10 @@ export default (args, sendResponse) => {
         }
     ]
 
-    const responseToUser = {
+    const responseToCustomer = {
         fulfillmentText: 'OK. Can you tell me your contact number?',
         outputContexts
     }
 
-    sendResponse({ responseToUser, ...args })
+    sendResponse({ responseToCustomer, ...args })
 }

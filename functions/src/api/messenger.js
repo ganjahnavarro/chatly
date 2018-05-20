@@ -3,19 +3,19 @@
 import axios from 'axios'
 
 import api from './'
-const { updateUserDetails } = api
+const { updateCustomer } = api
 
 const endpoint = 'https://graph.facebook.com/'
 const version = 'v2.12'
 const fields = ['first_name', 'last_name', 'profile_pic', 'locale', 'timezone', 'gender', 'is_payment_enabled', 'last_ad_referral']
 
-export const getUserDetails = (senderId) => {
-    console.log(`Getting user details. Sender ID: ${senderId}`)
+export const getCustomer = (senderId) => {
+    console.log(`Getting customer details. Sender ID: ${senderId}`)
 
     const onSuccess = (response) => {
         const data = response.data
         delete data.id
-        updateUserDetails(senderId, data)
+        updateCustomer(senderId, data)
     }
 
     const pageAccessToken = process.env.MESSENGER_PAGE_ACCESS_TOKEN

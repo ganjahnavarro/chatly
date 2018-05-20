@@ -19,6 +19,6 @@ export default (args, sendResponse) => {
         }
     }
 
-    const responseToUser = { payload }
-    sendResponse({ responseToUser, ...args })
+    const responseToCustomer = { payload }
+    sendResponse({ responseToCustomer, ...args })
 }

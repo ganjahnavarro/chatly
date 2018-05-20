@@ -1,4 +1,4 @@
-import { getUserDetails } from '../../api/messenger'
+import { getCustomer } from '../../api/messenger'
 import api from '../../api'
 
 const { updateSessionDetails } = api
@@ -7,7 +7,7 @@ export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
-        getUserDetails(senderId)
+        getCustomer(senderId)
         updateSessionDetails(senderId, null)
     }
 
@@ -56,6 +56,6 @@ export default (args, sendResponse) => {
         }
     }
 
-    const responseToUser = { payload }
-    sendResponse({ responseToUser, ...args })
+    const responseToCustomer = { payload }
+    sendResponse({ responseToCustomer, ...args })
 }

@@ -22,6 +22,9 @@ DROP:
 COUNT:
     db.collection_name.count()
 
+UPDATE:
+    db.collection_name.update({}, { $set: { deleted: false } }, { multi: true })
+
 REMOVE DOCUMENT:
     db.collection_name.remove({ field: { $exists: false } });
 

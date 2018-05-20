@@ -3,7 +3,7 @@ import { getAddress } from '../../api/maps'
 
 import api from '../../api'
 
-const { updateUserDetails } = api
+const { updateCustomer } = api
 
 export default (args, sendResponse) => {
     const { payloadData, senderId } = args
@@ -15,7 +15,7 @@ export default (args, sendResponse) => {
             let location = { lat, long }
             location.mapsData = response
 
-            updateUserDetails(senderId, { location })
+            updateCustomer(senderId, { location })
             onOrderContinue(args, sendResponse)
         })
     } else {

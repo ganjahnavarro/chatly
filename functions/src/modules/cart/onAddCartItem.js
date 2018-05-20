@@ -64,11 +64,11 @@ export default (args, sendResponse) => {
                     const outputContexts = [
                         { name: `${session}/contexts/product-added`, lifespanCount: 1 }
                     ]
-                    const responseToUser = {
+                    const responseToCustomer = {
                         fulfillmentText: message,
                         outputContexts
                     }
-                    sendResponse({ responseToUser, ...args })
+                    sendResponse({ responseToCustomer, ...args })
                 })
             })
         })
@@ -162,7 +162,7 @@ const askForMissingAttribute = (missingAttributes, parameters, args, sendRespons
         }
     ]
 
-    const responseToUser = {
+    const responseToCustomer = {
         fulfillmentText: text,
         outputContexts,
         payload
@@ -170,7 +170,7 @@ const askForMissingAttribute = (missingAttributes, parameters, args, sendRespons
 
     updateSessionDetails(senderId, { parameters })
     sendResponse({
-        responseToUser,
+        responseToCustomer,
         ...args
     })
 }

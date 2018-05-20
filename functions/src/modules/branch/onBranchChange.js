@@ -2,7 +2,7 @@ import onAskBranch from './onAskBranch'
 import onOrderContinue from '../order/onOrderContinue'
 import api from '../../api'
 
-const { getBranches, updateUserDetails } = api
+const { getBranches, updateCustomer } = api
 
 export default (args, sendResponse) => {
     const { parameters, senderId } = args
@@ -17,7 +17,7 @@ export default (args, sendResponse) => {
         getBranches().then(branches => {
             const selectedBranch = branches.find(item => item.name.toLowerCase() === branch.toLowerCase())
             if (selectedBranch) {
-                updateUserDetails(senderId, { branch: selectedBranch })
+                updateCustomer(senderId, { branch: selectedBranch })
             }
         })
     }

@@ -1,26 +1,26 @@
 import moment from 'moment'
 import api from '../../api'
 
-const { getUserOrders } = api
+const { getCustomerOrders } = api
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args
     const documentNo = parameters['document-no']
 
     if (senderId) {
-        getUserOrders(args).then(userOrders => {
+        getCustomerOrders(args).then(customerOrders => {
             if (documentNo) {
-                const userOrder = userOrders.find(userOrder => String(userOrder.document_no) === documentNo)
-                handleSingleOrder(args, sendResponse, userOrder)
+                const customerOrder = customerOrders.find(customerOrder => String(customerOrder.document_no) === documentNo)
+                handleSingleOrder(args, sendResponse, customerOrder)
             } else {
                 const endStatuses = ['PROCESSED', 'CANCELLED']
-                const filteredUserOrders = userOrders.filter(userOrder => !endStatuses.includes(userOrder.status))
+                const filteredUserOrders = customerOrders.filter(customerOrder => !endStatuses.includes(customerOrder.status))
 
                 if (filteredUserOrders && filteredUserOrders.length) {
                     handleOrderCancelling(args, sendResponse, filteredUserOrders)
                 } else {
-                    const responseToUser = 'You currently have no orders in progress.'
-                    sendResponse({ responseToUser, ...args })
+                    const responseToCustomer = 'You currently have no orders in progress.'
+                    sendResponse({ responseToCustomer, ...args })
                 }
             }
         })
@@ -38,14 +38,14 @@ const handleOrderCancelling = (args, sendResponse, filteredUserOrders) => {
 }
 
 const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
-    const responseToUser = {}
+    const responseToCustomer = {}
 
-    const elements = filteredUserOrders.map(userOrder => {
+    const elements = filteredUserOrders.map(customerOrder => {
         const {
             timestamp,
             document_no: documentNo,
             total_amount: totalAmount
-        } = userOrder
+        } = customerOrder
 
         const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
         return {
@@ -82,22 +82,22 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
         }
     }
 
-    responseToUser.payload = payload
-    responseToUser.fulfillmentText = 'You have multiple orders in progress. Which one of your orders you want to check?'
+    responseToCustomer.payload = payload
+    responseToCustomer.fulfillmentText = 'You have multiple orders in progress. Which one of your orders you want to check?'
 
     sendResponse({
-        responseToUser,
+        responseToCustomer,
         ...args
     })
 }
 
-const handleSingleOrder = (args, sendResponse, userOrder) => {
-    let message = `Order # ${userOrder.document_no} status history: \n`
+const handleSingleOrder = (args, sendResponse, customerOrder) => {
+    let message = `Order # ${customerOrder.document_no} status history: \n`
 
-    const statusHistories = userOrder.status_history || []
+    const statusHistories = customerOrder.status_history || []
     statusHistories.forEach(statusHistory => {
         const formattedTimestamp = moment(statusHistory.timestamp).format('YYYY-MM-DD HH:mm')
         message += '\n' + `Status changed to: ${statusHistory.status} at ${formattedTimestamp}`
     })
-    sendResponse({ responseToUser: message, ...args })
+    sendResponse({ responseToCustomer: message, ...args })
 }

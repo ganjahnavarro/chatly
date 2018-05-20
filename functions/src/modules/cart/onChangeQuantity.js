@@ -17,18 +17,18 @@ export default (args, sendResponse) => {
             }
         ]
 
-        const responseToUser = {
+        const responseToCustomer = {
             fulfillmentText: message,
             outputContexts
         }
 
-        sendResponse({ responseToUser, ...args })
+        sendResponse({ responseToCustomer, ...args })
     } else {
         const filterContext = contexts.filter(item => item.name === `${session}/contexts/quantity-onchange`)
         const cartItem = filterContext[0].parameters['cart-item']
         const name = filterContext[0].parameters['name']
 
         updateCartItemQuantity(senderId, cartItem, quantity)
-        sendResponse({ responseToUser: `${name} quantity updated.`, ...args })
+        sendResponse({ responseToCustomer: `${name} quantity updated.`, ...args })
     }
 }

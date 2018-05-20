@@ -1,54 +1,54 @@
-import moment from 'moment'
+customerOrderimport moment from 'moment'
 import api from '../../api'
 
-const { getUserOrders, updateOrderDetails, updateOrderStatusHistory } = api
+const { getCustomerOrders, updateOrderDetails, updateOrderStatusHistory } = api
 
 export default (args, sendResponse) => {
     const { senderId, parameters } = args
     const documentNo = parameters['document-no']
 
     if (senderId) {
-        getUserOrders(args).then(userOrders => {
+        getCustomerOrders(args).then(customerOrders => {
             if (documentNo) {
-                const userOrder = userOrders.find(userOrder => String(userOrder.document_no) === documentNo)
-                handleSingleOrder(args, sendResponse, userOrder)
+                const customerOrder = customerOrders.find(customerOrder => String(customerOrder.document_no) === documentNo)
+                handleSingleOrder(args, sendResponse, customerOrder)
             } else {
                 const endStatuses = ['PROCESSED', 'CANCELLED']
-                const filteredUserOrders = userOrders.filter(userOrder => !endStatuses.includes(userOrder.status))
+                const filteredCustomerOrders = customerOrders.filter(customerOrder => !endStatuses.includes(customerOrder.status))
 
-                if (filteredUserOrders && filteredUserOrders.length) {
-                    handleOrderCancelling(args, sendResponse, filteredUserOrders)
+                if (filteredCustomerOrders && filteredCustomerOrders.length) {
+                    handleOrderCancelling(args, sendResponse, filteredCustomerOrders)
                 } else {
-                    const responseToUser = 'You currently have no orders in progress.'
-                    sendResponse({ responseToUser, ...args })
+                    const responseToCustomer = 'You currently have no orders in progress.'
+                    sendResponse({ responseToCustomer, ...args })
                 }
             }
         })
     }
 }
 
-const handleOrderCancelling = (args, sendResponse, filteredUserOrders) => {
-    const isMultiple = filteredUserOrders.length > 1
+const handleOrderCancelling = (args, sendResponse, filteredCustomerOrders) => {
+    const isMultiple = filteredCustomerOrders.length > 1
 
     if (isMultiple) {
-        handleMultipleOrders(args, sendResponse, filteredUserOrders)
+        handleMultipleOrders(args, sendResponse, filteredCustomerOrders)
     } else {
-        handleSingleOrder(args, sendResponse, filteredUserOrders[0])
+        handleSingleOrder(args, sendResponse, filteredCustomerOrders[0])
     }
 }
 
-const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
-    const responseToUser = {}
+const handleMultipleOrders = (args, sendResponse, filteredCustomerOrders) => {
+    const responseToCustomer = {}
 
-    const elements = filteredUserOrders.map(userOrder => {
-        const formattedTimestamp = moment(userOrder.timestamp).format('YYYY-MM-DD HH:mm')
+    const elements = filteredCustomerOrders.map(customerOrder => {
+        const formattedTimestamp = moment(customerOrder.timestamp).format('YYYY-MM-DD HH:mm')
         return {
-            title: `Order #: ${userOrder.document_no}`,
+            title: `Order #: ${customerOrder.document_no}`,
             subtitle: `Date: ${formattedTimestamp}`,
             buttons: [
                 {
                     type: 'postback',
-                    payload: `Cancel order no.: ${userOrder.document_no}`,
+                    payload: `Cancel order no.: ${customerOrder.document_no}`,
                     title: 'Cancel this order'
                 }
             ]
@@ -66,36 +66,36 @@ const handleMultipleOrders = (args, sendResponse, filteredUserOrders) => {
         }
     }
 
-    responseToUser.payload = payload
-    responseToUser.fulfillmentText = 'You have multiple orders in progress. Which one of your orders you want to cancel?'
+    responseToCustomer.payload = payload
+    responseToCustomer.fulfillmentText = 'You have multiple orders in progress. Which one of your orders you want to cancel?'
 
     sendResponse({
-        responseToUser,
+        responseToCustomer,
         ...args
     })
 }
 
-const handleSingleOrder = (args, sendResponse, userOrder) => {
+const handleSingleOrder = (args, sendResponse, customerOrder) => {
     const { timestamp } = args
 
     const endStatuses = ['PROCESSED', 'CANCELLED']
-    if (userOrder.status === 'PENDING') {
+    if (customerOrder.status === 'PENDING') {
         const cancelledStatus = 'CANCELLED'
         const formattedTimestamp = moment(timestamp).format('YYYY-MM-DD HH:mm')
 
-        updateOrderDetails(userOrder._id, { status: cancelledStatus })
-        updateOrderStatusHistory(userOrder._id, {
+        updateOrderDetails(customerOrder._id, { status: cancelledStatus })
+        updateOrderStatusHistory(customerOrder._id, {
             status: cancelledStatus,
             date: formattedTimestamp
         })
 
-        const responseToUser = `Order # ${userOrder.document_no} is successfully cancelled.`
-        sendResponse({ responseToUser, ...args })
-    } else if (endStatuses.includes(userOrder.status)) {
-        const responseToUser = `Order is already ${userOrder.status.toLowerCase()}. Don't hesitate to call us for more information.`
-        sendResponse({ responseToUser, ...args })
+        const responseToCustomer = `Order # ${customerOrder.document_no} is successfully cancelled.`
+        sendResponse({ responseToCustomer, ...args })
+    } else if (endStatuses.includes(customerOrder.status)) {
+        const responseToCustomer = `Order is already ${customerOrder.status.toLowerCase()}. Don't hesitate to call us for more information.`
+        sendResponse({ responseToCustomer, ...args })
     } else {
-        const responseToUser = 'Sorry order is already on the way! You can\'t cancel at this time. Don\'t hesitate to call us for more information.'
-        sendResponse({ responseToUser, ...args })
+        const responseToCustomer = 'Sorry order is already on the way! You can\'t cancel at this time. Don\'t hesitate to call us for more information.'
+        sendResponse({ responseToCustomer, ...args })
     }
 }

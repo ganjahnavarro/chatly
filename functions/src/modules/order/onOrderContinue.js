@@ -1,22 +1,22 @@
 import onAskBranch from '../branch/onAskBranch'
 import onAskLocation from '../location/onAskLocation'
 import onAskDeliveryType from '../delivery-type/onAskDeliveryType'
-import onAskContactNumber from '../user/onAskContactNumber'
+import onAskContactNumber from '../customer/onAskContactNumber'
 import onAskConfirmation from '../order/onAskConfirmation'
 import api from '../../api'
 
-const { getUserDetails, hasCartItems } = api
+const { getCustomer, hasCartItems } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
 
     if (senderId) {
         const promises = [
-            getUserDetails(senderId),
+            getCustomer(senderId),
             hasCartItems(senderId)
         ]
         Promise.all(promises).then(results => {
-            const user = results[0]
+            const customer = results[0]
             const hasCart = results[1]
 
             if (!hasCart) {
@@ -32,8 +32,8 @@ export default (args, sendResponse) => {
                         ]
                     }
                 }
-                const responseToUser = { payload }
-                sendResponse({ responseToUser, ...args })
+                const responseToCustomer = { payload }
+                sendResponse({ responseToCustomer, ...args })
                 return
             }
 
@@ -42,7 +42,7 @@ export default (args, sendResponse) => {
                 delivery_type: deliveryType,
                 phone_number: phoneNumber,
                 location
-            } = user
+            } = customer
 
             if (!deliveryType) {
                 onAskDeliveryType(args, sendResponse)

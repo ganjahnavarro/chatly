@@ -13,7 +13,7 @@ import onDeliveryTypeChange from './modules/delivery-type/onDeliveryTypeChange'
 import onAddPromoCode from './modules/discount/onAddPromoCode'
 
 import onBranchChange from './modules/branch/onBranchChange'
-import onPhoneNumberChange from './modules/user/onPhoneNumberChange'
+import onPhoneNumberChange from './modules/customer/onPhoneNumberChange'
 
 import onOrderContinue from './modules/order/onOrderContinue'
 import onOrderConfirm from './modules/order/onOrderConfirm'
@@ -39,9 +39,9 @@ const { recordRequest, recordResponse } = api
 
 const Controller = {}
 
-function sendResponse ({ responseToUser, response, senderId, timestamp }) {
-    const isString = typeof responseToUser === 'string'
-    const responseJson = isString ? { fulfillmentText: responseToUser } : responseToUser
+function sendResponse ({ responseToCustomer, response, senderId, timestamp }) {
+    const isString = typeof responseToCustomer === 'string'
+    const responseJson = isString ? { fulfillmentText: responseToCustomer } : responseToCustomer
 
     console.log('Response to Dialogflow: ' + JSON.stringify(responseJson))
     recordResponse(senderId, timestamp, responseJson)

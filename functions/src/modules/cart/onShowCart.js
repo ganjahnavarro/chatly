@@ -3,7 +3,7 @@ import api from '../../api'
 const { getCartItems } = api
 
 const getResponse = (items) => {
-    let responseToUser = {}
+    let responseToCustomer = {}
     if (items.length > 0) {
         const elements = items.map(item => {
             const { _id, quantity, product, product_type: productType } = item
@@ -41,7 +41,7 @@ const getResponse = (items) => {
                 }
             }
         }
-        responseToUser = { payload }
+        responseToCustomer = { payload }
     } else {
         const payload = {
             facebook: {
@@ -55,17 +55,17 @@ const getResponse = (items) => {
                 ]
             }
         }
-        responseToUser = { payload }
+        responseToCustomer = { payload }
     }
-    return responseToUser
+    return responseToCustomer
 }
 
 const onShowCart = (args, sendResponse) => {
     const { senderId } = args
     if (senderId) {
         getCartItems(senderId).then(items => {
-            const responseToUser = getResponse(items)
-            sendResponse({ responseToUser, ...args })
+            const responseToCustomer = getResponse(items)
+            sendResponse({ responseToCustomer, ...args })
         })
     } else {
         console.error('Invalid state: ' + JSON.stringify(args))

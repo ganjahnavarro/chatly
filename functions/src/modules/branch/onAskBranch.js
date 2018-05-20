@@ -21,10 +21,10 @@ export default (args, sendResponse) => {
             }
         }
 
-        const responseToUser = { fulfillmentText: text, payload }
+        const responseToCustomer = { fulfillmentText: text, payload }
 
         sendResponse({
-            responseToUser,
+            responseToCustomer,
             ...args
         })
     })

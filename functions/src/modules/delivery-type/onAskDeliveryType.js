@@ -27,14 +27,14 @@ export default (args, sendResponse) => {
         }
     ]
 
-    const responseToUser = {
+    const responseToCustomer = {
         fulfillmentText: text,
         outputContexts,
         payload
     }
 
     sendResponse({
-        responseToUser,
+        responseToCustomer,
         ...args
     })
 }

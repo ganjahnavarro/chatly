@@ -1,7 +1,7 @@
 import * as branches from './modules/branches'
 import * as conversations from './modules/conversations'
 import * as sessions from './modules/sessions'
-import * as users from './modules/users'
+import * as customers from './modules/customers'
 import * as categories from './modules/categories'
 import * as productTypes from './modules/productTypes'
 import * as attributes from './modules/attributes'
@@ -17,7 +17,7 @@ export default {
     ...attributes,
     ...cart,
     ...sessions,
-    ...users,
+    ...customers,
     ...orders,
     ...conversations,
     ...promos,

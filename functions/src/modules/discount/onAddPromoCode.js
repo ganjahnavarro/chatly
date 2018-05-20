@@ -44,13 +44,13 @@ const validatePromoCode = (args, sendResponse, promoCode, senderId) => {
                 }
             }
 
-            const responseToUser = {
+            const responseToCustomer = {
                 fulfillmentText: text,
                 payload
             }
 
             sendResponse({
-                responseToUser,
+                responseToCustomer,
                 ...args
             })
         }

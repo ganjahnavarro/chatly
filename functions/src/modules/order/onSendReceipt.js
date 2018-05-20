@@ -1,6 +1,6 @@
 import api from '../../api'
 
-const { getCompany, getUserOrderByDocumentNo } = api
+const { getCompany, getCustomerOrderByDocumentNo } = api
 
 export default (args, sendResponse) => {
     const promises = [
@@ -11,7 +11,7 @@ export default (args, sendResponse) => {
         const order = results[0]
         const company = results[1]
 
-        const { document_no: documentNo, items, user, timestamp, promo } = order
+        const { document_no: documentNo, items, customer, timestamp, promo } = order
 
         let totalAmount = 0
         let discountAmount = 0
@@ -40,13 +40,13 @@ export default (args, sendResponse) => {
             type: 'template',
             payload: {
                 template_type: 'receipt',
-                recipient_name: `${user.first_name} ${user.last_name}`,
+                recipient_name: `${customer.first_name} ${customer.last_name}`,
                 merchant_name: company.name,
                 order_number: documentNo,
                 currency: 'PHP',
                 payment_method: 'To be paid',
                 timestamp: parseInt(timestamp / 1000),
-                address: getAddress(user),
+                address: getAddress(customer),
                 elements
             }
         }
@@ -68,13 +68,13 @@ export default (args, sendResponse) => {
             facebook: { attachment }
         }
 
-        const responseToUser = { payload }
-        sendResponse({ responseToUser, ...args })
+        const responseToCustomer = { payload }
+        sendResponse({ responseToCustomer, ...args })
     })
 }
 
-const getAddress = (user) => {
-    const { mapsData } = user.location
+const getAddress = (customer) => {
+    const { mapsData } = customer.location
 
     const streetNumber = mapsData.street_number ? `${mapsData.street_number} ` : ''
     const route = mapsData.route ? `${mapsData.route} St.` : ''
@@ -93,6 +93,6 @@ const getOrderPromise = (args) => {
     const { order, senderId, parameters } = args
     const documentNo = order ? order.document_no : parameters['document-no']
     if (documentNo) {
-        return getUserOrderByDocumentNo(senderId, documentNo)
+        return getCustomerOrderByDocumentNo(senderId, documentNo)
     }
 }

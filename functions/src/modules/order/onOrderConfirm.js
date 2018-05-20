@@ -2,14 +2,14 @@ import onSendReceipt from './onSendReceipt'
 import api from '../../api'
 
 const { getCartItems, updateSessionDetails, addOrder,
-    getUserDetails, getSessionDetails } = api
+    getCustomer, getSessionDetails } = api
 
 export default (args, sendResponse) => {
     const { senderId } = args
     if (senderId) {
         const promises = [
             getCartItems(senderId, true),
-            getUserDetails(senderId),
+            getCustomer(senderId),
             getSessionDetails(senderId)
         ]
 
@@ -28,7 +28,7 @@ export default (args, sendResponse) => {
 
 const createOrder = (args, results) => {
     const { senderId, timestamp } = args
-    const user = results[1]
+    const customer = results[1]
     const session = results[2]
     const promo = session.promo
 
@@ -46,7 +46,7 @@ const createOrder = (args, results) => {
         senderId,
         items,
         promo,
-        user,
+        customer,
 
         status_history: [
             { status: defaultStatus, timestamp }

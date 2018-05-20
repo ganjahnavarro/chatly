@@ -32,7 +32,7 @@ export default (args, sendResponse) => {
     }
     */
 
-    const responseToUser = {
+    const responseToCustomer = {
         fulfillmentMessages: [
             createTextResponse('Hey!'),
             createTextResponse('Ho!'),
@@ -41,5 +41,5 @@ export default (args, sendResponse) => {
         ]
     }
 
-    sendResponse({ responseToUser, ...args })
+    sendResponse({ responseToCustomer, ...args })
 }

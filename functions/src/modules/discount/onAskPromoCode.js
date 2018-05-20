@@ -7,10 +7,10 @@ export default (args, sendResponse) => {
         }
     ]
 
-    const responseToUser = {
+    const responseToCustomer = {
         fulfillmentText: 'Please enter your promo code.',
         outputContexts
     }
 
-    sendResponse({ responseToUser, ...args })
+    sendResponse({ responseToCustomer, ...args })
 }
