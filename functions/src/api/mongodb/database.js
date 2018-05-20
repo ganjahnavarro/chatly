@@ -2,16 +2,13 @@ import { MongoClient } from 'mongodb'
 
 const Client = {}
 
-const uri = 'mongodb://localhost:27017/chatly'
-const databaseName = 'chatly'
-
-MongoClient.connect(uri, (err, rootDatabase) => {
+MongoClient.connect(process.env.MONGODB_CONNECTION_STRING, (err, rootDatabase) => {
     if (err) {
         throw err
     }
 
     Client.getCollection = (collectionName) => {
-        const database = rootDatabase.db(databaseName)
+        const database = rootDatabase.db(process.env.MONGODB_DEFAULT_DATABASE)
         return database.collection(collectionName)
     }
 })

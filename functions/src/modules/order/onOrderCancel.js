@@ -1,4 +1,4 @@
-customerOrderimport moment from 'moment'
+import moment from 'moment'
 import api from '../../api'
 
 const { getCustomerOrders, updateOrderDetails, updateOrderStatusHistory } = api

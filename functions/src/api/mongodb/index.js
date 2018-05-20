@@ -8,7 +8,8 @@ import * as attributes from './modules/attributes'
 import * as promos from './modules/promos'
 import * as companies from './modules/companies'
 import * as cart from './modules/cart'
-import * as orders from './modules/order'
+import * as orders from './modules/orders'
+import * as users from './modules/users'
 
 export default {
     ...branches,
@@ -21,5 +22,6 @@ export default {
     ...orders,
     ...conversations,
     ...promos,
-    ...companies
+    ...companies,
+    ...users
 }
