@@ -30,12 +30,15 @@ class Dashboard extends View {
 			{link: "/promos", label: "Promos", icon: "icon_promos"}
 		];
 
+		let filesComponents = files.map((item, index) => this.renderItem(item, index));
+
+		/*
 		let transactions = [];
 		let reports = [];
 
-		let filesComponents = files.map((item, index) => this.renderItem(item, index));
 		let transactionsComponents = transactions.map((item, index) => this.renderItem(item, index));
 		let reportsComponents = reports.map((item, index) => this.renderItem(item, index));
+		*/
 
 		return <div>
 			<Header />
